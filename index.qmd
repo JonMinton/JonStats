@@ -1,0 +1,9 @@
+---
+title: "Welcome"
+---
+
+This is my Statistical Methods website. 
+
+Here you can find collated 'courses' on a variety of statistical topics, based largely around generalised linear models. 
+
+The website was built [using Quarto](https://quarto.org/docs/websites) in VSCode. 

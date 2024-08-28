@@ -1,0 +1,10 @@
+---
+title: "About"
+---
+
+Welcome to my statistical methods website. 
+
+This websites contains materials originally developed as part of [my blog](https://jonminton.github.io/jon-blog/). The blog should be considered something of a staging post for new material. Once this material has reached enough maturity, it will be 'promoted' to this dedicated statisics site. 
+
+
+

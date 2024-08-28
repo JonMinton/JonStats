@@ -1,0 +1,107 @@
+{
+  "index.qmd": {
+    "index.html": "eb2c8839"
+  },
+  "about.qmd": {
+    "about.html": "6fd4a7c2"
+  },
+  "pages/time-series/lms-are-glms-part-19/index.qmd": {
+    "index.html": "f222d696"
+  },
+  "pages/time-series/lms-are-glms-part-21/index.qmd": {
+    "index.html": "4bd4c229"
+  },
+  "pages/time-series/lms-are-glms-part-20/index.qmd": {
+    "index.html": "e2c09e2f"
+  },
+  "pages/time-series/lms-are-glms-part-22/index.qmd": {
+    "index.html": "ea8df19e"
+  },
+  "pages/time-series/lms-are-glms-part-25/index.qmd": {
+    "index.html": "3f0ddcec"
+  },
+  "pages/time-series/lms-are-glms-part-24/index.qmd": {
+    "index.html": "1a7ac0b7"
+  },
+  "pages/time-series/lms-are-glms-part-23/index.qmd": {
+    "index.html": "90d35ce3"
+  },
+  "pages/complete-simulation-example/lms-are-glms-part-11/index.qmd": {
+    "index.html": "bcd3af89"
+  },
+  "pages/complete-simulation-example/lms-are-glms-part-13/index.qmd": {
+    "index.html": "c33d70b1"
+  },
+  "pages/complete-simulation-example/lms-are-glms-part-12/index.qmd": {
+    "index.html": "f56926fb"
+  },
+  "pages/hacker-stats/infer-introduction/index.qmd": {
+    "index.html": "8b6804c4"
+  },
+  "pages/hacker-stats/bootstrapping/index.qmd": {
+    "index.html": "7f7167e4"
+  },
+  "pages/hacker-stats/resampling-approaches-intro/index.qmd": {
+    "index.html": "0fbf8405"
+  },
+  "pages/hacker-stats/post-stratification/index.qmd": {
+    "index.html": "cdaab8f6"
+  },
+  "pages/hacker-stats/permutation-with-base-r/index.qmd": {
+    "index.html": "abdb7520"
+  },
+  "pages/intro-to-glms/lms-are-glms-part-02/index.qmd": {
+    "index.html": "bfd78a84"
+  },
+  "pages/intro-to-glms/lms-are-glms-part-03/index.qmd": {
+    "index.html": "4cead609"
+  },
+  "pages/intro-to-glms/lms-are-glms-part-04/index.qmd": {
+    "index.html": "c1be9b84"
+  },
+  "pages/intro-to-glms/index.qmd": {
+    "index.html": "12bd2458"
+  },
+  "pages/intro-to-glms/lms-are-glms-part-01/index.qmd": {
+    "index.html": "75a2ee48"
+  },
+  "pages/likelihood-and-simulation-theory/lms-are-glms-part-10/index.qmd": {
+    "index.html": "3957159d"
+  },
+  "pages/likelihood-and-simulation-theory/lms-are-glms-part-05/index.qmd": {
+    "index.html": "cffa1220"
+  },
+  "pages/likelihood-and-simulation-theory/lms-are-glms-part-08/index.qmd": {
+    "index.html": "2e955fec"
+  },
+  "pages/likelihood-and-simulation-theory/lms-are-glms-part-06/index.qmd": {
+    "index.html": "579bd588"
+  },
+  "pages/likelihood-and-simulation-theory/lms-are-glms-part-07/index.qmd": {
+    "index.html": "ce95f7c2"
+  },
+  "pages/likelihood-and-simulation-theory/lms-are-glms-part-09/index.qmd": {
+    "index.html": "37104474"
+  },
+  "pages/causal-inference/lms-are-glms-part-17/index.qmd": {
+    "index.html": "9bdb12e6"
+  },
+  "pages/causal-inference/lms-are-glms-part-18/index.qmd": {
+    "index.html": "86910f8b"
+  },
+  "pages/causal-inference/lms-are-glms-part-16/index.qmd": {
+    "index.html": "ef802d50"
+  },
+  "pages/causal-inference/lms-are-glms-part-14/index.qmd": {
+    "index.html": "dd5652d3"
+  },
+  "pages/causal-inference/lms-are-glms-part-15/index.qmd": {
+    "index.html": "ca1be994"
+  },
+  "pages/likelihood-and-simulation-theory/index.qmd": {
+    "index.html": "bcc02da0"
+  },
+  "pages/complete-simulation-example/index.qmd": {
+    "index.html": "e99231fa"
+  }
+}

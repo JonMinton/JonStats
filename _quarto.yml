@@ -1,0 +1,35 @@
+project:
+  type: website
+
+website:
+  title: "JonStats"
+  navbar:
+    left:
+      - href: index.qmd
+        text: Home
+      - about.qmd
+      - sidebar:main-course
+      - sidebar:supplementary-courses
+
+  sidebar:
+    - id: main-course
+      title: "Main Course: Statistical Inference and Simulation"
+      contents:
+        - href: pages/main-course/intro-to-glms/index.qmd
+          text: "(1) Intro to GLMs"
+        - href: pages/main-course/likelihood-and-simulation-theory/index.qmd
+          text: "(2) Likelihood and Simulation Theory"
+        - href: pages/main-course/complete-simulation-example/index.qmd
+          text: "(3) Complete Simulation Example"
+
+
+
+
+format:
+  html:
+    theme: cosmo
+    css: styles.css
+    toc: true
+
+
+
