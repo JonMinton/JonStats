@@ -1,0 +1,620 @@
+---
+title: "Causal Inference: An Opinionated Introduction"
+code-fold: show
+warning: false
+message: false
+bibliography: references.bib
+
+---
+
+
+
+
+## High level note/warning
+
+There are broadly two schools of thought when it comes to thinking about the problems of causal inference. One which interprets the challenge of causal inference mainly as a missing data problem; and another which interprets it mainly in terms of a modelling problem. The posts in this series are largely drawn from the missing data interpretation. If you want an overview of the two approaches (albeit subject to my own ignorance and biases), please skip briefly to [the end of these notes](#the-schools-of-causal-inference) before continuing. 
+
+## Causal Inference: A non-technical Introduction
+
+### Henry Dundas: Hero or Villain?
+
+::: {layout-ncol=3}
+
+![Henry Dundas, as observed](dundas-observed.png){fig-alt="Henry Dundas, as observed"}
+
+![Henry Dundas, the unobserved good counterfactual](dundas-good-counterfactual.png){fig-alt="Henry Dundas: the unobserved good counterfactual"}
+
+![Henry Dundas, the unobserved bad counterfactual](dundas-bad-counterfactual.png){fig-alt="Henry Dundas: the unobserved bad counterfactual"}
+
+:::
+
+
+A few minutes' walk from where I live is St Andrew Square. And in the middle of St Andrew Square is the [Melville Monument](https://en.wikipedia.org/wiki/Melville_Monument), a 40 metre tall column, on which stands a statue of [Henry Dundas, 1st Viscount Melville](https://en.wikipedia.org/wiki/Henry_Dundas,_1st_Viscount_Melville). 
+
+Though the Melville Monument was constructed in the 19th century to commemorate and celebrate this 18th century figure, in 2020 the City of Edimburgh Council chose to add more context to Dundas' legacy by unveiling [a plaque](https://upload.wikimedia.org/wikipedia/commons/4/44/Melville_Plaque.jpg) with the following message:: 
+
+> At the top of this neoclassial column stands a statue of Hentry Dundas, 1st Viscount Melville (1742-1811). He was the Scottish Lord Advocate, an MP for Edinburgh and Midlothian, and the First Lord of the Admiralty. Dundas was a contentious figure, provoking controversies that resonate to this day. While Home Secretary in 1792, and first Secretary of State for War in 1796 he was instrumental in deferring the abolition of the Atlantic slave trade. Slave trading by British ships was not abolished until 1807. As a result of this delay, more than half a million enslaved Africans crossed the Atlantic. 
+
+So, the claim of the council plaque was that Dundas *caused* the enslavement of hundreds of thousands of Africans, by promoting a gradualist policy of abolition. 
+
+The descendents of Dundas contested these claims, however, [instead arguing](https://www.edinburghnews.scotsman.com/heritage-and-retro/retro/dundas-plaque-row-descendants-of-dundas-surprised-and-disappointed-at-false-plaque-wording-3172579):
+
+> The claim that Henry Dundas caused the enslavement of more than half a million Africans is patently false. The truth is: Dundas was the first MP to advocate in Parliament for the emancipation of slaves in the British territories along with the abolition of the slave trade. Dundas's efforts resulted in the House of Commons voting in favour of ending the Atlantic slave trade for the first time in its history.
+
+So, the claim of the descendents was that Dundas *prevented* the enslavement of (at least) hundreds of thousands of Africans, by promoting a gradualist policy of abolition. 
+
+How can the same agreed-upon historical facts lead to such diametrically opposing interpretations of the effects of Dundas and his actions? 
+
+The answer to this question is at the heart of causal inference, and an example of why, when trying to estimate causal effects, *at least half of the data are always missing*. 
+
+### The unobserved counterfactual 
+
+Both parties in the Dundas debate have, as mentioned, access to the same historical facts. They agree on the same observed historical reality. And both are making bold claims about the impact of Dundas in relation to the Transatlantic slave trade. In doing this, they are both comparing this observed historical reality with something else: **the unobserved counterfactual**.
+
+The unobserved counterfactual is *the data that would have been observed if what had happened, hadn't happened* [^1] However, what happened *did* happen, so this data *isn't* observed. So, as it hasn't been observed, it doesn't exist in any historic facts. Instead, the unobserved counterfactual has to be *imputed*, or *inferred*... in effect, *made up*. 
+
+Causal inference *always* involves some kind of comparison between an observed reality and an unobserved counterfactual. The issue at heart of the Dundas debate is that both parties have compared the observed reality with a different unobserved counterfactual, and from this different Dundas effects have been inferred. 
+
+For the council, the unobserved counterfactual appears to be something like the following:
+
+> Dundas doesn't propose a gradualist amendment to a bill in parliament. The more radical and rapid version of the bill passes, and slavery is abolished earlier, leading to fewer people becoming enslaved. 
+
+Whereas for the descendents, the unobserved counterfactual appears to be something like this:
+
+> Dundas doesn't propose a gradualist amendment to a bill in parliament. Because of this, the more radical version of the bill doesn't have enough support in parliament (perhaps because it would be acting too much against the financial interests of some parliamentarians and powerful business interests), and so is defeated. As a result of this, the abolition of slavery is delayed, leading to more people becoming enslaved.
+
+So, by having the same observed historical facts, the observed Dundas, but radically different counterfactuals, the two parties have used the same methodology to derive near antithetical estimates of the 'Dundas Effect'. 
+
+
+[^1]: The data that would have been observed if what hadn't happened, had happened, is the other type of unobserved counterfactual. 
+
+## Causal Inference: Technical Descriptions
+
+
+### Models don't care about causality... but we do
+
+The first stage when using a statistical model is to take a big rectangle of data, $D$, and split the columns of the data into two types: 
+
+- **Predictor variables**, usually denoted $X$
+- **Response variables**, usually denoted $y$
+
+With the predictor variables and the response variables defined, the challenge of model fitting is then to find some combination of model parameters $\theta$ that minimises in some way the gap between the *observed* response values $y$, and the *predicted* response values from the model $Y$.
+
+The first point to note is that, from the perspective of the model, it does not matter which variable or variables from $D$ we choose to put in the predictor side $X$ or the response side $y$. Even if we put a variable from the future in as a predictor of something in the past, the optimisation algorithms will still work in exactly the same way, working to minimise the gap between observed and predicted responses. The only problem is such a model would make no sense from a causal perspective. 
+
+The model also does not 'care' about how we think about and go about defining any of the variables that go into the predictor side of the equation, $X$. But again, we do. In particular, when thinking about causality it can be immensely helpful to imagine splitting the predictor columns up into some conceptually different types. This will be helpful for thinking about causal inference using some algebra. 
+
+### The (Impossible) Platinum Standard
+
+In some previous expressions of the data, $D$, we used the subscript $i$ to indicate the *rows* of the data which go into the model. Each of these rows is, by convention, a different observation. So, instead of saying the purpose of the model is to predict $y$ on $X$, it's more precisely to predict $y_i$ on $X_i$, for all $i$ in the data (i.e. all rows in $D$). 
+
+Now let's do some predictor variable fission and say, for our purposes, that: 
+
+$$
+X_i = \{X_i^*, Z_i\}
+$$
+
+Here $Z_i$ is an *assignment variable*, and takes either a value of `1`, meaning 'is assigned', or `0`, meaning 'is not assigned'. The variable $X_i^*$, by contrast, means 'all other predictor variables'. 
+
+For individual observations $D_i$ where $Z_i = 1$, the individual is *exposed* (or *treated*) to something. And for individual observations $D_i$ where $Z_i = 0$, the individual is *not exposed* (or *not treated*) to that thing.
+
+The causal effect of assignment, or treatment, for any individual observation is: 
+
+$$
+TE_i = y_i|(X_i^*, Z = 1) - y_i| (X_i^*, Z = 0) 
+$$
+
+**The fundamental problem of causal inference, however, is that for any individual observation $i$, one of the two parts of this expression is always missing.** If an individual $i$ *had* been assigned, then $y_i|(X_i^*, Z=1)$ *is observed*, but $y_i|(X_i^*, Z=0)$ *is unobserved*. By contrast, if an individual $i$ *had not been assigned*, then $y_i|(X_i^*, Z=0)$ *is observed*, but $y_i|(X_i^*, Z=1)$ *is unobserved*.  
+
+Another way to think about this is as a table, where the treatment effect for an individual involves comparing the outcomes reported in two columns of the same row, but the cells in one of these two columns is always missing:
+
+| individual | outcome if treated | outcome if not treated | treatment effect | 
+| ---- | ------ | ----- | ------ |
+| 1 | 4.8 | ?? | ?? | 
+| 2 | 3.7 | ?? | ?? |
+| 3 | ??  | 2.3 | ?? | 
+| 4 | 3.1 | ?? | ?? | 
+| 5 | ??  | 3.4 | ?? |
+| 6 | ??  | 2.9 | ?? |
+
+The Platinum Standard of causal effect estimation would therefore be if the missing cells in the outcome columns could be accurately filled in, allowing the treatment effect for each individual to be calculated. 
+
+However, this isn't possible. It's **social science fiction**, as we can't split the universe and compare parallel realities: one in which what happened didn't happen, and the other in which what didn't happen happened. 
+
+So, what can be done? 
+
+### The Everyday Fool's Gold Standard 
+
+There's one thing you might be tempted to do with the kind of data shown in the table above: compare the average outcome in the treated group with the average outcome in the untreated group, i.e.: 
+
+$$
+ATE = E(y | Z = 1) - E(y | Z = 0)
+$$
+
+
+Let's do this with the example above:
+
+```{r}
+e_y_z1 <- mean(c(4.8, 3.7, 3.1))
+e_y_z0 <- mean(c(2.3, 3.4, 2.9))
+
+
+# And the difference?
+e_y_z1 - e_y_z0
+```
+
+In this example, the difference in the averages between the two groups is `1.0`.[^2] Based on this, we might imagine the first individual, who was treated, would have had a score of `3.8` rather than `4.8`, and the third individual, who was not treated, would have received a score of `3.3` rather than `2.3` if they had been treated. 
+
+[^2]: This is pure fluke. I didn't choose the values to get a difference of exactly 1, but there we go...
+
+
+So, what's the problem with just comparing the averages in this way? Potentially, nothing. But potentially, a lot. It depends on the data and the problem. More specifically, it depends on the relationship between the assignment variable, $Z$, and the other characteristics of the individual, which includes but is not usually entirely captured by the known additional characteristics of the individual, $X_i^*$. 
+
+Let's give a specific example: What if I were to tell you that the outcomes $y_i$ were waiting times at public toilets/bathrooms, and the assignment variable, $Z$, takes the value `1` if the individual has been assigned to a facility containing urinals, and `0` if the individual has been assigned to a facility containing no urinals? Would it be right to infer that the difference in the average is the average causal effect of urinals in public toilets/bathrooms? 
+
+I'd suggest not, because there are characteristics of the individual which govern assignment to bathroom type. What this means is that $Z_i$ and $X_i^*$ are coupled or related to each other in some way. So, any difference in the average outcome between those assigned to (or 'treated with') urinals *could be* due to the urinals themselves; or *could be* due to other ways that 'the treated' and 'the untreated' differ from each other systematically. We may be able to observe a difference, and to report that it's statistically significant. But we don't know how much, if any, of that difference is due to the exposure or treatment of primary interest to us, and how much is due to other ways in the 'treated' and 'untreated' groups differ. 
+
+So, we need some way of breaking the link between $Z$ and $X^*$. How do we do this?
+
+### Why Randomised Controlled Trials are the real Gold Standard
+
+The clue's in the subheading. Randomised Controlled Trials (RCTs) are known as the Gold Standard for scientific evaluation of effects for a reason, and the reason is this: they're explicitly designed to break the link between $Z$ and $X^*$. And not just $X^*$, but any unobserved or unincluded characteristics of the individuals, $W^*$, which might also otherwise influence assignment or selection to $Z$ but we either couldn't measure or didn't choose to include. 
+
+The key idea of an RCT is that assignment to either a treated or untreated group, or to any additional arms of the trial, has nothing to do with the characteristics of any individual in the trial. Instead, the allocation is random, determined by a figurature (or historically occasionally literal) coin toss. [^3] 
+
+[^3]: In the gold-plated gold standard of the double-blind RCT, not even the people running the trial and interacting with participants would be aware of which treatment a participant has been assigned. They would simply be given a participant ID, find a pack containing the participant's treatment, and give this pack to the participant. Only a statistician, who has access to a random number cypher, would know which participants are assigned to which treatment, and they might not know until the trial has concluded. The idea of all of these layers of secrecy in assignment is to reduce the possibility that those running the experiment could intentionally or unintentially inform participants about which treatment they're receiving, and so create expectations in participants about the effectiveness or otherwise of the treatments, which could have an additional effect on the outcomes. 
+
+
+What this random assignment means is that assignment $Z$ should be unrelated to the known characteristics $X^*$, as well as unknown characteristics $W^*$. The technical term for this (if I remember correctly) is that assignment is *orthogonal* to other characteristics, represented algebraically as $Z \perp X^*$ and $Z \perp W^*$. 
+
+This doesn't mean that, for any particular trial, there will be zero correlation between $Z$ and other characteristics. Nor does it mean that the characteristics of participants will be the same across trial arms. Because of random variation there are always going to be differences between arms in any specific RCT. However, we know that, because we are aware of the mechanism used to allocate participants to treated or non-treated groups (or more generally to trial arms), the *expected* difference in characteristics will be zero across *many* RCTs. Along with increased observations, this is the reason why, in principle, a meta-analysis of methodologically identical RCTs should offer even greater precision as to the causal effect of a treatment than just relying on a single RCT. [^4]
+
+### Summing up 
+
+A key point to note is that, when analysing a properly conducted RCT to estimate a treatment effect, the ATE formula shown above, which is naive and likely to be biased when working with observational data, *is likely to produce an unbiased estimate of the treatment effect*. Because the trial design is sophisticated in the way it breaks the link between $Z$ and everything else, the statistical analysis does not have to be sophisticated. 
+
+The flip side of this, however, is that when the data are observational, and it would be naive (as with the urinals and waiting times example) to assume that $Z$ is unlinked to everything else known ($X^*$) and unknown ($W^*$), then more careful and bespoke statistical modelling approaches are likely to be required to recover non-biased causal effects. Such modelling approaches need to be mindful of both the platinum and gold standards presented above, and rely on modelling and other assumptions to try to simulate what the treatment effects would be if these unobtainable (platinum) and unobtained (gold) standards had been obtained. 
+
+[^4]: In practice, issues like methodological variation, and publication bias, mean that meta-analyses of RCTs are unlikely to provide as accurate and unbiased an estimate of treatment effect as we would hope for. 
+
+
+
+## Multiple Regression and Matching Approaches in Practice
+
+This post will go explore some application of the first two approaches: controlling for variables using multiple regression; and using matching methods. A fuller consideration of the issues is provided in @Ho_Imai_King_Stuart_2007, and the main package and dataset used will be that of the associated `MatchIt` package @MatchIt and [vignette using the `lalonde` dataset](https://cran.r-project.org/web/packages/MatchIt/vignettes/MatchIt.html).
+
+### Getting started
+
+We start by loading the `Matchit` package and exploring the `lalonde` dataset.
+
+```{r}
+library(tidyverse)
+library(MatchIt)
+unmatched_data <- tibble(lalonde)
+
+unmatched_data
+```
+
+### Data
+
+The description of the `lalonde` dataset is as follows:
+
+```{r}
+help(lalonde)
+
+```
+
+> ### Description
+>
+> This is a subsample of the data from the treated group in the National Supported Work Demonstration (NSW) and the comparison sample from the Population Survey of Income Dynamics (PSID). This data was previously analyzed extensively by Lalonde (1986) and Dehejia and Wahba (1999).
+>
+> ### Format
+>
+> A data frame with 614 observations (185 treated, 429 control). There are 9 variables measured for each individual.
+>
+> -   "treat" is the treatment assignment (1=treated, 0=control).
+>
+> -   "age" is age in years.
+>
+> -   "educ" is education in number of years of schooling.
+>
+> -   "race" is the individual's race/ethnicity, (Black, Hispanic, or White). Note previous versions of this dataset used indicator variables `black` and `hispan` instead of a single race variable.
+>
+> -   "married" is an indicator for married (1=married, 0=not married).
+>
+> -   "nodegree" is an indicator for whether the individual has a high school degree (1=no degree, 0=degree).
+>
+> -   "re74" is income in 1974, in U.S. dollars.
+>
+> -   "re75" is income in 1975, in U.S. dollars.
+>
+> -   "re78" is income in 1978, in U.S. dollars.
+>
+> "treat" is the treatment variable, "re78" is the outcome, and the others are pre-treatment covariates.
+
+Let's look at the data to get a sense of it:
+
+```{r}
+unmatched_data |>
+    mutate(treat = as.factor(treat)) |>
+    filter(re78 < 25000) |>
+    ggplot(aes(y = re78, x = re75, shape = treat, colour = treat)) + 
+geom_point() + 
+geom_abline(intercept = 0, slope = 1) +
+coord_equal() + 
+stat_smooth(se = FALSE, method = "lm")
+```
+
+Clearly this is quite complicated data, where the single implied control, wages in 1975 (`re75`) is not sufficient. There are also a great many observations where wages in either of both years were 0, hence the horizontal and vertical streaks apparent.
+
+The two lines are the linear regression lines for the two treatment groups as a function of earlier wage. The lines are not fixed to have the same slope, so the differences in any crude treatment effect estimate vary by earlier wage, but for most previous wages the wages in 1978 appear to be lower in the treatment group (blue), than the control group (red). This would suggest either that the treatment may be harmful to wages... or that there is severe imbalance between the characteristics of persons in both treatment conditions.
+
+Let's now start to use a simple linear regression to estimate an average treatment effect, before adding more covariates to see how these model-derived estimates change
+
+
+```{r}
+# Model of treatment assignment only
+mod_01 <- lm(re78 ~ treat, unmatched_data)
+summary(mod_01) 
+
+```
+
+On average the treated group had (annual?) wages $635 lower than the control group. However the difference is not statistically significant.
+
+Now let's add previous wage from 1975
+
+```{r}
+mod_02 <- lm(re78 ~ re75 + treat, unmatched_data)
+summary(mod_02)
+
+```
+
+Previously observed wage is statistically significant and positive. The point estimate on treatment is smaller, and even less 'starry'. 
+
+Now let's add all possible control variables and see what the treatment effect estimate produced is: 
+
+```{r}
+mod_03 <- lm(re78 ~ re75 + age + educ + race + married + nodegree + re74 + treat, unmatched_data)
+summary(mod_03)
+
+```
+
+With all of these variables as controls, the effect of treatment is now statistically significant and positive, associated with on average an increase of $155 over the control group. 
+
+However, we should probably be concerned about how dependent this estimate is on the specific model specification we used. For example, it is fairly common to try to 'control for' nonlinearities in age effects by adding a squared term. If modeller decisions like this don't make much difference, then its addition shouldn't affect the treatment effect estimate. Let's have a look:
+
+```{r}
+mod_04 <- lm(re78 ~ re75 + poly(age, 2) + educ + race + married + nodegree + re74 + treat, unmatched_data)
+summary(mod_04)
+```
+
+The inclusion of the squared term to age has changed the point estimate of treatment from around $1550 to $1370. However it has also changed the statistical significance of the effect from p < 0.05 to p < 0.10, i.e. from 'statistically significant' to 'not statistically significant'. If we were playing the stargazing game, this might be the difference between a publishable finding and an unpublishable finding. 
+
+And what if we excluded age, because none of the terms are statistically significant at the standard level? 
+
+```{r}
+mod_05 <- lm(re78 ~ re75 + educ + race + married + nodegree + re74 + treat, unmatched_data)
+summary(mod_05)
+
+```
+
+Now the exclusion of this term, which the coefficient tables suggested wasn't statistically significant, but intuitively we recognise as an important determinant of labour market activity, has led to yet another point estimate. It's switched back to 'statistically significant' again, but now the point estimate is about $1565 more. Such estimates aren't vastly different, but they definitely aren't the same, and come from just a tiny same of the potentially hundreds of different model specifications we could have considered and decided to present to others. 
+
+
+### Matching with MatchIt
+
+As the title of @Ho_Imai_King_Stuart_2007 indicates, matching methods are presented as a way of *preprocessing* the data to reduce the kind of model dependence we've just started to explore. Let's run the first example they present in [the MatchIt vignette](https://cran.r-project.org/web/packages/MatchIt/vignettes/MatchIt.html) then discuss what it means:
+
+
+```{r}
+m.out0 <- matchit(treat ~ age + educ + race + married + 
+                   nodegree + re74 + re75, data = lalonde,
+                 method = NULL, distance = "glm")
+summary(m.out0)
+```
+
+With `method = NULL`, the `matchit` function presents some summary estimates of differences in characteristics between the Treatment and Control groups. For example, the treated group has an average age of around 25, compared with 28 in the control group, have a slightly higher education score, are more likely to be Black, less likely to be Hispanic, and much less likely to be White (all important differences in the USA context, especially perhaps of the 1970s). They are also less likely to be married, more likely to have no degree, and have substantially earlier wages in both 1974 and 1975. Clearly a straightforward comparision between average outcomes is far from a like-with-like comparisons between groups. The inclusion of other covariates ($X^*$) does seem to have made a difference, switching the reported direction of effect and its statistical significance, but if we could find a subsample of the control group whose characteristics better match those of the treatment groups, we would hopefully get a more precise and reliable estimate of the effect of the labour market programme. 
+
+The next part of the vignette shows MatchIt working with some fairly conventional settings:
+
+```{r}
+m.out1 <- matchit(treat ~ age + educ + race + married + 
+                   nodegree + re74 + re75, data = lalonde,
+                 method = "nearest", distance = "glm")
+m.out1
+```
+
+The propensity score, i.e. the probability of being in the treatment group, has been predicted using the other covariates, and using logistic regression. For each individual in the treatment group, a 'nearest neighbour' in the control group has been identified with the most similar propensity score, which we hope also will also mean the characteristics of the treatment group, and *matched* pairs from the control group, will be more similar too. 
+
+We can start to see what this means in practice by looking at the summary of the above object
+
+```{r}
+summary(m.out1)
+
+```
+
+Previously, there were 185 people in the treatment group, and 429 people in the control group. After matching there are 185 people in the treatment group... and also 185 people in the control group. So, each of the 185 people in the treatment group has been matched up with a 'data twin' in the control group, so the ATT should involve more of a like-with-like comparison. 
+
+The summary presents covariate-wise differences between the Treatment and Control groups for All Data, then for Matched Data. We would hope that, in the Matched Data, the differences are smaller for each covariate, though this isn't necessarily the case. After matching, for example, we can see that the Black proportion in the Control group is now 0.47 rather than 0.20, and that the earlier income levels are lower, in both cases bringing the values in the Control group closer to, but not identical to, those in the Treatment group. Another way of seeing how balancing has changed things is to look at density plots:
+
+```{r}
+plot(m.out1, type = "density", interactive = FALSE,
+     which.xs = ~age + married + re75+ race + nodegree + re74)
+
+```
+
+In these density charts, the darker lines indicate the Treatment group and the lighter lines the Control groups. The matched data are on the right hand side, with All data on the left. We are looking to see if, on the right hand side, the two sets of density lines are more similar than they are on the right. Indeed they do appear to be, though we can also tell they are far from identical.
+
+
+### Estimating Treatment Effect Sizes *after* matching 
+
+Historically, the MatchIt package was designed to work seamlessly with [Zelig](https://gking.harvard.edu/zelig), which made it much easier to use a single library and framework to produce 'quantities of interest' using multiple model structures. However Zelig has since been deprecated, meaning the vignette now recommends using the `marginaleffects` package. We'll follow their lead: 
+
+First the vignette recommends extracting matched data from the matchit output: 
+
+
+```{r}
+m.data <- match.data(m.out1)
+
+m.data <- as_tibble(m.data)
+m.data
+```
+
+Whereas the unmatched data contains 614 observations, the matched data contains 370 observations. Note that the Treatment group contained 185 observations, and that 370 is 185 times two. So, the matched data contains one person in the Control group for each person in the Treatment group. 
+
+We can also see that, in addition to the metrics originally included, the matched data contains three additional variables: 'distance', 'weights' and 'subclass'. The 'subclass' field is perhaps especially useful for understanding the intuition of the approach, because it helps show which individual in the Control group has been paired with which individual in the Treatment group. Let's look at the first three subgroups:
+
+```{r}
+m.data |> filter(subclass == '1')
+
+```
+
+So, for the first subclass, a 37 year old married Black person with no degree has been matched to a 22 year old Black married person with no degree. 
+
+```{r}
+m.data |> filter(subclass == '2')
+
+```
+
+For the second subclass a 33 year old married White person with a degree has been paired with a 39 year old White person with a degree.
+
+```{r}
+m.data |> filter(subclass == '3')
+
+```
+
+For the third subclass, a 31 year old unmarried Hispanic person with no degree has been paired with a 16 year old White person with no degree. 
+
+In each case, we can see the pairings are similar in some ways but (as with the last example) quite dissimilar in others. The matching algorithm is trying to do the best it can with the data available, especially with the constraint[^5] that once a person in the Control group has been paired up once to someone in the Treatment group, they can't be paired up again with someone else in the Treatment group. 
+
+[^5]: I think this is implied by the use of `method = "nearest"`, which is the default, meaning 'greedy nearest neighbour matching'.
+
+The identification of these specific pairings suggests we can used a fairly crude strategy to produce an estimate of the ATT: namely just compare the outcome across each of these pairs. Let's have a look at this:
+
+```{r}
+trt_effects <- 
+    m.data |>
+        group_by(subclass) |>
+        summarise(
+            ind_treat_effect = re78[treat == 1] - re78[treat == 0]
+        ) |> 
+        ungroup()
+
+trt_effects |>
+    ggplot(aes(ind_treat_effect)) + 
+    geom_histogram(bins = 100) + 
+    geom_vline(xintercept = mean(trt_effects$ind_treat_effect), colour = "red") + 
+    geom_vline(xintercept = 0, colour = 'lightgray', linetype = 'dashed')
+
+```
+
+This crude paired comparison suggests an average difference that's slightly positive, of $`r round(mean(trt_effects$ind_treat_effect), 2)`. 
+
+This is not a particularly sophisticated or 'kosher' approach however. Instead the vignette suggests calculating the treatment effect estimate as follows:
+
+
+```{r}
+library("marginaleffects")
+
+fit <- lm(re78 ~ treat * (age + educ + race + married + nodegree + 
+             re74 + re75), data = m.data, weights = weights)
+
+avg_comparisons(fit,
+                variables = "treat",
+                vcov = ~subclass,
+                newdata = subset(m.data, treat == 1),
+                wts = "weights")
+
+
+```
+
+Using the recommended approach, the ATT estimate is now $1121. Not statistically significant at the conventional 95% threshold, but also more likely to be positive than negative. 
+
+
+### Summary 
+
+In this post we have largely followed along with the introductionary vignette from the `MatchIt` package, in order to go from the fairly cursory theoretical overview in the previous post, to showing how some of the ideas and methods relating to multiple regression and matching methods work in practice. There are a great many ways that both matching, and multiple regression, can be implemented in practice, and both are likely to affect any causal effect estimates we produce. However, the aspiration of using matching methods is to somewhat reduce the dependency that causal effect estimates have on the specific model specifications we used. 
+
+## The Schools of Causal Inference
+
+Readers who've been involved and interested in the topic of causal inference over the last few years might be less surprised by what I have covered than by what I've not, namely the causal inference framework developed by Judea Pearl, and (somewhat) popularised by his co-authored book, **The Book of Why: The New Science of Cause and Effect**. (@pearl2018book)
+
+This 'oversight' in posts so far has been intentional, but in this post the Pearl framework will finally be discussed. I'll aim to: i) give an overview of the two primary ways of thinking about causal inference: either as a missing data problem; or as a 'do-logic' problem; ii) discuss the concept of the omitted variable vs post treatment effect bias trade-off as offering something of a bridge between the two paradigms; iii) give some brief examples of directed acyclic graphs (DAGs) and do-logic, two important ideas from the Pearl framework, as described in @pearl2018book; iv) make some suggestions about the benefits and uses of the Pearl framework; and finally v) advocate for epistemic humility when it comes to trying to draw causal inferences from observational data, even where a DAG has been clearly articulated and agreed upon within a research community. [^6] Without further ado, let's begin:
+
+[^6]: I might not cover these areas in the order listed above, and thinking about this further this might be too much territory for a single post. Let's see how this post develops...
+
+### Causal Inference: Two paradigms
+
+In the posts so far, I've introduced and kept returning to the idea that *the fundamental problem of causal inference is that at least half of the data is always missing*. i.e., for each individual observation, who has either been treated or not treated, if they had been treated then we do not observe them in the untreated state, and if they had not been treated we do not observe them in the treated state. It's this framing of the problem which 
+
+In introducing causal inference from this perspective, I've 'taken a side' in an ongoing debate, or battle, or even war, between two clans of applied epistemologists. Let's call them the *Rubinites*, and the *Pearlites*. Put crudely, the **Rubinites** adopt a *data-centred* framing of the challenge of causal inference, whereas the **Pearlites** adopt a *model-centred* framing of the challenge of causal inference. For the Rubinites, the data-centred framing leads to an intepretation of causal inference as a *missing data* problem, for which the solution is therefore to perform some kind of *data imputation*. For the Pearlites, by contrast, the solution is focused on developing, describing and drawing out *causal models*, which describe how we believe *one thing leads to another* and the paths of effect and influence that one variable has on each other variable. 
+
+It is likely no accident that the broader backgrounds and interests of Rubin and Pearl align with type of solution each proposes. Rubin's other main interests are in data imputation more generally, including methods of multiple imputation which allow 'missing values' to be filled in stochastically, rather than deterministically, to allow some representation of uncertainty and variation in the missing values to be indicated by the range of values that are generated for a missing hole in the data. Pearl worked as a computer scientist, whose key contribution to the field was the development of *Bayesian networks*, which share many similarities with *neural networks*. For both types of network, there are **nodes**, and there are **directed links**. The nodes have values, and these values can be influenced and altered by the values of other nodes that are connected to the node in question. This influence that each node has on other nodes, through the paths indicated in the directed links, is perhaps more likely to be described as *updating* from the perspective of a Bayesian network, and *propagation* from the perspective of a neural network. But in either case, it really *is correct* to say that one node really does *cause* another node's value to change through the *causal pathway* of the directed link. The main graphical tool Pearl proposes for reasoning about causality in obervational data is the **directed acyclic graph (DAG)**, and again it should be unsurprising that DAGs look much like Bayesian networks. 
+
+### The Omitted Variable Bias vs Post Treatment Bias Trade-off as a potential bridge between the two paradigms
+
+The school of inference I'm most familiar with is that of Gary King, a political scientist, methodologist and (in the hallowed halls of Harvard) populariser of statistical methods in the social sciences. In the crude paradigmatic split I've sketched out above, King is a **Rubinite**, and so I guess - mainly through historical accident but partly through conscious decision - I am too. However, I have read @pearl2018book (maybe not recently enough nor enough times to fully digest it), consider it valuable and insightful in many places, and think there's at least one place where the epistemic gap between the two paradigms can be bridged. 
+
+The bridge point on the Rubinite side,[^7] I'd suggest, comes from thinking carefully about the sources of bias enumerated in section 3.2 of @KinZen06, which posits that: 
+
+$$
+bias = \Delta_o + \Delta_p + \Delta_i + \Delta_e
+$$
+
+[^7]: The bridge point on the Pearlite side might be a recognition of the apparent *bloody obviousness* of the fact that, if an observational unit was treated, we don't observe untreated, and vice versa. The kind of table with missing cells, as shown earlier, would appear to follow straightforwardly from conceding this point. However, @pearl2018book includes an example of this kind of table (table 8.1; p. 273), and argues forcefully against this particular framing.
+
+This section states:
+
+> These four terms denote exactly the four sources of bias in using observational data, with the subscripts being mnemonics for the components ... . The bias components are due to, respectively, **omitted variable bias** ($\Delta_o$), **post-treatment bias** ($\Delta_p$), interpolation bias ($\Delta_i$) and extrapolation bias ($\Delta_e$). [Emphases added]
+
+Of the four sources of bias listed, it's the first two which appear to offer a potential link between the two paradigms, and so suggest to Rubinites why some engagement with the Pearlite approach may be valuable. The section continues: 
+
+> Briefly, $\Delta_o$ is the bias due to omitting relevant variables such as *common causes* of both the treatment and the outcome variables [whereas] $\Delta_p$ is bias due to controlling for the *consequences* of the treatment. [Emphases added]
+
+From the Rubinite perspective, it seems that omitted variable bias and post-treatment bias are recognised, in combination, as constituting a **wicked problem**. This is because the inclusion of an specific variable can simultaneously affect both types of bias: reducing omitted variable bias, but also potentially increasing post treatment bias. *You're doomed if you do, but you're also doomed if you don't.* 
+
+### With apologies to economists and epidemiologists alike...
+
+Of the two sources of bias, omitted variable bias seems to be the more discussed. And historically, it seems different social and health science disciplines have placed a different weight of addressing these two sources of bias. In particular, at least in the UK context, it's seemed that economists tend to be more concerned about omitted variable bias, leading to the inclusion of a large number of variables in their statistical models, whereas epidemiologists (though they might not be familiar with and use the term) tend to be more concerned about post-treatment bias, leading a statistical models with fewer variables. 
+
+The issue of post treatment bias is especially important to consider in the context of root or fundamental causes, which again is often something more of interest to epidemiologists than economists. And the importance of the issue comes into sharp relief if considering factors like sex or race. An economist/econometrician, if asked to estimate the effect of race on (say) the probability of a successful job application to an esteemed organisation, might be very liable to try to include many additional covariates, such as previous work experience and job qualifications, as 'control variables' in a statistical model in addition to race. From this, they might find that the covariate associated with race is neither statistically nor substantively, and from this conclude that there is no evidence of (say) racial discrimination in employment, because any disparities in outcomes between racial groups appear to be 'explained by' other factors like previous experience and job qualifications. 
+
+To this, a methodologically minded epidemiologist might counter - very reasonably - that the econometrician's model is *over-controlling*, and that the inclusion of factors like educational outcomes and previous work experience in the model risks introducing **post treatment bias**. If there were discrimination on the basis of race, or sex, it would be unlikely to *just* affect the specific outcome on the response side of the model. Instead, discrimination (or other race-based factors) would also likely affect the kind of education available to people of different races, and the kinds of educational expectations placed on people of different racial groups. This would then affect the level of educational achievement by group as well. Similarly, both because of prior differences in educational achievement, and because of concurrent effects of discrimination, race might also be expected to affect job history too. Based on this, the epidemiologist might choose to omit both qualifications and job history from the model, because both are presumed to be causallly downstream of the key factor of interest, race. 
+
+So which type of model is correct? The epidemiologist's more parsimonious model, which is mindful of post-treatment bias, or the economist's more complicated model, which is mindful of omitted variable bias? The conclusion from the four-biases position laid out above is that *we don't know*, but that all biases potentially exist in observational data, and neither model specification can claim to be free from bias. *Perhaps* both kinds of model can be run, and *perhaps* looking at the estimates from both models can give something like a plausible range of possible effects. But fundamentally, we don't know, and can't know, and ideally we should seek better quality data, run RCTs and so on. 
+
+@pearl2018book  argues that Rubinites don't see much (or any) value in causal diagrams, stating "The Rubin causal model treats counterfactuals as abstract mathematical objects that are managed by algebraic machinery but not derived from a model." [p. 280] Though I think this characterisation is broadly *consciously* correct, the recognition within the Rubinite community that such things as post-treatment bias and omitted variables *exist* suggests to me that, *unconsciously*, even Rubinites employ something like path-diagram reasoning when considering which sources of bias are likely to affect their effect estimates. Put simply: I don't see how claims of either omitted variable or post treatment bias could be made or believed but for the kind of graphical, path-like thinking at the centre of the Pearlite paradigm. 
+
+Let's draw the two types of statistical model implied in the discussion above. Firstly the economist's model: 
+
+```{mermaid}
+flowchart LR
+
+race(race)
+qual(qualifications)
+hist(job history)
+accept(job offer)
+
+race -->|Z| accept
+qual -->|X*| accept
+hist -->|X*| accept 
+
+```
+
+And now the epidemiologist's model:
+
+```{mermaid}
+flowchart LR 
+
+race(race)
+accept(job offer)
+
+race -->|Z| accept
+
+```
+
+Employing a DAG-like causal path diagram would at the very least allow both the economist and epidemiologist to discuss whether or not they agree that the underlying causal pathways are more likely to be something like the follows: 
+
+```{mermaid}
+flowchart LR
+
+
+race(race)
+qual(qualifications)
+hist(job history)
+accept(job offer)
+
+race --> qual
+qual --> hist
+hist --> accept
+
+race --> hist
+qual --> accept
+race --> accept
+
+```
+
+If, having drawn out their presumed causal pathways like this, the economist and epidemiologist end up with the same path diagram, then the Pearlian framework offers plenty of suggestions about how, subject to various assumptions about the types of effect each node has on each downstream node, statistical models based on observational data should be specified, and how the values of various coefficients in the statistical model should be combined in order to produce an overall estimate of the left-most node on the right-most node. Even a Rubinite who does not subscribe to some of these assumptions may still find this kind of graphical, path-based reasoning helpful for thinking through what their concerns are relating to both omitted variable and post-treatment biases are, and whether there's anything they can do about it. In the path diagram above, for example, the importance of temporal sequence appears important: *first* there's education and qualification; *then* there's initial labour market experience; *and then* there's contemporary labour market experience. This appreciation of the sequence of events might suggest that, perhaps, data employing a longitudinal research design might be preferred to one using only cross-sectional data; and/or that what appeared intially to be only a single research question, investigated through a single statistical model, is actually a series of linked, stepped research questions, each employing a different statistical model, breaking down the cause-effect question into a series of smaller steps. 
+
+### Summary thoughts: on social complexity and the need for epistemic humility
+
+As mentioned before, I probably lean somewhat more towards the Rubinite than the Pearlite framework. A lot of this is simply because this is the causal effect framework I was first introduced to, but some of it comes from more fundamental concerns I have about how some users and advocates of the Pearlite framework seem to think, or suggest, it can solve issues of causal inference from observational data that, fundamentally, I don't think it may be possible to address. 
+
+One clue about what the Pearlite framework can and cannot do comes from the 'A' in DAG: 'acyclic'. This means that causal pathways of the following form can be specified: 
+
+```{mermaid}
+flowchart LR
+A(A)
+B(B)
+
+A --> B
+```
+
+But causal pathways of the following form cannot:
+
+```{mermaid}
+flowchart LR
+
+A(A)
+B(B)
+
+A --> B
+B --> A
+
+```
+
+Unfortunately, cyclic relationships between two or more factors, in which the pathways of influence go in both directions, are likely extremely common in social and economic systems, because such systems are *complex* rather than merely *complicated*. [^8] One approach to trying to fit a representation of a complex coupled system into a DAG-like framework would be to use time to try to break the causal paths:
+
+[^8]: The economist's model is more *complicated* than the epidemiologist's model, but both are equally *complex*, i.e. not complex at all, because they don't involve any pathways going from right to left. 
+
+```{mermaid}
+flowchart LR
+
+c0(Chicken at T0)
+e1(Egg at T1)
+c2(Chicken at T2)
+e3(Egg at T3)
+
+c0 --> e1
+e1 --> c2
+c2 --> e3
+
+```
+
+But another way of reasoning about such localised coupled complexity might be to use something like factor analysis to identify patterns of co-occurence of variables which may be consistent with this kind of localised complex coupling:
+
+
+```{mermaid}
+flowchart LR
+
+ce((ChickenEgg))
+e[egg]
+c[chicken]
+
+ce --> e
+ce --> c
+
+```
+
+
+Within the above diagram, based on structural equation modelling, the directed arrows have a different meaning. They're not claims of causal effects, but instead of membership. The circle is an underlying proposed 'latent variable', the **ChickenEgg**, which is presumed to manifest through the two observed/manifest variables **egg** and **chicken** represented by the rectangles. In places with a lot of **ChickenEgg**, such as a hen house, we would expect to observe a lot of both **chicken**s and **egg**s. The statistical model in the above case is a *measurement model*, rather than a *causal model*, but in this case is one which is informed by an implicit recognition of continual causal influence operating within members of a complex, paired, causal system. 
+
+So, I guess my first concern relating to DAGs is that, whereas they *can* be really useful in allowing researchers to express some form of causal thinking and assumptions about paths of influence between factors, their *acyclic* requirement can also lead researchers to disregard or underplay the role of complexity even when considering inherently complex systems. In summary, they offer the potential both to *expand*, but also to *restrict*, our ability to reason effectively about causal influence. 
+
+My second, related, concern about the potential over-use or over-reach of DAG-like thinking comes from conventional assumptions built into the paths of influence between nodes. We can get to the heart of this latter concern by looking at , and carefully considering the implications of, something called a **double pendulum**, a video of which is shown below:
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/d0Z8wLLPNE0?si=l8IjyVKIxdbGPHfy" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+
+A double pendulum is not a *complicated* system, but it is a *complex* system, and also a *chaotic* system. The variables at play include two length variables, two mass variables, a gravity variable, and time. The chaotic complexity of the system comes from the way the length and mass of the first arm interact with the length and and mass of the second arm. This complex interaction is what leads to the position of the outer-most part of the second arm (the grey ball) at any given time. 
+
+Now imagine trying to answer a question of the form "what is *the* effect of the first arm's mass on the grey ball's position?" This kind of question is one that it's simply not meaningful to even ask. It's the complex interaction between all components of the system that *jointly* determines the ball's position, and attempting to decompose the causal effect of any one variable in the system is simply not a fruitful way of trying to understand the system as a whole. 
+
+This does not mean, however, that we cannot develop a useful understanding of the double pendulum. We know, for example, that the ball cannot be further than the sum of the length of the two arms from the centre of the system. If we were thinking about placing another object near the double pendulum, for example, this would help us work out how far apart from the pendulum we should place it. Also, if one of the arms is much longer or more massive than the other, then maybe we could approximate it with a simple pendulum too. Additionally, all double pendulums tend to behave in similar ways during their initial fall. But the nature of this kind of complex system also means some types of causal question are beyond the realm of being answerable. 
+
+
+The double pendulum, for me, is an object lesson on the importance of *epistemic humility*. My overall concern relating to causal inference applies nearly equally to Rubinites and Pearlites alike, and is that excessive engagement with or enthusiasm for any kind of method or framework can lead to us believing we know more than we really know more about *how one thing affects another*. This can potentially lead both to errors of judgement - such as not planning sufficiently for eventualities our models suggest cannot happen - and potentially to intolerance towards those who 'join the dots' in a different way to ourselves. [^9]
+
+
+In short: stay methodologically engaged, but also stay epistemically modest.
+
+[^9]: A majority of political disagreement, for example, seems to occur when people agree on the facts, but disagree about the primary causal pathway. 

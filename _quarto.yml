@@ -9,7 +9,7 @@ website:
         text: Home
       - about.qmd
       - sidebar:main-course
-      - sidebar:supplementary-courses
+      - sidebar:extra-courses
 
   sidebar:
     - id: main-course
@@ -22,14 +22,23 @@ website:
         - href: pages/main-course/complete-simulation-example/index.qmd
           text: "(3) Complete Simulation Example"
 
+    - id: extra-courses
+      title: "Supplementary Courses"
+      contents:
+        - href: pages/extra-courses/causal-inference/index.qmd
+          text: "Causal Inference"
+        - href: pages/extra-courses/time-series/index.qmd
+          text: "Time Series"
+
 
 
 
 format:
   html:
-    theme: cosmo
+    theme: 
+      light: cosmo
+      dark: slate
     css: styles.css
     toc: true
-
 
 
