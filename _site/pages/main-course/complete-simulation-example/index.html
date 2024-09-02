@@ -88,10 +88,12 @@ div.csl-indent {
 <script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
 <script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<link href="../../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -150,6 +152,10 @@ div.csl-indent {
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-main-course-statistical-inference-and-simulation">    
         <li>
+    <a class="dropdown-item" href="../../../pages/main-course/statistics-as-circuits/index.html" rel="" target="">
+ <span class="dropdown-text">(0) Statistics as Circuit Boards</span></a>
+  </li>  
+        <li>
     <a class="dropdown-item" href="../../../pages/main-course/intro-to-glms/index.html" rel="" target="">
  <span class="dropdown-text">(1) Intro to GLMs</span></a>
   </li>  
@@ -169,13 +175,22 @@ div.csl-indent {
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-supplementary-courses">    
         <li>
-    <a class="dropdown-item" href="../../../pages/supplementary-courses/causal-inference/index.qmd" rel="" target="">
+    <a class="dropdown-item" href="../../../pages/extra-courses/causal-inference/index.html" rel="" target="">
  <span class="dropdown-text">Causal Inference</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../../pages/extra-courses/time-series/index.html" rel="" target="">
+ <span class="dropdown-text">Time Series</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../../pages/extra-courses/hacker-stats/index.html" rel="" target="">
+ <span class="dropdown-text">Hacker Stats</span></a>
   </li>  
     </ul>
   </li>
 </ul>
             <div class="quarto-navbar-tools ms-auto">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
 </div>
           </div> <!-- /navcollapse -->
       </div> <!-- /container-fluid -->
@@ -197,6 +212,12 @@ div.csl-indent {
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../pages/main-course/statistics-as-circuits/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">(0) Statistics as Circuit Boards</span></a>
+  </div>
+</li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../../pages/main-course/intro-to-glms/index.html" class="sidebar-item-text sidebar-link">
@@ -877,12 +898,12 @@ Y_i \sim Norm(\theta_i, \sigma^2)
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>     (Intercept) log(dose)    suppVC log(dose):suppVC
-[1,]    21.38498  8.705757 -4.750950         4.674708
-[2,]    21.28967  8.056243 -4.050778         5.367108
-[3,]    20.18314 10.530421 -3.231182         3.878748
-[4,]    19.81736  8.345250 -1.732652         3.125173
-[5,]    20.64979  9.966520 -2.747275         4.414104
-[6,]    20.98720  9.180350 -3.032385         2.646055</code></pre>
+[1,]    21.65190  9.840500 -3.899808         2.738817
+[2,]    20.43810  6.602578 -3.830201         4.658698
+[3,]    20.50023  9.382617 -3.628783         3.212637
+[4,]    21.25554  9.065408 -3.839082         2.309542
+[5,]    21.54364  7.734648 -4.513899         5.592446
+[6,]    19.66816  7.962146 -3.072227         6.101191</code></pre>
 </div>
 </div>
 <p>Let’s first look at each of these parameters individually:</p>
@@ -1035,7 +1056,7 @@ Y_i \sim Norm(\theta_i, \sigma^2)
 <span id="cb48-10"><a href="#cb48-10" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(predictions_ev)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 23.32761 23.08737 22.53293 21.67955 22.87376 23.03573</code></pre>
+<pre><code>[1] 23.84774 21.91142 22.59390 23.27843 23.26958 21.44486</code></pre>
 </div>
 </div>
 <p>Let’s now get a 95% credible interval:</p>
@@ -1046,7 +1067,7 @@ Y_i \sim Norm(\theta_i, \sigma^2)
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>    2.5%      50%    97.5% 
-21.30301 22.72359 24.17352 </code></pre>
+21.30727 22.71851 24.15138 </code></pre>
 </div>
 </div>
 <p>So, the 95% interval for the expected value is between <code>21.31</code> and <code>24.14</code>, with a middle (median) estimate of <code>22.73</code>.<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a> Let’s check this against estimates from the <code>predict()</code> function:</p>
@@ -1078,7 +1099,7 @@ Y_i \sim Norm(\theta_i, \sigma^2)
 <span id="cb54-8"><a href="#cb54-8" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(predictions_pv)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 24.28755 23.32435 16.16326 23.39975 26.59984 24.70898</code></pre>
+<pre><code>[1] 18.61948 21.74620 24.29911 23.65014 28.94759 15.12784</code></pre>
 </div>
 </div>
 <p>Let’s get the 95% interval from the above using quantile</p>
@@ -1089,7 +1110,7 @@ Y_i \sim Norm(\theta_i, \sigma^2)
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>    2.5%      50%    97.5% 
-15.25717 22.68875 30.22538 </code></pre>
+15.10562 22.70801 29.97023 </code></pre>
 </div>
 </div>
 <p>As expected, the interval is now much wider, with a 95% interval from <code>15.34</code> to <code>30.11</code>. The central estimate should in theory, with an infinite number of runs, be the same, however because of random variation it will never be <em>exactly</em> the same to an arbitrary number of decimal places. In this case, the middle estimate is <code>22.75</code>, not identical to the central estimate from the expected values distribution of <code>22.72</code>. The number of simulations can <em>always</em> be increased to produce greater precision if needed.</p>
@@ -1149,18 +1170,18 @@ Y_i \sim Norm(\theta_i, \sigma^2)
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 10,000 × 3
-      x0    x1    fd
-   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
- 1  23.3  19.6 -3.71
- 2  23.1  20.2 -2.85
- 3  22.5  20.2 -2.37
- 4  21.7  20.6 -1.04
- 5  22.9  21.1 -1.76
- 6  23.0  20.6 -2.44
- 7  22.1  19.8 -2.31
- 8  21.8  20.0 -1.83
- 9  22.7  20.2 -2.57
-10  22.9  20.7 -2.17
+      x0    x1     fd
+   &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;
+ 1  23.8  20.6 -3.29 
+ 2  21.9  19.1 -2.79 
+ 3  22.6  19.7 -2.91 
+ 4  23.3  20.0 -3.32 
+ 5  23.3  20.0 -3.27 
+ 6  21.4  19.7 -1.71 
+ 7  23.9  20.0 -3.85 
+ 8  23.0  20.7 -2.35 
+ 9  22.4  19.5 -2.92 
+10  22.0  21.1 -0.922
 # ℹ 9,990 more rows</code></pre>
 </div>
 </div>
@@ -1206,7 +1227,7 @@ Y_i \sim Norm(\theta_i, \sigma^2)
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>      2.5%        50%      97.5% 
--4.8591797 -2.8407341 -0.8408581 </code></pre>
+-4.8965030 -2.8402664 -0.8604746 </code></pre>
 </div>
 </div>
 <p>So, 95% of estimates of the first difference are between <code>-4.85</code> and <code>-0.81</code>, with the middle of this distribution (on this occasion) being <code>-2.83</code>.</p>
@@ -1341,8 +1362,8 @@ F-statistic:  64.5 on 3 and 56 DF,  p-value: &lt; 2.2e-16</code></pre>
 <pre><code>
 SAMPLING FOR MODEL 'continuous' NOW (CHAIN 1).
 Chain 1: 
-Chain 1: Gradient evaluation took 0.001295 seconds
-Chain 1: 1000 transitions using 10 leapfrog steps per transition would take 12.95 seconds.
+Chain 1: Gradient evaluation took 0.000247 seconds
+Chain 1: 1000 transitions using 10 leapfrog steps per transition would take 2.47 seconds.
 Chain 1: Adjust your expectations accordingly!
 Chain 1: 
 Chain 1: 
@@ -1359,15 +1380,15 @@ Chain 1: Iteration: 1600 / 2000 [ 80%]  (Sampling)
 Chain 1: Iteration: 1800 / 2000 [ 90%]  (Sampling)
 Chain 1: Iteration: 2000 / 2000 [100%]  (Sampling)
 Chain 1: 
-Chain 1:  Elapsed Time: 0.03 seconds (Warm-up)
-Chain 1:                0.037 seconds (Sampling)
-Chain 1:                0.067 seconds (Total)
+Chain 1:  Elapsed Time: 0.033 seconds (Warm-up)
+Chain 1:                0.033 seconds (Sampling)
+Chain 1:                0.066 seconds (Total)
 Chain 1: 
 
 SAMPLING FOR MODEL 'continuous' NOW (CHAIN 2).
 Chain 2: 
-Chain 2: Gradient evaluation took 7e-06 seconds
-Chain 2: 1000 transitions using 10 leapfrog steps per transition would take 0.07 seconds.
+Chain 2: Gradient evaluation took 5e-06 seconds
+Chain 2: 1000 transitions using 10 leapfrog steps per transition would take 0.05 seconds.
 Chain 2: Adjust your expectations accordingly!
 Chain 2: 
 Chain 2: 
@@ -1385,14 +1406,14 @@ Chain 2: Iteration: 1800 / 2000 [ 90%]  (Sampling)
 Chain 2: Iteration: 2000 / 2000 [100%]  (Sampling)
 Chain 2: 
 Chain 2:  Elapsed Time: 0.032 seconds (Warm-up)
-Chain 2:                0.025 seconds (Sampling)
-Chain 2:                0.057 seconds (Total)
+Chain 2:                0.033 seconds (Sampling)
+Chain 2:                0.065 seconds (Total)
 Chain 2: 
 
 SAMPLING FOR MODEL 'continuous' NOW (CHAIN 3).
 Chain 3: 
-Chain 3: Gradient evaluation took 4e-06 seconds
-Chain 3: 1000 transitions using 10 leapfrog steps per transition would take 0.04 seconds.
+Chain 3: Gradient evaluation took 1.4e-05 seconds
+Chain 3: 1000 transitions using 10 leapfrog steps per transition would take 0.14 seconds.
 Chain 3: Adjust your expectations accordingly!
 Chain 3: 
 Chain 3: 
@@ -1409,15 +1430,15 @@ Chain 3: Iteration: 1600 / 2000 [ 80%]  (Sampling)
 Chain 3: Iteration: 1800 / 2000 [ 90%]  (Sampling)
 Chain 3: Iteration: 2000 / 2000 [100%]  (Sampling)
 Chain 3: 
-Chain 3:  Elapsed Time: 0.033 seconds (Warm-up)
-Chain 3:                0.028 seconds (Sampling)
-Chain 3:                0.061 seconds (Total)
+Chain 3:  Elapsed Time: 0.034 seconds (Warm-up)
+Chain 3:                0.037 seconds (Sampling)
+Chain 3:                0.071 seconds (Total)
 Chain 3: 
 
 SAMPLING FOR MODEL 'continuous' NOW (CHAIN 4).
 Chain 4: 
-Chain 4: Gradient evaluation took 8e-06 seconds
-Chain 4: 1000 transitions using 10 leapfrog steps per transition would take 0.08 seconds.
+Chain 4: Gradient evaluation took 9e-06 seconds
+Chain 4: 1000 transitions using 10 leapfrog steps per transition would take 0.09 seconds.
 Chain 4: Adjust your expectations accordingly!
 Chain 4: 
 Chain 4: 
@@ -1434,9 +1455,9 @@ Chain 4: Iteration: 1600 / 2000 [ 80%]  (Sampling)
 Chain 4: Iteration: 1800 / 2000 [ 90%]  (Sampling)
 Chain 4: Iteration: 2000 / 2000 [100%]  (Sampling)
 Chain 4: 
-Chain 4:  Elapsed Time: 0.03 seconds (Warm-up)
-Chain 4:                0.028 seconds (Sampling)
-Chain 4:                0.058 seconds (Total)
+Chain 4:  Elapsed Time: 0.034 seconds (Warm-up)
+Chain 4:                0.029 seconds (Sampling)
+Chain 4:                0.063 seconds (Total)
 Chain 4: </code></pre>
 </div>
 <details open="">
@@ -1457,27 +1478,27 @@ Model Info:
 
 Estimates:
                    mean   sd   10%   50%   90%
-(Intercept)      20.7    0.7 19.8  20.7  21.6 
-log(dose)         9.2    1.2  7.7   9.2  10.8 
-suppVC           -3.7    1.0 -4.9  -3.7  -2.6 
-log(dose):suppVC  3.9    1.8  1.6   3.9   6.1 
+(Intercept)      20.7    0.7 19.8  20.7  21.5 
+log(dose)         9.3    1.2  7.7   9.3  10.8 
+suppVC           -3.7    1.0 -5.0  -3.7  -2.4 
+log(dose):suppVC  3.8    1.8  1.6   3.8   6.0 
 sigma             3.8    0.4  3.3   3.8   4.3 
 
 Fit Diagnostics:
            mean   sd   10%   50%   90%
-mean_PPD 18.8    0.7 17.9  18.8  19.7 
+mean_PPD 18.8    0.7 18.0  18.8  19.7 
 
 The mean_ppd is the sample average posterior predictive distribution of the outcome variable (for details see help('summary.stanreg')).
 
 MCMC diagnostics
                  mcse Rhat n_eff
-(Intercept)      0.0  1.0  3921 
-log(dose)        0.0  1.0  2761 
-suppVC           0.0  1.0  4014 
-log(dose):suppVC 0.0  1.0  2782 
-sigma            0.0  1.0  4003 
-mean_PPD         0.0  1.0  4098 
-log-posterior    0.0  1.0  1797 
+(Intercept)      0.0  1.0  3676 
+log(dose)        0.0  1.0  1956 
+suppVC           0.0  1.0  3401 
+log(dose):suppVC 0.0  1.0  1839 
+sigma            0.0  1.0  3289 
+mean_PPD         0.0  1.0  3276 
+log-posterior    0.0  1.0  1591 
 
 For each parameter, mcse is Monte Carlo standard error, n_eff is a crude measure of effective sample size, and Rhat is the potential scale reduction factor on split chains (at convergence Rhat=1).</code></pre>
 </div>
@@ -1511,12 +1532,12 @@ For each parameter, mcse is Monte Carlo standard error, n_eff is a crude measure
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>            1
-[1,] 16.45905
-[2,] 26.91309
-[3,] 28.30747
-[4,] 25.59066
-[5,] 21.48906
-[6,] 22.22209</code></pre>
+[1,] 17.27468
+[2,] 25.12167
+[3,] 24.76709
+[4,] 19.58145
+[5,] 23.13263
+[6,] 28.66616</code></pre>
 </div>
 <details open="">
 <summary>Code</summary>
@@ -1555,7 +1576,7 @@ For each parameter, mcse is Monte Carlo standard error, n_eff is a crude measure
 <p><img src="index_files/figure-html/unnamed-chunk-40-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<p>The darker-shaded parts of the histogram show the 95% uncertainty interval, and the blue vertical line the median estimate. This 95% interval range is 14.95 to 30.04.</p>
+<p>The darker-shaded parts of the histogram show the 95% uncertainty interval, and the blue vertical line the median estimate. This 95% interval range is 15.08 to 30.24.</p>
 <p>Remember we previously estimated both the <em>expected values</em> and the <em>predicted values</em> for this condition. Our 95% range for the <em>expected values</em> were <code>20.27</code> to <code>24.19</code> (or thereabouts), whereas our 95% range for the <em>predicted values</em> were (by design) wider, at <code>15.34</code> to <code>30.11</code>. The 95% uncertainty interval above is therefore of <em>predicted values</em>, which include fundamental variation due to the ancillary parameters <span class="math inline">\(\sigma\)</span>, rather than <em>expected values</em>, which result from parameter uncertainty alone.</p>
 <p>There are a couple of other functions in <code>rstanarm</code> we can look at: <code>predictive_error()</code> and <code>predictive_interval()</code></p>
 <p>First here’s <code>predictive_interval</code>. It is a convenience function that the posterior distribution generated previously, <code>predictions</code>, and returns an uncertainty interval:</p>
@@ -1568,7 +1589,7 @@ For each parameter, mcse is Monte Carlo standard error, n_eff is a crude measure
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>        5%      95%
-1 16.22679 28.92694</code></pre>
+1 16.39398 28.96278</code></pre>
 </div>
 </div>
 <p>We can see by default the intervals returned are from 5% to 95%, i.e.&nbsp;are the 90% intervals rather than the 95% intervals considered previously. We can change the intervals requested with the <code>prob</code> argument:</p>
@@ -1582,7 +1603,7 @@ For each parameter, mcse is Monte Carlo standard error, n_eff is a crude measure
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>      2.5%    97.5%
-1 14.95077 30.03604</code></pre>
+1 15.08329 30.23879</code></pre>
 </div>
 </div>
 <p>As expected, this requested interval returns an interval closer to (but not identical to) the interval estimated using the quantile function.</p>
@@ -1597,8 +1618,8 @@ For each parameter, mcse is Monte Carlo standard error, n_eff is a crude measure
 <span id="cb84-5"><a href="#cb84-5" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
-<pre><code>      2.5%   97.5%
-1 14.95388 30.5151</code></pre>
+<pre><code>      2.5%    97.5%
+1 15.24548 30.09073</code></pre>
 </div>
 </div>
 <p>Yes. This approach works too. The values aren’t identical as, no doubt, a more sophisticated approach is used by <code>predictive_interval</code> to estimate the interval than simply arranging the posterior estimates in order using <code>quantile</code>.</p>
@@ -1617,7 +1638,7 @@ For each parameter, mcse is Monte Carlo standard error, n_eff is a crude measure
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>    2.5%      50%    97.5% 
-21.29030 22.75297 24.20892 </code></pre>
+21.22646 22.74636 24.20295 </code></pre>
 </div>
 </div>
 <p>For comparison, the expected value 95% interval we obtained from the Frequentist model was 21.3 to 24.2 when drawing from the quasi-posterior distribution, and 22.7 to 24.2 when using the <code>predict()</code> function with the <code>interval</code> argument set to <code>"confidence"</code>.</p>
@@ -1639,12 +1660,12 @@ For each parameter, mcse is Monte Carlo standard error, n_eff is a crude measure
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>            1        2
-[1,] 20.43321 16.39788
-[2,] 20.82978 19.84081
-[3,] 27.13488 22.76374
-[4,] 18.45427 14.22702
-[5,] 24.62406 18.13178
-[6,] 19.00336 22.00924</code></pre>
+[1,] 21.12879 16.82976
+[2,] 25.13729 20.06466
+[3,] 27.66625 15.62957
+[4,] 24.33312 24.97839
+[5,] 28.15871 17.98785
+[6,] 24.50237 25.81453</code></pre>
 </div>
 </div>
 <p>The <code>newdata</code> argument to posterior_predict now has two rows, one for the OJ supplement and the other for the VC supplement scenario. And the predictions matrix returned by <code>posterior_predict</code> now has two columns: one for each scenario (row) in <code>predictors_fd</code>. We can look at the distribution of both of these columns, as well as the rowwise comparisions between columns, which will give our distribution of first differences for the <em>predicted</em> values:</p>
@@ -1690,7 +1711,7 @@ For each parameter, mcse is Monte Carlo standard error, n_eff is a crude measure
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>      2.5%        50%      97.5% 
--13.857756  -2.952790   8.078398 </code></pre>
+-13.521911  -2.984012   7.939206 </code></pre>
 </div>
 </div>
 <p>The 95% intervals for first differences in <em>predicted</em> values is from -13.6 to +7.9, with the median estimate at -3.0. As expected, the median is similar to the equivalent value from using expected values (-2.9) but the range is wider.</p>
@@ -1708,12 +1729,12 @@ For each parameter, mcse is Monte Carlo standard error, n_eff is a crude measure
 <div class="cell-output cell-output-stdout">
 <pre><code>          
 iterations        1        2
-      [1,] 22.32912 19.16732
-      [2,] 23.11436 19.15944
-      [3,] 23.21977 20.45930
-      [4,] 22.52365 19.96163
-      [5,] 22.82536 20.36854
-      [6,] 22.69024 19.94984</code></pre>
+      [1,] 21.61562 19.86438
+      [2,] 22.03329 20.43422
+      [3,] 23.63749 19.47578
+      [4,] 22.44225 19.06079
+      [5,] 23.33263 20.99931
+      [6,] 22.54872 19.67856</code></pre>
 </div>
 </div>
 <div class="cell">
@@ -1757,7 +1778,7 @@ iterations        1        2
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>      2.5%        50%      97.5% 
--4.9253769 -2.8496558 -0.7829446 </code></pre>
+-5.0807111 -2.8689507 -0.7343028 </code></pre>
 </div>
 </div>
 <p>We now have a 95% interval for the first difference in expected values of -4.9 to -0.7. By contrast, the equivalent range estimated using the Frequentist model in part 12 was -4.8 to -0.8. So, although they’re not identical, they do seem to be very similar.</p>
@@ -1816,6 +1837,121 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
   }
   toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  let localAlternateSentinel = 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
   const icon = "";
   const anchorJS = new window.AnchorJS();
   anchorJS.options = {
