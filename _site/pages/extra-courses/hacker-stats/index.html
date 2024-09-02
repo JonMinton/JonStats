@@ -1,0 +1,2053 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.450">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>JonStats - Hacker Stats</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../">
+<script src="../../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script src="../../../site_libs/quarto-diagram/mermaid.min.js"></script>
+<script src="../../../site_libs/quarto-diagram/mermaid-init.js"></script>
+<link href="../../../site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<link rel="stylesheet" href="../../../styles.css">
+</head>
+
+<body class="nav-sidebar floating nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../../../index.html">
+    <span class="navbar-title">JonStats</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../../index.html" rel="" target="">
+ <span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../about.html" rel="" target="">
+ <span class="menu-text">About</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-main-course-statistical-inference-and-simulation" role="button" data-bs-toggle="dropdown" aria-expanded="false" rel="" target="">
+ <span class="menu-text">Main Course: Statistical Inference and Simulation</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-main-course-statistical-inference-and-simulation">    
+        <li>
+    <a class="dropdown-item" href="../../../pages/main-course/statistics-as-circuits/index.html" rel="" target="">
+ <span class="dropdown-text">(0) Statistics as Circuit Boards</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../../pages/main-course/intro-to-glms/index.html" rel="" target="">
+ <span class="dropdown-text">(1) Intro to GLMs</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../../pages/main-course/likelihood-and-simulation-theory/index.html" rel="" target="">
+ <span class="dropdown-text">(2) Likelihood and Simulation Theory</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../../pages/main-course/complete-simulation-example/index.html" rel="" target="">
+ <span class="dropdown-text">(3) Complete Simulation Example</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-supplementary-courses" role="button" data-bs-toggle="dropdown" aria-expanded="false" rel="" target="">
+ <span class="menu-text">Supplementary Courses</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-supplementary-courses">    
+        <li>
+    <a class="dropdown-item" href="../../../pages/extra-courses/causal-inference/index.html" rel="" target="">
+ <span class="dropdown-text">Causal Inference</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../../pages/extra-courses/time-series/index.html" rel="" target="">
+ <span class="dropdown-text">Time Series</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../../pages/extra-courses/hacker-stats/index.html" rel="" target="">
+ <span class="dropdown-text">Hacker Stats</span></a>
+  </li>  
+    </ul>
+  </li>
+</ul>
+            <div class="quarto-navbar-tools ms-auto">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../../pages/extra-courses/hacker-stats/index.html">Hacker Stats</a></li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../pages/extra-courses/causal-inference/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Causal Inference</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../pages/extra-courses/time-series/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Time Series</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../pages/extra-courses/hacker-stats/index.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Hacker Stats</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview">Overview</a>
+  <ul class="collapse">
+  <li><a href="#introduction" id="toc-introduction" class="nav-link" data-scroll-target="#introduction">Introduction</a></li>
+  <li><a href="#resampling-as-hacker-stats" id="toc-resampling-as-hacker-stats" class="nav-link" data-scroll-target="#resampling-as-hacker-stats">Resampling as Hacker Stats</a></li>
+  </ul></li>
+  <li><a href="#types-of-permutation-method" id="toc-types-of-permutation-method" class="nav-link" data-scroll-target="#types-of-permutation-method">Types of permutation method</a>
+  <ul class="collapse">
+  <li><a href="#the-thin-but-deep-theories" id="toc-the-thin-but-deep-theories" class="nav-link" data-scroll-target="#the-thin-but-deep-theories">The thin-but-deep theories</a></li>
+  <li><a href="#post-stratification" id="toc-post-stratification" class="nav-link" data-scroll-target="#post-stratification">Post-stratification</a></li>
+  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary">Summary</a></li>
+  </ul></li>
+  <li><a href="#bootstrapping-example" id="toc-bootstrapping-example" class="nav-link" data-scroll-target="#bootstrapping-example">Bootstrapping example</a></li>
+  <li><a href="#permutation-testing-with-base-r" id="toc-permutation-testing-with-base-r" class="nav-link" data-scroll-target="#permutation-testing-with-base-r">Permutation Testing with Base R</a>
+  <ul class="collapse">
+  <li><a href="#summary-1" id="toc-summary-1" class="nav-link" data-scroll-target="#summary-1">Summary</a></li>
+  </ul></li>
+  <li><a href="#hacker-stats-and-hypothesis-testing-with-the-infer-package" id="toc-hacker-stats-and-hypothesis-testing-with-the-infer-package" class="nav-link" data-scroll-target="#hacker-stats-and-hypothesis-testing-with-the-infer-package">Hacker Stats and Hypothesis Testing with the Infer package</a>
+  <ul class="collapse">
+  <li><a href="#introduction-1" id="toc-introduction-1" class="nav-link" data-scroll-target="#introduction-1">Introduction</a></li>
+  <li><a href="#setting-up" id="toc-setting-up" class="nav-link" data-scroll-target="#setting-up">Setting up</a></li>
+  <li><a href="#the-infer-package" id="toc-the-infer-package" class="nav-link" data-scroll-target="#the-infer-package">The infer package</a></li>
+  <li><a href="#the-gss-dataset" id="toc-the-gss-dataset" class="nav-link" data-scroll-target="#the-gss-dataset">The gss dataset</a></li>
+  <li><a href="#example-1-categorical-predictor-continuous-response" id="toc-example-1-categorical-predictor-continuous-response" class="nav-link" data-scroll-target="#example-1-categorical-predictor-continuous-response">Example 1: Categorical Predictor; Continuous Response</a></li>
+  <li><a href="#example-2-categorical-predictor-categorical-response" id="toc-example-2-categorical-predictor-categorical-response" class="nav-link" data-scroll-target="#example-2-categorical-predictor-categorical-response">Example 2: Categorical Predictor; Categorical Response</a></li>
+  <li><a href="#summing-up" id="toc-summing-up" class="nav-link" data-scroll-target="#summing-up">Summing up</a></li>
+  </ul></li>
+  <li><a href="#post-stratification-1" id="toc-post-stratification-1" class="nav-link" data-scroll-target="#post-stratification-1">Post Stratification</a>
+  <ul class="collapse">
+  <li><a href="#introduction-2" id="toc-introduction-2" class="nav-link" data-scroll-target="#introduction-2">Introduction</a></li>
+  <li><a href="#red-coinblue-coin" id="toc-red-coinblue-coin" class="nav-link" data-scroll-target="#red-coinblue-coin">Red Coin/Blue Coin</a></li>
+  <li><a href="#summary-2" id="toc-summary-2" class="nav-link" data-scroll-target="#summary-2">Summary</a></li>
+  </ul></li>
+  <li><a href="#overall-summary" id="toc-overall-summary" class="nav-link" data-scroll-target="#overall-summary">Overall summary</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Hacker Stats</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<section id="overview" class="level2">
+<h2 class="anchored" data-anchor-id="overview">Overview</h2>
+<section id="introduction" class="level3">
+<h3 class="anchored" data-anchor-id="introduction">Introduction</h3>
+<p>This page discusses resampling approaches to statistical inference. Resampling approaches are a powerful and highly adaptable set of approaches for trying to get ‘good enough’ estimates of how statistically significant some observed value or summary of observed values is likely to be, or equivalently how likely what one’s observed is to have been observed by chance. They can also be extended and applied to performing post-stratification, which allows samples of the population with known biases to be adjusted in ways that aim to mitigate such biases, and so produce summary estimates more representative of the population of interest.</p>
+</section>
+<section id="resampling-as-hacker-stats" class="level3">
+<h3 class="anchored" data-anchor-id="resampling-as-hacker-stats">Resampling as Hacker Stats</h3>
+<p>Resampling methods are sometimes called <strong>Hacker Stats</strong>, which might be a slightly derogatory term, but is also an informative one. Broadly, Resampling Methods:</p>
+<ul>
+<li>Substitute meat brain effort (deriving and recalling analytic solutions) for silicon brain effort (i.e.&nbsp;they’re computationally intensive rather than human knowledge and reasoning intensive).</li>
+<li>Are theoretically and methodologically <em>thin</em> rather than theoretically and methodologically <em>fat</em>.</li>
+<li>Are approximate, stochastic and general; rather than precise, deterministic and specialist.</li>
+</ul>
+<p>Put another way, Hacker Stats are methods that data scientists and more casual users of statistics can use to get <em>good enough</em> approximations of the kinds of careful, analytic solutions and tests that, with many years of specialist training and memorisation, a degree in statistics would provide. They’re a good example of the 80:20 Principle: part of the 20% of stats know-how that’s used for 80% of the tasks.</p>
+</section>
+</section>
+<section id="types-of-permutation-method" class="level2">
+<h2 class="anchored" data-anchor-id="types-of-permutation-method">Types of permutation method</h2>
+<p>The following flowchart shows the ‘family tree’ of types of resampling method:</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<div>
+<pre class="mermaid mermaid-js">flowchart TB
+    sd[Sample Data]
+    us(Uniform Sampling)
+    nus(Non-Uniform Sampling)
+    pt[Permutation Testing]
+    bs[Bootstrapping]
+    ps[Post-Stratification]
+
+    pw[Population Weights]
+
+    dec1{Equal Probability?}
+    dec2{With Replacement?}
+
+    sd --sampling--&gt; dec1
+
+    us --&gt; dec2
+
+    dec1 --Yes--&gt; us
+    dec1 --No--&gt; nus
+    nus --&gt; ps
+
+    dec2 --Yes--&gt; bs
+    dec2 --No--&gt; pt
+
+    pw --&gt; nus
+
+</pre>
+</div>
+</div>
+</div>
+</div>
+<p>n.b.&nbsp;Bootstrapping and permutation testing can be applied to post-stratified data too!</p>
+<section id="the-thin-but-deep-theories" class="level3">
+<h3 class="anchored" data-anchor-id="the-thin-but-deep-theories">The thin-but-deep theories</h3>
+<p>Both Bootstrapping, which is resampling <em>with</em> replacement, and Permutation Testing, which is resampling <em>without</em> replacement, use computation to explore the implications of two distinct, simple, and important theories about the sample data, and any observations we may think we’ve observed within it. Let’s try to talk through these two thin-but-deep theories:</p>
+<section id="bootstrapping" class="level4">
+<h4 class="anchored" data-anchor-id="bootstrapping">Bootstrapping</h4>
+<section id="definition-and-history" class="level5">
+<h5 class="anchored" data-anchor-id="definition-and-history">Definition and history</h5>
+<p>According to <a href="https://en.wikipedia.org/wiki/Bootstrapping_(statistics)">Wikipedia</a>:</p>
+<blockquote class="blockquote">
+<p>Bootstrapping is any test or metric that uses random sampling with replacement (e.g.&nbsp;mimicking the sampling process), and falls under the broader class of resampling methods. Bootstrapping assigns measures of accuracy (bias, variance, confidence intervals, prediction error, etc.) to sample estimates.[1][2] This technique allows estimation of the sampling distribution of almost any statistic using random sampling methods.[3][4]</p>
+</blockquote>
+<blockquote class="blockquote">
+<p>Bootstrapping estimates the properties of an estimand (such as its variance) by measuring those properties when sampling from an approximating distribution. One standard choice for an approximating distribution is the empirical distribution function of the observed data. In the case where a set of observations can be assumed to be from an independent and identically distributed population, this can be implemented by constructing a number of resamples with replacement, of the observed data set (and of equal size to the observed data set).</p>
+</blockquote>
+<blockquote class="blockquote">
+<p>It may also be used for constructing hypothesis tests.[5] It is often used as an alternative to statistical inference based on the assumption of a parametric model when that assumption is in doubt, or where parametric inference is impossible or requires complicated formulas for the calculation of standard errors.</p>
+</blockquote>
+<p>n.b.&nbsp;The same page (In <strong>History</strong>) also states: “Other names … suggested for the ‘bootstrap’ method were: <em>Swiss Army Knife</em>, <em>Meat Axe</em>, <em>Swan-Dive</em>, <em>Jack-Rabbit</em>, and <em>Shotgun</em>.” So, there might not be good reasons to fear statistics, but given this list of suggestions there might be good reasons to fear some statisticians! Of these alternative names, perhaps <em>Swiss Army Knife</em> is the most appropriate, as it’s a very widely applicable approach!</p>
+</section>
+<section id="the-key-assumption-of-bootstrapping" class="level5">
+<h5 class="anchored" data-anchor-id="the-key-assumption-of-bootstrapping">The key assumption of Bootstrapping</h5>
+<p>Bootstrapping starts and ends with something like the following assumption:</p>
+<blockquote class="blockquote">
+<p><em>Every observation in our dataset is equally likely.</em></p>
+</blockquote>
+<p>Why is this?</p>
+<blockquote class="blockquote">
+<p><em>Because each specific observation in our dataset has been observed the same number of times.</em></p>
+</blockquote>
+<p>Why do you say that?</p>
+<blockquote class="blockquote">
+<p><em>Because each observation in the dataset has been observed exactly one time, and <code>1=1</code>!</em></p>
+</blockquote>
+<p>And why does this matter?</p>
+<blockquote class="blockquote">
+<p><em>Because, if we can accept the above, we can say that another dataset, made up by resampling the real sample data, so that each observation (row) is as likely to be picked as every other one, is as likely as the dataset we actually observed. And so long as this other dataset has the same number of observations as the original dataset, then it’s also as precise as the original dataset.</em></p>
+</blockquote>
+<p>It’s this line of reasoning - and the two conditions for another dataset: <strong>equally likely</strong>; and <strong>equally precise</strong> - which lead to the justification, in bootstrapping, for <em>resampling with replacement</em>.</p>
+</section>
+</section>
+<section id="permutation-tests" class="level4">
+<h4 class="anchored" data-anchor-id="permutation-tests">Permutation Tests</h4>
+<p>Here’s a more <em>informal</em> description of what permutation tests do, followed by a slightly more <em>formal</em> coverage of the same.</p>
+<section id="informal-explanation" class="level5">
+<h5 class="anchored" data-anchor-id="informal-explanation">Informal Explanation</h5>
+<p>Let’s try to understand the intuition of permutation tests using a (rather boring) story:</p>
+<ul>
+<li>Imagine you have two types of index cards: red cards and blue cards.</li>
+<li>Say there are 12 red cards and 8 blue cards, so a total of 20 cards.</li>
+<li>On each of the cards is a value. Let’s say it’s a binary value: <code>1</code> (maybe for a ‘success’) or <code>0</code> (a ‘failure’).</li>
+<li>Let’s say the values from the red card came from flipping a specific coin, <strong>Coin A</strong>, 12 times, and writing a <code>1</code> on a blank red index card if the coin came up heads, and <code>0</code> on a blank red index card if the coin came up tails.</li>
+<li>The values on the blue cards came from flipping a different coin, <strong>Coin B</strong>, 8 times, and doing the same thing, but with blue cards instead of red cards.</li>
+</ul>
+<p>What you want to know is whether Coin A or Coin B are different, i.e.&nbsp;one has a different probability of producing heads than the other one. However, you don’t have access either Coin A or Coin B. The only information you have to go on is the 20 index cards: 12 red, 8 blue.</p>
+<p>How do you go about determining if the two coins are different, when you don’t have access to either coin, and all you have are the 20 index cards?</p>
+<p>One approach is to perform permutation tests. This is a way of using computation to produce a <strong>Null Distribution</strong>, meaning a distribution of some kind of <strong>summary statistic</strong> that you would expect to observe if there were really no difference between Coin A and Coin B. This <strong>Null Distribution</strong> is a distribution of summary values that you would expect to observe if the <strong>Null Hypothesis</strong> were true, where the <strong>Null Hypothesis</strong> is that Coin A and Coin B behave in exactly the same way. You then compare the corresponding summary statistic from the <em>observed data</em> against this <strong>Null Distribution</strong>. If the observed summary statistic is far from the range of summary statistics, then you have more reason to <strong>Reject the Null Hypothesis</strong>, which generally corresponds to <em>evidence for</em> the <strong>Alternative Hypothesis</strong>, which in this case is that Coin A and Coin B are different.</p>
+<p>The way you would manually perform a permutation test (without computers) in this example is as follows:</p>
+<ol type="1">
+<li>You get a big box of only red index cards, and a big box of blue index cards, all of which are blank.</li>
+<li>From the big box of red index cards, you take 12 cards, and put them into a little pile.</li>
+<li>From the big box of blue index cards, you take 8 cards, and put them into the same pile containing the 12 red index cards.</li>
+<li>You then <em>randomly shuffle</em> the 20 cards with values written on them (your data), and place this randomly shuffled pile face down.</li>
+<li>You take the top card from the data pile, turn it over, and write its value on the first card in the small pile of 20 blank cards you’ve just made. You then take this now-not-blank card from the small pile, and place it next to the pile of now 19 blank cards.</li>
+<li>You then repeat with the next card in the data pile, and the next card in the small blank card pile, until all cards in the blank card pile have had a value (<code>1</code> or <code>0</code>) written onto them.</li>
+<li>You then repeat steps 2 through 6 a large number of times: say another 999 times. At the end of this, you now have one real dataset, comprising 20 index cards - 12 red, 8 blue - and 1000 ‘fake datasets’, i.e.&nbsp;1000 piles of 20 index cards each - 12 red, 8 blue - which also each have <code>1</code> or <code>0</code> written on them.</li>
+<li>After you have done this, you calculate a <strong>summary statistic</strong> for both the one real dataset, and the 1000 ‘fake datasets’. Say this is the difference in the proportions of <code>1</code> in the red subset of cards, and the blue subset in cards. You calculate this for the real dataset, and call it the <strong>observed statistic</strong>. And you also calculate it for each of the 1000 fake datasets, which provides your <strong>Null distribution</strong> for this same statistic.</li>
+<li>Finally, you compare the <strong>observed statistic</strong> (from the real dataset), with the <strong>Null distribution</strong> of summary statistics. If the <strong>observed statistic</strong> is somewhere in the middle of the <strong>Null distribution</strong>, there’s little reason to reject the Null Hypothesis; if it’s quite far from the Null distribution, there’s much more reason to reject the Null Hypothesis.</li>
+</ol>
+<p>As you can tell from the description above, this would be quite a slow approach to making a Null distribution if we were to follow the steps manually. This is why historically many of the approaches for producing Null distributions that you might be familiar with involve algebra-based theoretical distributions. In the example above a classic way of calculating the Null distribution would be using <a href="https://online.stat.psu.edu/stat415/lesson/9/9.4">the Chi-Squared distribution</a>. Historically, it was much quicker for one person to figure out the algebra once, and perform calculation based on the algebraic solution, than to perform a permutation test. These days, even if we have an algebraic solution, it can still be as quick or quicker to perform a permutation test.</p>
+</section>
+<section id="formal-explanation" class="level5">
+<h5 class="anchored" data-anchor-id="formal-explanation">Formal Explanation</h5>
+<p>Say we have a sample dataset, <span class="math inline">\(D\)</span>, which is a big rectangle of data with rows (observations) and columns (variables). To simplify, imagine <span class="math inline">\(D\)</span> comprises five observations and two variables, so it looks like this:</p>
+<p><span class="math display">\[
+D =
+\begin{pmatrix}
+d_{1,1} &amp; d_{1,2} \\
+d_{2,1} &amp; d_{2,2} \\
+d_{3,1} &amp; d_{3,2} \\
+d_{4,1} &amp; d_{4,2} \\
+d_{5,1} &amp; d_{5,2}  
+\end{pmatrix}
+\]</span></p>
+<p>There are a number of different ways of describing and thinking about this kind of data, which is really just a structured collection of elements. One approach is to think about from the perspective of <strong>observations</strong>, which leads to a <em>row-wise</em> interpretation of the dataset:</p>
+<p><span class="math display">\[
+D =
+\begin{pmatrix}
+d_{1} = \{d_{1,1} , d_{1,2}\} \\
+d_{2} = \{d_{2,1} , d_{2,2}\} \\
+d_{3} = \{d_{3,1} , d_{3,2}\} \\
+d_{4} = \{d_{4,1} , d_{4,2}\} \\
+d_{5} = \{d_{5,1} , d_{5,2}\}  
+\end{pmatrix}
+\]</span></p>
+<p>And another way of thinking about the data is from the perspective of <strong>variables</strong>, which leads to a <em>column-wise</em> interpretation of the data:</p>
+<p><span class="math display">\[
+D = \{X, Y\}
+\]</span></p>
+<p><span class="math display">\[
+X = \{d_{1,1}, d_{2,1}, d_{3, 1}, d_{4, 1}, d_{5, 1}\}
+\]</span></p>
+<p><span class="math display">\[
+Y = \{d_{1,2}, d_{2,2}, d_{3, 2}, d_{4, 2}, d_{5, 2}\}
+\]</span></p>
+<p>Now, imagine we’ve looked at our dataset, and we <em>think</em> there’s an <em>association</em> between the two variables <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span>. What would be a very generalisable way of testing for whether we’re correct in assuming this association?</p>
+<p>The key piece of reasoning behind resampling without replacement for permutation testing is as follows:</p>
+<blockquote class="blockquote">
+<p>If there is a real association between the variables then the way values are paired up as observations matters, and should be preserved. If there’s no real association between the variables then the pairing up of values into observations doesn’t matter, so we can break this pairing and still get outcomes similar to what we actually observed.</p>
+</blockquote>
+<p>There’s another term for <em>resampling with replacement</em>: <strong>shuffling</strong>. We can break-up the observational pairing seen in the dataset by <em>shuffling</em> one or both of the variables, then putting back the data into the same kind of rectangular structure it was before.</p>
+<p>For instance, say we shuffle variable <span class="math inline">\(Y\)</span>, and end up with the following new vector of observations:</p>
+<p><span class="math display">\[
+Y^{shuffled} = \{ d_{2,2}, d_{5, 2}, d_{3, 2}, d_{1,2}, d_{4, 2} \}
+\]</span></p>
+<p>We could then make a new fake dataset, with all the same values as in the original dataset, but not necessarily in the same order:</p>
+<p><span class="math display">\[
+X = \{d_{1,1}, d_{2,1}, d_{3, 1}, d_{4, 1}, d_{5, 1}\}
+\]</span></p>
+<p><span class="math display">\[
+Y^{shuffled} = \{d_{4,2}, d_{2,2}, d_{1, 2}, d_{3, 2}, d_{5, 2}\}
+\]</span></p>
+<p><span class="math display">\[
+D^{fake} = \{X, Y^{shuffled}\}
+\]</span></p>
+<p><span class="math display">\[
+D^{fake} =
+\begin{pmatrix}
+d_{1}^{fake} = \{d_{1,1} , d_{4,2}\} \\
+d_{2}^{fake} = \{d_{2,1} , d_{2,2}\} \\
+d_{3}^{fake} = \{d_{3,1} , d_{1,2}\} \\
+d_{4}^{fake} = \{d_{4,1} , d_{3,2}\} \\
+d_{5}^{fake} = \{d_{5,1} , d_{5,2}\}  
+\end{pmatrix}
+\]</span></p>
+<p>So, in <span class="math inline">\(D^{fake}\)</span> the observed (row-wise) association between each <span class="math inline">\(X\)</span> and corresponding <span class="math inline">\(Y\)</span> value has broken, even though the same values <span class="math inline">\(d_{i,j}\)</span> are present.</p>
+<p>However, if the assumption/‘<em>hunch</em>’ about there being an association between <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> from the real dataset <span class="math inline">\(D\)</span> was justified through some kind of summary statistic, such as a correlation coefficient, <span class="math inline">\(r(X, Y)\)</span>, then we calculate the same summary statistic for the fake dataset too, <span class="math inline">\(r(X, Y^{fake})\)</span>.</p>
+<p>In fact (and in practice) we can repeat the fakery, permuting the values again and again, and each time calculating the summary statistic of interest. This produces a <em>distribution</em> of values for this summary statistic, against which we can compare the <em>observed</em> value of this summary statistic.</p>
+<p>This <em>distribution of summary statistics</em> produced from a large selection of permutated (fake) datasets is the distribution we would expect to see under the <strong>Null Hypothesis</strong>, which is that the apparent association is illusionary, and that no <em>real</em> association exists: the appearance of association comes from chance alone.</p>
+</section>
+</section>
+</section>
+<section id="post-stratification" class="level3">
+<h3 class="anchored" data-anchor-id="post-stratification">Post-stratification</h3>
+<p>Resampling methods can also be used as a method for post-stratification, reweighting sample data to try to make it more representative of the population of interest. Consider two scenarios where this might be important:</p>
+<blockquote class="blockquote">
+<p><strong>Intentional Oversampling</strong>: Say we know that 95% of people working in a particular occupation tend to be female, and 5% male. We are interested both in the typical characteristics of people who work in this occupation, but also in properly understanding the characteristics of males and females separately, and the differences between males and females within the occupation. And we know that, if we take a purely random sample of the population, we’ll only get, on average, 5% of the sample being males, which won’t give us enough precision/resolution to properly understand males in the population. So, we <em>intentionally oversample</em> from the male population, meaning our sample contains 20% males and 80% females, even though this isn’t representative of the population as a whole.</p>
+</blockquote>
+<blockquote class="blockquote">
+<p><strong>Unintentional Undersampling</strong>: Say we are interested in political party voting intentions at an upcoming election. However for reasons of convenience we decide only to poll people who play console games, by asking someone about to play a game if they’re more likely to vote for the Blue Party or the Red Party. We know that our sample has very different characteristics to the population at large. However we also know so many people play console games that we have a reasonably large (and so sufficiently precise) set of estimates for each of the main demographic stratas of interest to us. So what do we do to convert the very biased sample data into unbiased population estimates? <a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
+</blockquote>
+<p>In either case resampling methods can be applied. Just go from <em>equal probability sampling</em> to <em>weighted probability sampling</em>, in which samples from our dataset is more likely to be selected if they are under-represented in the sample dataset compared with the population, and less likely to be selected if they are under-represented in the sample dataset compared with the population.</p>
+</section>
+<section id="summary" class="level3">
+<h3 class="anchored" data-anchor-id="summary">Summary</h3>
+<p>In this post we’ve discussed the key ideas behind resampling methods, AKA <code>Hacker Stats</code>. These approaches are computationally intensive as compared with analytical solutions, which would have been a big barrier to their use until, perhaps, the mid 1980s. However <em>computationally intensive</em> these days might just mean it takes five seconds to perform many times, whereas the analytic solution takes five microseconds: still a large relative difference in computing time, but practically both kinds of approaches are similarly fast to perform.</p>
+<p>These days, whether you know an analytic approximation for performing the test or calculation of interest, or whether you don’t, the <code>Hacker Stats</code> approach is still worth trying out. Even at their slowest, the worst case scenario with <code>Hacker Stats</code> is your computer might whirr a bit more loudly than usual, and you’ll finally have a good excuse to get that much-deserved tea- or coffee-break!</p>
+</section>
+</section>
+<section id="bootstrapping-example" class="level2">
+<h2 class="anchored" data-anchor-id="bootstrapping-example">Bootstrapping example</h2>
+<p>I’m not going to look for length-of-stay data; instead I’m going to look at <em>length-of-teeth</em>, and the hamster experiment dataset I used in <a href="../../../pages/main-course/complete-simulation-example/index.html">the main course</a>.</p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> ToothGrowth <span class="sc">|&gt;</span> <span class="fu">tibble</span>()</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 60 × 3
+     len supp   dose
+   &lt;dbl&gt; &lt;fct&gt; &lt;dbl&gt;
+ 1   4.2 VC      0.5
+ 2  11.5 VC      0.5
+ 3   7.3 VC      0.5
+ 4   5.8 VC      0.5
+ 5   6.4 VC      0.5
+ 6  10   VC      0.5
+ 7  11.2 VC      0.5
+ 8  11.2 VC      0.5
+ 9   5.2 VC      0.5
+10   7   VC      0.5
+# ℹ 50 more rows</code></pre>
+</div>
+</div>
+<p>Let’s say, instead of building a statistical model, I’m just interested in the following question:</p>
+<blockquote class="blockquote">
+<p>Where the dose is 1mg, is using the OJ supplement instead of the VC supplement associated with a significant and detectable difference in the <em>median</em> tooth length?</p>
+</blockquote>
+<p>We can do this in at least a couple of ways:</p>
+<ol type="1">
+<li>Calculate the median of OJ at 1mg tooth lengths, and compare it to a bootstrapped distribution of medians from VC at 1mg.</li>
+<li>Bootstrap both the OJ and VC (both at 1mg) populations, get the medians for each bootstrapped population, and record the difference in the medians.</li>
+</ol>
+<p>These are asking slightly different questions, but both ways of using bootstrapping to address the general type of question framed above.</p>
+<section id="approach-one" class="level4">
+<h4 class="anchored" data-anchor-id="approach-one">Approach One</h4>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>Nreps <span class="ot">&lt;-</span> <span class="dv">10000</span> <span class="co"># Number of bootstrap replicates</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>bs_med_vc <span class="ot">&lt;-</span> <span class="fu">vector</span>(<span class="at">mode =</span> <span class="st">'numeric'</span>,  <span class="at">length =</span> Nreps) <span class="co">#Vector for holding bootstrapped medians</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>dta_vc <span class="ot">&lt;-</span> df <span class="sc">|&gt;</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(supp <span class="sc">==</span> <span class="st">"VC"</span>, dose <span class="sc">==</span> <span class="fl">1.0</span>) <span class="co"># The equivalent of our 'control' population</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>control_toothlengths <span class="ot">&lt;-</span> dta_vc <span class="sc">|&gt;</span> <span class="fu">pull</span>(len) <span class="co"># Literally pulling teeth!</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>Ncontrol <span class="ot">&lt;-</span> <span class="fu">length</span>(control_toothlengths) <span class="co">#Length of 'control' population sample</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>Nreps){</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>    bs_c_length <span class="ot">&lt;-</span> <span class="fu">sample</span>(</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>        control_toothlengths, </span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>        <span class="at">size =</span> Ncontrol,</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>        <span class="at">replace =</span> <span class="cn">TRUE</span></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>    ) <span class="co"># resampling to the same length as the 'control' population</span></span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>    this_bs_control_median <span class="ot">&lt;-</span> <span class="fu">median</span>(bs_c_length)</span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>    bs_med_vc[i] <span class="ot">&lt;-</span> this_bs_control_median</span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>We’ve now done the bootstrapping on the ‘control’ population. Let’s look at this bootstrapped distribution of medians in comparison with the observed median from the ‘treatment’ group.</p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>treatment_toothlengths <span class="ot">&lt;-</span> df <span class="sc">|&gt;</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(supp <span class="sc">==</span> <span class="st">"OJ"</span>, dose <span class="sc">==</span> <span class="fl">1.0</span>) <span class="sc">|&gt;</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">pull</span>(len) <span class="co"># pulling teeth for the 'treatment' population</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>obs_med_oj <span class="ot">&lt;-</span> <span class="fu">median</span>(treatment_toothlengths)</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="fu">tibble</span>(<span class="at">bs_control_median =</span> bs_med_vc) <span class="sc">|&gt;</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>bs_control_median)) <span class="sc">+</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_histogram</span>() <span class="sc">+</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> obs_med_oj, <span class="at">colour =</span> <span class="st">"red"</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>) <span class="sc">+</span> </span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="fu">median</span>(control_toothlengths), <span class="at">colour =</span> <span class="st">"blue"</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>) <span class="sc">+</span> </span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Median toothlength"</span>,</span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Number of bootstraps"</span>,</span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">"Bootstrapping approach One"</span>,</span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">"Red line: Observed median toothlength in 'treatment' arm. Blue line: Observed median in 'control' arm"</span></span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>    )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>We can see here that the red line, which is the observed median in the ‘treatment’ arm, is higher than all of the bootstrapped medians from the ‘control’ arm. The blue line shows the equivalent in the observed median in the ‘control’ arm.</p>
+<p>So, without even performing a calculation, we can feel more confident that the OJ supplement is associated with larger tooth length, even though both arms comprise just ten observations.</p>
+</section>
+<section id="approach-two" class="level4">
+<h4 class="anchored" data-anchor-id="approach-two">Approach Two</h4>
+<p>Let’s now use bootstrapping to produce a distributions of differences in medians between the two arms. So, this time we repeatedly resample from both the control and the treatment arm.</p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>Nreps <span class="ot">&lt;-</span> <span class="dv">10000</span> <span class="co"># Number of bootstrap replicates</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>bs_diff_meds <span class="ot">&lt;-</span> <span class="fu">vector</span>(<span class="at">mode =</span> <span class="st">'numeric'</span>,  <span class="at">length =</span> Nreps) <span class="co">#Vector for holding differences in bootstrapped medians</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>dta_vc <span class="ot">&lt;-</span> df <span class="sc">|&gt;</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(supp <span class="sc">==</span> <span class="st">"VC"</span>, dose <span class="sc">==</span> <span class="fl">1.0</span>) <span class="co"># The equivalent of our 'control' population</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>control_toothlengths <span class="ot">&lt;-</span> dta_vc <span class="sc">|&gt;</span> <span class="fu">pull</span>(len) <span class="co"># Literally pulling teeth!</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>Ncontrol <span class="ot">&lt;-</span> <span class="fu">length</span>(control_toothlengths) <span class="co">#Length of 'control' population sample</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>dta_oj <span class="ot">&lt;-</span> df <span class="sc">|&gt;</span></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(supp <span class="sc">==</span> <span class="st">"OJ"</span>, dose <span class="sc">==</span> <span class="fl">1.0</span>) <span class="co"># The equivalent of our 'treamtnet' population</span></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>treatment_toothlengths <span class="ot">&lt;-</span> dta_oj <span class="sc">|&gt;</span> <span class="fu">pull</span>(len) <span class="co"># Literally pulling teeth!</span></span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>Ntreatment <span class="ot">&lt;-</span> <span class="fu">length</span>(treatment_toothlengths) <span class="co">#Length of 'treatment' population sample</span></span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>Nreps){</span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>    bs_c_length <span class="ot">&lt;-</span> <span class="fu">sample</span>(</span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a>        control_toothlengths, </span>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a>        <span class="at">size =</span> Ncontrol,</span>
+<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a>        <span class="at">replace =</span> <span class="cn">TRUE</span></span>
+<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a>    ) <span class="co"># resampling to the same length as the 'control' population</span></span>
+<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a>    this_bs_control_median <span class="ot">&lt;-</span> <span class="fu">median</span>(bs_c_length)</span>
+<span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-29"><a href="#cb5-29" aria-hidden="true" tabindex="-1"></a>    bs_t_length <span class="ot">&lt;-</span> <span class="fu">sample</span>(</span>
+<span id="cb5-30"><a href="#cb5-30" aria-hidden="true" tabindex="-1"></a>        treatment_toothlengths, </span>
+<span id="cb5-31"><a href="#cb5-31" aria-hidden="true" tabindex="-1"></a>        <span class="at">size =</span> Ntreatment,</span>
+<span id="cb5-32"><a href="#cb5-32" aria-hidden="true" tabindex="-1"></a>        <span class="at">replace =</span> <span class="cn">TRUE</span></span>
+<span id="cb5-33"><a href="#cb5-33" aria-hidden="true" tabindex="-1"></a>    ) <span class="co"># resampling to the same length as the 'control' population</span></span>
+<span id="cb5-34"><a href="#cb5-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-35"><a href="#cb5-35" aria-hidden="true" tabindex="-1"></a>    this_bs_treat_median <span class="ot">&lt;-</span> <span class="fu">median</span>(bs_t_length)</span>
+<span id="cb5-36"><a href="#cb5-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-37"><a href="#cb5-37" aria-hidden="true" tabindex="-1"></a>    bs_diff_meds[i] <span class="ot">&lt;-</span> this_bs_treat_median <span class="sc">-</span> this_bs_control_median</span>
+<span id="cb5-38"><a href="#cb5-38" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>We now have a bootstrapped distribution of differences, each time subtracting the bootstrapped control median from the bootstrapped treat median. So, values above 0 indicate the treatment is more effective (at lengthening teeth) than the control.</p>
+<p>Let’s look at this distribution</p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tibble</span>(<span class="at">bs_diffs_median =</span> bs_diff_meds) <span class="sc">|&gt;</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>bs_diffs_median)) <span class="sc">+</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_histogram</span>() <span class="sc">+</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="dv">0</span>) <span class="sc">+</span> </span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_vline</span>(</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>        <span class="at">xintercept =</span> <span class="fu">median</span>(treatment_toothlengths) <span class="sc">-</span> <span class="fu">median</span>(control_toothlengths), <span class="at">linetype =</span> <span class="st">"dashed"</span>, <span class="at">colour =</span> <span class="st">"green"</span>         </span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>        ) <span class="sc">+</span> </span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Differences in medians"</span>,</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Number of bootstraps"</span>,</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">"Bootstrapping approach Two"</span>,</span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">"Values above 0: medians are higher in treatment group"</span></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>    )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>I’ve added the observed difference in medians as a vertical green line. This corresponds with the highest peak in bootstrapped differences in medians, as we might expect.</p>
+<p><em>Almost</em> all bootstrapped differences in medians are above 0, which again suggests we don’t even need to calculate the proportion above 0 to work out if there is likely to be a difference in medians between the two groups.</p>
+<p>However if we wanted to get this empirical p-value, we could do it as follows:</p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(bs_diff_meds <span class="sc">&lt;</span> <span class="dv">0</span>) <span class="sc">/</span> Nreps</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 4e-04</code></pre>
+</div>
+</div>
+<p>Tiny!</p>
+</section>
+</section>
+<section id="permutation-testing-with-base-r" class="level2">
+<h2 class="anchored" data-anchor-id="permutation-testing-with-base-r">Permutation Testing with Base R</h2>
+<p>In this post I’ll cover the intuition of permutation tests through a little toy example. In a follow-up post I’ll discuss how this intuition can be implemented (and made a bit easier) using the <code>infer</code> package.</p>
+<p>Let’s actually make the dataset I’ve described above (using a random number seed so the answers don’t change). Let’s say in our example the true proportion for Coin A is 0.55, and for Coin B it’s 0.50. (Something we’d never know in practice.)</p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">7</span>) <span class="co"># Random number set.seed</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>draws_A <span class="ot">&lt;-</span> <span class="fu">rbinom</span>(<span class="at">n=</span><span class="dv">12</span>, <span class="at">size=</span><span class="dv">1</span>, <span class="at">prob=</span><span class="fl">0.55</span>)</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>draws_B <span class="ot">&lt;-</span> <span class="fu">rbinom</span>(<span class="at">n=</span><span class="dv">8</span>, <span class="at">size=</span><span class="dv">1</span>, <span class="at">prob=</span><span class="fl">0.50</span>)</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>card_colour <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">rep</span>(<span class="st">"red"</span>, <span class="dv">12</span>),</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">rep</span>(<span class="st">"blue"</span>, <span class="dv">8</span>)</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>real_data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">card_colour =</span> card_colour,</span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">outcome =</span> <span class="fu">c</span>(draws_A, draws_B)</span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>real_data</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>   card_colour outcome
+1          red       0
+2          red       1
+3          red       1
+4          red       1
+5          red       1
+6          red       0
+7          red       1
+8          red       0
+9          red       1
+10         red       1
+11         red       1
+12         red       1
+13        blue       1
+14        blue       0
+15        blue       0
+16        blue       0
+17        blue       1
+18        blue       0
+19        blue       1
+20        blue       0</code></pre>
+</div>
+</div>
+<p>In this example, what is the proportion of <code>1</code>s in the red card subgroup, and the blue card subgroup?</p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>prop_in_red <span class="ot">&lt;-</span> real_data<span class="sc">$</span>outcome[real_data<span class="sc">$</span>card_colour <span class="sc">==</span> <span class="st">"red"</span>] <span class="sc">|&gt;</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mean</span>()</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>prop_in_blue <span class="ot">&lt;-</span> real_data<span class="sc">$</span>outcome[real_data<span class="sc">$</span>card_colour <span class="sc">==</span> <span class="st">"blue"</span>] <span class="sc">|&gt;</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mean</span>()</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>diff_in_props <span class="ot">&lt;-</span> prop_in_red <span class="sc">-</span> prop_in_blue</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>diff_in_props</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.375</code></pre>
+</div>
+</div>
+<p>In this example the proportion ‘heads’ in the red subgroup (from coin A) is 0.750, and in the blue subgroup (from coin B) happens to be exactly 0.375. This means the difference in proportions is 0.375.</p>
+<p>How would we use a permutation test to produce a Null distribution of differences in proportions between the two groups?</p>
+<p>Here’s one approach:</p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>nReps <span class="ot">&lt;-</span> <span class="dv">1000</span> <span class="co"># We'll perform 1000 replications/resamples</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>nullVector <span class="ot">&lt;-</span> <span class="fu">vector</span>(<span class="at">mode =</span> <span class="st">"numeric"</span>, <span class="at">length =</span> <span class="dv">1000</span>)</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>outcomes <span class="ot">&lt;-</span> real_data<span class="sc">$</span>outcome</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>labels <span class="ot">&lt;-</span> real_data<span class="sc">$</span>card_colour</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>nObs <span class="ot">&lt;-</span> <span class="fu">length</span>(outcomes)</span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>nReps){</span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>    random_draw_of_outcomes <span class="ot">&lt;-</span> <span class="fu">sample</span>(outcomes, <span class="at">size =</span> nObs, <span class="at">replace =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>    fake_prop_red <span class="ot">&lt;-</span> <span class="fu">mean</span>(</span>
+<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a>        random_draw_of_outcomes[labels <span class="sc">==</span> <span class="st">"red"</span>]</span>
+<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a>    fake_prop_blue <span class="ot">&lt;-</span> <span class="fu">mean</span>(</span>
+<span id="cb13-20"><a href="#cb13-20" aria-hidden="true" tabindex="-1"></a>        random_draw_of_outcomes[labels <span class="sc">==</span> <span class="st">"blue"</span>]</span>
+<span id="cb13-21"><a href="#cb13-21" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb13-22"><a href="#cb13-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-23"><a href="#cb13-23" aria-hidden="true" tabindex="-1"></a>    fake_diff_outcomes <span class="ot">&lt;-</span> fake_prop_red <span class="sc">-</span> fake_prop_blue</span>
+<span id="cb13-24"><a href="#cb13-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-25"><a href="#cb13-25" aria-hidden="true" tabindex="-1"></a>    nullVector[i] <span class="ot">&lt;-</span> fake_diff_outcomes</span>
+<span id="cb13-26"><a href="#cb13-26" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb13-27"><a href="#cb13-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-28"><a href="#cb13-28" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(nullVector)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] -0.25000000 -0.04166667  0.16666667 -0.04166667 -0.25000000 -0.04166667</code></pre>
+</div>
+</div>
+<p>What does the distribution of differences look like?</p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(nullVector)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Here we can see quite a wide range of differences in proportions are generated by the permutation-based Null distribution. We can use the quantile function to get a sense of the range:</p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">quantile</span>(nullVector, <span class="at">prob =</span> <span class="fu">c</span>(<span class="fl">0.025</span>, <span class="fl">0.050</span>, <span class="fl">0.25</span>, <span class="fl">0.50</span>, <span class="fl">0.75</span>, <span class="fl">0.95</span>, <span class="fl">0.975</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>       2.5%          5%         25%         50%         75%         95% 
+-0.45833333 -0.45833333 -0.25000000 -0.04166667  0.16666667  0.37500000 
+      97.5% 
+ 0.37500000 </code></pre>
+</div>
+</div>
+<p>Here the median value of the proportion of differences is -0.042. Half of the values are between -0.025 and 0.0167; 90% of the values are between -0.458 and 0.375, and 95% of values are between -0.458 and 0.375.</p>
+<p>For reference, the real observed difference in proportions is 0.375. This seems to be at the far right end of the Null distribution. We can calculate what is in effect a p-value, of the probability of seeing a value as or more extreme than the observed value from the Null distribution, by counting up the proportion of Null distribution values that were as or more extreme than the observed value:</p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(nullVector <span class="sc">&gt;=</span> diff_in_props) <span class="sc">/</span> <span class="fu">length</span>(nullVector)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.103</code></pre>
+</div>
+</div>
+<p>So, the proportion of times the Null distribution generates a value as great or greater than the observed value is about 10%. This wouldn’t meet conventional thresholds of statistical significance, which would be less than 5% of values being this or more extreme. However it does seem from the data that it’s more likely than not the two coins may be different. (And we know, as a fact, the two coins <em>are</em> different, because we made them to be!)</p>
+<p>Finally, let’s use the Chi-squared test to try to answer the same sort of question<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>:</p>
+<p>First we make a cross-tab out of the real data:</p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>xtab <span class="ot">&lt;-</span> <span class="fu">xtabs</span>(<span class="sc">~</span>card_colour <span class="sc">+</span> outcome, <span class="at">data =</span> real_data)</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>xtab</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>           outcome
+card_colour 0 1
+       blue 5 3
+       red  3 9</code></pre>
+</div>
+</div>
+<p>And then we pass the cross-tab to the function chisq.test:</p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">chisq.test</span>(xtab)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Pearson's Chi-squared test with Yates' continuity correction
+
+data:  xtab
+X-squared = 1.467, df = 1, p-value = 0.2258</code></pre>
+</div>
+</div>
+<p>Here the function produces a p-value that’s even larger than the approximately 0.10 value from the permutation approach, giving even less confidence that there may be a difference between the two groups. However it also gives a warnings that the assumptions made in producing this p-value may not be appropriate. In particular, two of the four cells (so 50% of the cells) in the cross-tab have values less than 5, whereas a rule-of-thumb when calculating a Chi-squared statistic is that <a href="https://services.ncl.ac.uk/itservice/research/dataanalysis/simpletests/crosstabulationchi-squaretest/#:~:text=Like%20most%20statistics%20test%2C%20to,values%20(counts)%20less%20than%205">no more than 20% of cells should have values less than 5</a>.</p>
+<p>An alternative to the Chi-Square test, when there are small sample sizes, is the <a href="https://statsandr.com/blog/fisher-s-exact-test-in-r-independence-test-for-a-small-sample/">Fisher Exact test</a>. This is more computationally intensive than the Chi-Square test, but can be more appropriate when there are small sample sizes. Unlike with the Chi-Square test, we can perform one sided as well as two sided tests using this method, with the default being two sided. Let’s see what this produces:</p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fisher.test</span>(xtab)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Fisher's Exact Test for Count Data
+
+data:  xtab
+p-value = 0.1675
+alternative hypothesis: true odds ratio is not equal to 1
+95 percent confidence interval:
+  0.5182846 52.4512095
+sample estimates:
+odds ratio 
+  4.564976 </code></pre>
+</div>
+</div>
+<p>Here the p-value is slightly smaller than for the Chi-squared test, but slightly larger than for the (one-sided) permutation based p-value. Let’s see what the corresponding p-value is if we specify we want a one-sided test, by setting the <code>alternative</code> argument to <code>"greater"</code>:</p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fisher.test</span>(xtab, <span class="at">alternative =</span> <span class="st">"greater"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Fisher's Exact Test for Count Data
+
+data:  xtab
+p-value = 0.1132
+alternative hypothesis: true odds ratio is greater than 1
+95 percent confidence interval:
+ 0.6835727       Inf
+sample estimates:
+odds ratio 
+  4.564976 </code></pre>
+</div>
+</div>
+<p>This time, we get a p value of 0.113, which is much closer to the permutation-based one-sided p-value of 0.103 we derived previously.</p>
+<section id="summary-1" class="level3">
+<h3 class="anchored" data-anchor-id="summary-1">Summary</h3>
+<p>In this post we’ve used only Base R functions to understand the intuition and implementation of permutation based tests for trying to either reject or not reject the Null hypothesis. Permutation methods, like bootstrapping, fall under the broader umbrella of resampling methods, and are immensely versatile and applicable to a great many types of data and question.</p>
+<p>Approaches like these are sometimes referred to as <strong>‘Hacker Stats’</strong>, as being able to implement them correctly depends much more on having some computer science knowledge - such as for loops or equivalent - than much knowledge of statistical methods and tests. In this example I happened to know of a couple of classic conventional statistical tests that were broadly appropriate to the type of question we were trying to answer, but a reasonable programmer, once they understand the intuition behind the approach, would be able to produce a p-value and Null distribution in the way I did, and get to roughly the right answer even without knowing or implementing either of the classical statistical methods shown here.</p>
+<p>From my perspective, I don’t think it’s a case of either-or when it comes to which kind of approach we use - Hacker Stats or ‘Proper’ Stats. Indeed, I think it’s from these simulation based examples, where we can run a little experiment and see what happens, that we can develop the kind of deep intuition about the Null hypothesis - and so p-values, statistical significance, and the bread-and-butter of a lot of conventional statistical learning - that we need to be effective statisticians. It’s likely only by historical accident, in my view, that <strong>Hacker Stats</strong> are often only taught later in courses, and classical approaches taught first. Resampling methods can be both the <em>Alpha</em> of statistics, because they help to develop the deep intuitions through clear examples that don’t rely on much algebra, and also the <em>Omega</em> of statistics, because some quantities of interest just aren’t easy (and in some cases may be impossible) to derive analytic solutions to.</p>
+</section>
+</section>
+<section id="hacker-stats-and-hypothesis-testing-with-the-infer-package" class="level2">
+<h2 class="anchored" data-anchor-id="hacker-stats-and-hypothesis-testing-with-the-infer-package">Hacker Stats and Hypothesis Testing with the Infer package</h2>
+<section id="introduction-1" class="level3">
+<h3 class="anchored" data-anchor-id="introduction-1">Introduction</h3>
+<p>In this post, I show how <a href="https://infer.netlify.app/">the infer package</a>, can be used to perform both bootstrapping and permutation testing in a way that’s slightly easier, and more declarative in the context of a general hypothesis testing framework.</p>
+</section>
+<section id="setting-up" class="level3">
+<h3 class="anchored" data-anchor-id="setting-up">Setting up</h3>
+<p>Let’s install the <code>infer</code> packge and try a couple of examples from the documentation.</p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages("infer") # First time around</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(infer)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+</section>
+<section id="the-infer-package" class="level3">
+<h3 class="anchored" data-anchor-id="the-infer-package">The infer package</h3>
+<p>From <a href="https://infer.netlify.app/articles/infer">the vignette page</a> we can see that <code>infer</code>’s workflow is framed around four verbs:</p>
+<ul>
+<li><strong><code>specify()</code></strong> allows you to specify the variable, or relationship between variables, that you’re interested in.</li>
+<li><strong><code>hypothesize()</code></strong> allows you to declare the null hypothesis.</li>
+<li><strong><code>generate()</code></strong> allows you to generate data reflecting the null hypothesis.</li>
+<li><strong><code>calculate()</code></strong> allows you to calculate a distribution of statistics from the generated data to form the null distribution.</li>
+</ul>
+<p>The package describes the problem of hypothesis testing as being somewhat generic, regardless of the specific test, hypothesis, or dataset being used:</p>
+<blockquote class="blockquote">
+<p>Regardless of which hypothesis test we’re using, we’re still asking the same kind of question: is the effect/difference in our observed data real, or due to chance? To answer this question, we start by assuming that the observed data came from some world where “nothing is going on” (i.e.&nbsp;the observed effect was simply due to random chance), and call this assumption our <em>null hypothesis</em>. (In reality, we might not believe in the null hypothesis at all—the null hypothesis is in opposition to the <em>alternate hypothesis</em>, which supposes that the effect present in the observed data is actually due to the fact that “something is going on.”) We then calculate a <em>test statistic</em> from our data that describes the observed effect. We can use this test statistic to calculate a <em>p-value</em>, giving the probability that our observed data could come about if the null hypothesis was true. If this probability is below some pre-defined <em>significance level <span class="math inline">\(\alpha\)</span></em>, then we can reject our null hypothesis.</p>
+</blockquote>
+</section>
+<section id="the-gss-dataset" class="level3">
+<h3 class="anchored" data-anchor-id="the-gss-dataset">The gss dataset</h3>
+<p>Let’s look through - and in some places adapt - the examples used. These mainly make use of the <code>gss</code> dataset.</p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(gss)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(gss)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 500
+Columns: 11
+$ year    &lt;dbl&gt; 2014, 1994, 1998, 1996, 1994, 1996, 1990, 2016, 2000, 1998, 20…
+$ age     &lt;dbl&gt; 36, 34, 24, 42, 31, 32, 48, 36, 30, 33, 21, 30, 38, 49, 25, 56…
+$ sex     &lt;fct&gt; male, female, male, male, male, female, female, female, female…
+$ college &lt;fct&gt; degree, no degree, degree, no degree, degree, no degree, no de…
+$ partyid &lt;fct&gt; ind, rep, ind, ind, rep, rep, dem, ind, rep, dem, dem, ind, de…
+$ hompop  &lt;dbl&gt; 3, 4, 1, 4, 2, 4, 2, 1, 5, 2, 4, 3, 4, 4, 2, 2, 3, 2, 1, 2, 5,…
+$ hours   &lt;dbl&gt; 50, 31, 40, 40, 40, 53, 32, 20, 40, 40, 23, 52, 38, 72, 48, 40…
+$ income  &lt;ord&gt; $25000 or more, $20000 - 24999, $25000 or more, $25000 or more…
+$ class   &lt;fct&gt; middle class, working class, working class, working class, mid…
+$ finrela &lt;fct&gt; below average, below average, below average, above average, ab…
+$ weight  &lt;dbl&gt; 0.8960034, 1.0825000, 0.5501000, 1.0864000, 1.0825000, 1.08640…</code></pre>
+</div>
+</div>
+</section>
+<section id="example-1-categorical-predictor-continuous-response" class="level3">
+<h3 class="anchored" data-anchor-id="example-1-categorical-predictor-continuous-response">Example 1: Categorical Predictor; Continuous Response</h3>
+<p>Let’s go slightly off piste and say we are interested in seeing if there is a relationship between age, a cardinal variable, and sex, a categorical variable. We can start by stating our null and alternative hypotheses explicitly:</p>
+<ul>
+<li><strong>Null hypothesis</strong>: There is no difference between age and sex</li>
+<li><strong>Alt hypothesis</strong>: There is a difference between age and sex</li>
+</ul>
+<p>Let’s see if we can start by just looking at the data to see if, informally, it looks like it might better fit the Null or Alt hypothesis.</p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>gss <span class="sc">|&gt;</span> </span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>age, <span class="at">group =</span> sex, <span class="at">colour =</span> sex)) <span class="sc">+</span> </span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_density</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-21-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>It looks like the densities of age distributions are similar for both sexes. However, they’re not identical. Are the differences more likely to be due to chance, or are they more structural?</p>
+<p>We can start by calculating, say, the differences in average ages between males and females:</p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>gss <span class="sc">|&gt;</span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(sex) <span class="sc">|&gt;</span></span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarise</span>(<span class="at">n =</span> <span class="fu">n</span>(), <span class="at">mean_age =</span> <span class="fu">mean</span>(age))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 3
+  sex        n mean_age
+  &lt;fct&gt;  &lt;int&gt;    &lt;dbl&gt;
+1 male     263     40.6
+2 female   237     39.9</code></pre>
+</div>
+</div>
+<section id="our-first-testable-hypothesis-using-permutation-testingsampling-without-replacement" class="level4">
+<h4 class="anchored" data-anchor-id="our-first-testable-hypothesis-using-permutation-testingsampling-without-replacement">Our first testable hypothesis (using permutation testing/sampling without replacement)</h4>
+<p>The mean age is <code>40.6</code> for males and <code>39.9</code> for females, a difference of about <code>0.7</code> years of age. Could this have occurred by chance?</p>
+<p>There are <code>263</code> male observations, and <code>237</code> female observations, in the dataset. Imagine that the ages are values, and the sexes are labels that are added to these values.</p>
+<p>One approach to operationalising the concept of the Null Hypothesis is to ask: <em>If we shifted around the labels assigned to the values, so there were still as many male and female labels, but they were randomly reassigned, what would the difference in mean age between these two groups be? What would happen if we did this many times?</em></p>
+<p>This is the essence of building a Null distribution using a permutation test, which is similar to a bootstrap except it involves resampling with replacement rather than without replacement.</p>
+<p>We can perform this permutation test using the infer package as follows:</p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>model <span class="ot">&lt;-</span> gss <span class="sc">|&gt;</span></span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">specify</span>(age <span class="sc">~</span> sex) <span class="sc">|&gt;</span></span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">hypothesize</span>(<span class="at">null =</span> <span class="st">'independence'</span>) <span class="sc">|&gt;</span></span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">generate</span>(<span class="at">reps =</span> <span class="dv">10000</span>, <span class="at">type =</span> <span class="st">'permute'</span>)</span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a>model</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Response: age (numeric)
+Explanatory: sex (factor)
+Null Hypothesis: independence
+# A tibble: 5,000,000 × 3
+# Groups:   replicate [10,000]
+     age sex    replicate
+   &lt;dbl&gt; &lt;fct&gt;      &lt;int&gt;
+ 1    57 male           1
+ 2    49 female         1
+ 3    61 male           1
+ 4    23 male           1
+ 5    20 male           1
+ 6    36 female         1
+ 7    42 female         1
+ 8    28 female         1
+ 9    51 female         1
+10    32 female         1
+# ℹ 4,999,990 more rows</code></pre>
+</div>
+</div>
+<p>The infer package has now arbitrarily shifted around the labels assigned to the age values 10000 times. Each time is labelled with a different replicate number. Let’s take the first nine replicates and show what the densities by sex look like:</p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>model <span class="sc">|&gt;</span></span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(replicate <span class="sc">&lt;=</span> <span class="dv">9</span>) <span class="sc">|&gt;</span></span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>age, <span class="at">group =</span> sex, <span class="at">colour =</span> sex)) <span class="sc">+</span> </span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_density</span>() <span class="sc">+</span> </span>
+<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">facet_wrap</span>(<span class="sc">~</span>replicate)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-24-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>What if we now look at the differences in means apparent in each of these permutations</p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>model <span class="sc">|&gt;</span></span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">calculate</span>(<span class="at">stat =</span> <span class="st">"diff in means"</span>, <span class="at">order =</span> <span class="fu">c</span>(<span class="st">"male"</span>, <span class="st">"female"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">visualize</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-25-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Here we can see the distribution of differences in means follows broadly a normal distribution, which appears to be centred on 0.</p>
+<p>Let’s now calculate and save the observed difference in means.</p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>tmp <span class="ot">&lt;-</span> gss <span class="sc">|&gt;</span></span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(sex) <span class="sc">|&gt;</span></span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarise</span>(<span class="at">mean_age =</span> <span class="fu">mean</span>(age))</span>
+<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a>tmp </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 2
+  sex    mean_age
+  &lt;fct&gt;     &lt;dbl&gt;
+1 male       40.6
+2 female     39.9</code></pre>
+</div>
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>diff_means <span class="ot">&lt;-</span> tmp<span class="sc">$</span>mean_age[tmp<span class="sc">$</span>sex <span class="sc">==</span> <span class="st">"male"</span>] <span class="sc">-</span> tmp<span class="sc">$</span>mean_age[tmp<span class="sc">$</span>sex <span class="sc">==</span> <span class="st">"female"</span>]</span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a>diff_means</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.7463541</code></pre>
+</div>
+</div>
+</section>
+<section id="a-two-sided-hypothesis" class="level4">
+<h4 class="anchored" data-anchor-id="a-two-sided-hypothesis">A two-sided hypothesis</h4>
+<p>Let’s now show where the observed difference in means falls along the distribution of differences in means generated by this permutation-based Null distribution:</p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>model <span class="sc">|&gt;</span></span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">calculate</span>(<span class="at">stat =</span> <span class="st">"diff in means"</span>, <span class="at">order =</span> <span class="fu">c</span>(<span class="st">"male"</span>, <span class="st">"female"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">visualize</span>() <span class="sc">+</span></span>
+<span id="cb43-4"><a href="#cb43-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">shade_p_value</span>(<span class="at">obs_stat =</span> diff_means, <span class="at">direction =</span> <span class="st">"two-sided"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-27-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>The observed difference in means appears to be quite close to the centre of mass for the distribution of differences in means generated by the Null distribution. So it appears very likely that this observed difference could be generated from a data generating process in which there’s no real difference in mean ages between the two groups. We can formalise this slightly by calcuating a p-value:</p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>model <span class="sc">|&gt;</span></span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">calculate</span>(<span class="at">stat =</span> <span class="st">"diff in means"</span>, <span class="at">order =</span> <span class="fu">c</span>(<span class="st">"male"</span>, <span class="st">"female"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">get_p_value</span>(<span class="at">obs_stat =</span> diff_means, <span class="at">direction =</span> <span class="st">"two-sided"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 1
+  p_value
+    &lt;dbl&gt;
+1   0.527</code></pre>
+</div>
+</div>
+<p>The p value is much, much greater than 0.05, suggesting there’s little evidence to reject the Null hypothesis, that in this dataset age is not influenced by sex.</p>
+</section>
+</section>
+<section id="example-2-categorical-predictor-categorical-response" class="level3">
+<h3 class="anchored" data-anchor-id="example-2-categorical-predictor-categorical-response">Example 2: Categorical Predictor; Categorical Response</h3>
+<p>Now let’s look at the two variables <code>college</code> and <code>partyid</code>:</p>
+<ul>
+<li><strong>college</strong>: Can be <code>degree</code> or <code>no degree</code></li>
+<li><strong>partyid</strong>: Can be <code>ind</code> <code>rep</code>, <code>dem</code>, <code>other</code></li>
+</ul>
+<p>The simplest type of hypothesis to state is probably something like:</p>
+<ul>
+<li><strong>Null Hypothesis</strong>: There is <em>no</em> relationship between <code>partyid</code> and <code>college</code></li>
+<li><strong>Alt Hypothesis</strong>: There <em>is</em> a relationship between <code>partyid</code> and <code>college</code></li>
+</ul>
+<p>We can then consider more specific and targetted hypotheses at a later date.</p>
+<p>Let’s see how we could use <code>infer</code> to help decide between these hypotheses, using a permutation test:</p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>model <span class="ot">&lt;-</span> gss <span class="sc">|&gt;</span></span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">specify</span>(partyid <span class="sc">~</span> college) <span class="sc">|&gt;</span></span>
+<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">hypothesize</span>(<span class="at">null =</span> <span class="st">'independence'</span>) <span class="sc">|&gt;</span></span>
+<span id="cb46-4"><a href="#cb46-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">generate</span>(<span class="at">reps =</span> <span class="dv">10000</span>, <span class="at">type =</span> <span class="st">'permute'</span>)</span>
+<span id="cb46-5"><a href="#cb46-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-6"><a href="#cb46-6" aria-hidden="true" tabindex="-1"></a>model</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Response: partyid (factor)
+Explanatory: college (factor)
+Null Hypothesis: independence
+# A tibble: 5,000,000 × 3
+# Groups:   replicate [10,000]
+   partyid college   replicate
+   &lt;fct&gt;   &lt;fct&gt;         &lt;int&gt;
+ 1 rep     degree            1
+ 2 rep     no degree         1
+ 3 dem     degree            1
+ 4 rep     no degree         1
+ 5 other   degree            1
+ 6 ind     no degree         1
+ 7 dem     no degree         1
+ 8 rep     degree            1
+ 9 rep     degree            1
+10 ind     no degree         1
+# ℹ 4,999,990 more rows</code></pre>
+</div>
+</div>
+<p>Let’s visualise the relationship between <code>partyid</code> and <code>college</code> in the first nine replicates:</p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>model <span class="sc">|&gt;</span></span>
+<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(replicate <span class="sc">&lt;=</span> <span class="dv">9</span>) <span class="sc">|&gt;</span></span>
+<span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> college, <span class="at">fill =</span> partyid)) <span class="sc">+</span> </span>
+<span id="cb48-4"><a href="#cb48-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_bar</span>(<span class="at">position =</span> <span class="st">"fill"</span>) <span class="sc">+</span> </span>
+<span id="cb48-5"><a href="#cb48-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">facet_wrap</span>(<span class="sc">~</span>replicate) <span class="sc">+</span></span>
+<span id="cb48-6"><a href="#cb48-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Permuted (fake) datasets"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-30-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>And how does this compare with the observed dataset?</p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a>gss <span class="sc">|&gt;</span></span>
+<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> college, <span class="at">fill =</span> partyid)) <span class="sc">+</span> </span>
+<span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_bar</span>(<span class="at">position =</span> <span class="st">"fill"</span>) <span class="sc">+</span> </span>
+<span id="cb49-4"><a href="#cb49-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Relationship in real dataset"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-31-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>But what summary statistic can we use for comparing the observed level of extremeness of any apparent association between the two variables, with summary statistics under the Null hypothesis (i.e.&nbsp;using permutation testing)? The standard answer is to calculate the <a href="https://en.wikipedia.org/wiki/Chi-squared_distribution">Chi-squared statistic</a>, as detailed <a href="https://cran.r-project.org/web/packages/infer/vignettes/observed_stat_examples.html#two-categorical-2-level-chi-squared-test-of-independence">here</a>.</p>
+<p>First, what’s the Chi-squared value we get from the observed data?</p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>Chisq_obs <span class="ot">&lt;-</span> gss <span class="sc">|&gt;</span></span>
+<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">specify</span>(partyid <span class="sc">~</span> college) <span class="sc">|&gt;</span></span>
+<span id="cb50-3"><a href="#cb50-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">hypothesize</span>(<span class="at">null =</span> <span class="st">"independence"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb50-4"><a href="#cb50-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">calculate</span>(<span class="at">stat =</span> <span class="st">"Chisq"</span>)</span>
+<span id="cb50-5"><a href="#cb50-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-6"><a href="#cb50-6" aria-hidden="true" tabindex="-1"></a>Chisq_obs</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Response: partyid (factor)
+Explanatory: college (factor)
+Null Hypothesis: independence
+# A tibble: 1 × 1
+   stat
+  &lt;dbl&gt;
+1  4.15</code></pre>
+</div>
+</div>
+<p>So, the value is <code>4.15</code>. Is this a big or a small value?</p>
+<p>To answer that let’s calculate the same statistic from the Null distribution</p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a>chi_dist_null <span class="ot">&lt;-</span> model <span class="sc">|&gt;</span></span>
+<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">calculate</span>(<span class="at">stat =</span> <span class="st">"Chisq"</span>)</span>
+<span id="cb52-3"><a href="#cb52-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-4"><a href="#cb52-4" aria-hidden="true" tabindex="-1"></a>chi_dist_null</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Response: partyid (factor)
+Explanatory: college (factor)
+Null Hypothesis: independence
+# A tibble: 10,000 × 2
+   replicate  stat
+       &lt;int&gt; &lt;dbl&gt;
+ 1         1 2.08 
+ 2         2 1.29 
+ 3         3 0.508
+ 4         4 3.71 
+ 5         5 0.438
+ 6         6 2.35 
+ 7         7 7.17 
+ 8         8 6.03 
+ 9         9 2.67 
+10        10 0.834
+# ℹ 9,990 more rows</code></pre>
+</div>
+</div>
+<p>So, is the observed value something that could have been plausibly generated from the Null distribution? We can answer this by seeing how extreme the observed Chi-squared value is compared with the distribution of values under the Null:</p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="fu">visualise</span>(chi_dist_null) <span class="sc">+</span></span>
+<span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">shade_p_value</span>(<span class="at">obs_stat =</span> Chisq_obs, <span class="at">direction =</span> <span class="st">"greater"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-34-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>So, it looks like it’s <em>fairly likely</em> that the value we observed could have been observed under the Null, a scenario in which there’s no true relationship between the variables. But how likely?</p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a>chi_dist_null <span class="sc">|&gt;</span></span>
+<span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">get_p_value</span>(<span class="at">obs_stat =</span> Chisq_obs, <span class="at">direction =</span> <span class="st">"greater"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 1
+  p_value
+    &lt;dbl&gt;
+1   0.245</code></pre>
+</div>
+</div>
+<p>Around a quarter of Chi-squared values under the Null are as greater or greater than that observed in the real dataset. So there’s not great evidence of there being a relationship between having a degree and distribution of party affiliations.</p>
+<p>Infer makes it fairly straightforward to calculate the extremeness of our observed test statistic using the analytic/theoretical approach too, using the <code>assume()</code> verb:</p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a>null_dist_theory <span class="ot">&lt;-</span> gss <span class="sc">%&gt;%</span></span>
+<span id="cb57-2"><a href="#cb57-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">specify</span>(partyid <span class="sc">~</span> college) <span class="sc">|&gt;</span></span>
+<span id="cb57-3"><a href="#cb57-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">assume</span>(<span class="at">distribution =</span> <span class="st">"Chisq"</span>)</span>
+<span id="cb57-4"><a href="#cb57-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb57-5"><a href="#cb57-5" aria-hidden="true" tabindex="-1"></a><span class="fu">visualize</span>(null_dist_theory) <span class="sc">+</span></span>
+<span id="cb57-6"><a href="#cb57-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">shade_p_value</span>(<span class="at">obs_stat =</span> Chisq_obs, <span class="at">direction =</span> <span class="st">"greater"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-36-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a>null_dist_theory <span class="sc">|&gt;</span></span>
+<span id="cb58-2"><a href="#cb58-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">get_p_value</span>(<span class="at">obs_stat =</span> Chisq_obs, <span class="at">direction =</span> <span class="st">"greater"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 1
+  p_value
+    &lt;dbl&gt;
+1   0.386</code></pre>
+</div>
+</div>
+<p>Here the theoretical distribution suggests the observed value is even more likely to have been observed by chance under the Null, than using the permutation-based approach.</p>
+<p>And we can show both approaches together:</p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a>chi_dist_null <span class="sc">|&gt;</span></span>
+<span id="cb60-2"><a href="#cb60-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">visualise</span>(<span class="at">method =</span> <span class="st">"both"</span>) <span class="sc">+</span></span>
+<span id="cb60-3"><a href="#cb60-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">shade_p_value</span>(<span class="at">obs_stat =</span> Chisq_obs, <span class="at">direction =</span> <span class="st">"greater"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-38-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Here we can see the resampling-based distribution (the histogram) has more values lower than the observed value, and fewer values higher than the observed value, than the theoretical distribution (the density line), which helps to explain the difference in p-values calculated.</p>
+</section>
+<section id="summing-up" class="level3">
+<h3 class="anchored" data-anchor-id="summing-up">Summing up</h3>
+<p>So, that’s a brief introduction to the <code>infer</code> package. It provides a clear and opinionated way of thinking about and constructing hypothesis tests using a small series of verbs, and as part of this handles a lot of the code for performing permutation tests, visualising data, and comparing resampling-based estimates of the Null distribution with theoretical estimates of the same quantities. And, though both of the examples I’ve shown above are about permutation testing, it also allows for bootstrapped calculations to be performed too.</p>
+<p>In some ways, <code>infer</code> seems largely intended as a pedagogic/teaching tool, for understanding the intuition behind the concept of the Null hypothesis and distribution, and so what a p-value actually means. However you can see that it does abstract away some of the computational complexity involved in producing Null distributions using both resampling and ‘traditional’ approaches. In previous posts we showed that it’s not necessarily too difficult to produce resampled distributions without this, but there’s still potentially some quality-of-life benefits to using it.</p>
+</section>
+</section>
+<section id="post-stratification-1" class="level2">
+<h2 class="anchored" data-anchor-id="post-stratification-1">Post Stratification</h2>
+<section id="introduction-2" class="level3">
+<h3 class="anchored" data-anchor-id="introduction-2">Introduction</h3>
+<p>At the top of this page on Hacker Stats, I mentioned that resampling methods can be used to perform post-stratification, meaning reweighting of observations from a sample in such a way as to make them more representative of the population of interest to us. Let’s look at this using a variation of the <a href="../permutation-with-base-r/index.qmd">red coin/blue coin</a> example from a couple of posts ago.</p>
+</section>
+<section id="red-coinblue-coin" class="level3">
+<h3 class="anchored" data-anchor-id="red-coinblue-coin">Red Coin/Blue Coin</h3>
+<p>Imagine we have a <strong>population</strong> of two types of coin:</p>
+<ul>
+<li><strong>Red Coins</strong>, which come up heads 65% of the time</li>
+<li><strong>Blue Coins</strong>, which come up heads 47% of the time</li>
+</ul>
+<p>Within our <em>population</em>, we know 75% of the coins are <strong>Blue coins</strong>, and 25 of the coins are <strong>Red Coins</strong>.</p>
+<p>However, our sample contains 20 red coins, and 20 blue coins. i.e.&nbsp;the distribution of coin types in our sample is different to that in our population.</p>
+<p>Let’s first create this sample dataset:</p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb61"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb61-2"><a href="#cb61-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb61-3"><a href="#cb61-3" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">9</span>)</span>
+<span id="cb61-4"><a href="#cb61-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb61-5"><a href="#cb61-5" aria-hidden="true" tabindex="-1"></a>draws_red <span class="ot">&lt;-</span> <span class="fu">rbinom</span>(<span class="at">n=</span><span class="dv">20</span>, <span class="at">size =</span> <span class="dv">1</span>, <span class="at">prob =</span> <span class="fl">0.65</span>)</span>
+<span id="cb61-6"><a href="#cb61-6" aria-hidden="true" tabindex="-1"></a>draws_blue <span class="ot">&lt;-</span> <span class="fu">rbinom</span>(<span class="at">n=</span><span class="dv">20</span>, <span class="at">size =</span> <span class="dv">1</span>, <span class="at">prob =</span> <span class="fl">0.47</span>)</span>
+<span id="cb61-7"><a href="#cb61-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb61-8"><a href="#cb61-8" aria-hidden="true" tabindex="-1"></a>coin_colour <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb61-9"><a href="#cb61-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">rep</span>(<span class="st">"red"</span>, <span class="dv">20</span>),</span>
+<span id="cb61-10"><a href="#cb61-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">rep</span>(<span class="st">"blue"</span>, <span class="dv">20</span>)</span>
+<span id="cb61-11"><a href="#cb61-11" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb61-12"><a href="#cb61-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb61-13"><a href="#cb61-13" aria-hidden="true" tabindex="-1"></a>real_sample_data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb61-14"><a href="#cb61-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">coin_colour =</span> coin_colour, </span>
+<span id="cb61-15"><a href="#cb61-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">outcome =</span> <span class="fu">c</span>(draws_red, draws_blue)</span>
+<span id="cb61-16"><a href="#cb61-16" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb61-17"><a href="#cb61-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb61-18"><a href="#cb61-18" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(draws_red, draws_blue, coin_colour)</span>
+<span id="cb61-19"><a href="#cb61-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb61-20"><a href="#cb61-20" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(real_sample_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>  coin_colour outcome
+1         red       1
+2         red       1
+3         red       1
+4         red       1
+5         red       1
+6         red       1</code></pre>
+</div>
+</div>
+<p>What’s the expected probability of heads in the sample?</p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb63"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(real_sample_data<span class="sc">$</span>outcome)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.65</code></pre>
+</div>
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb65"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a>real_sample_data <span class="sc">|&gt;</span></span>
+<span id="cb65-2"><a href="#cb65-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(coin_colour) <span class="sc">|&gt;</span></span>
+<span id="cb65-3"><a href="#cb65-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarise</span>(<span class="at">prop =</span> <span class="fu">mean</span>(outcome))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 2
+  coin_colour  prop
+  &lt;chr&gt;       &lt;dbl&gt;
+1 blue          0.5
+2 red           0.8</code></pre>
+</div>
+</div>
+<p>Overall, 65% of the sample - 20 reds, 20 blues - are heads. The proportion of blues is 50%, and of reds is 80%. So, it so happens that, with this random number seed, the proportions in the sample of both reds and blues are higher than the theoretical average (the <code>prob</code> value arguments in the code above).</p>
+<p>Let’s now try to use bootstrapping to calculate a distribution around the sample mean:</p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb67"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a>bootstrap_means <span class="ot">&lt;-</span> <span class="cf">function</span>(x, <span class="at">nReps =</span> <span class="dv">10000</span>){</span>
+<span id="cb67-2"><a href="#cb67-2" aria-hidden="true" tabindex="-1"></a>    out <span class="ot">&lt;-</span> <span class="fu">vector</span>(<span class="st">"numeric"</span>, nReps) </span>
+<span id="cb67-3"><a href="#cb67-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb67-4"><a href="#cb67-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>nReps){</span>
+<span id="cb67-5"><a href="#cb67-5" aria-hidden="true" tabindex="-1"></a>        this_resample <span class="ot">&lt;-</span> <span class="fu">sample</span>(</span>
+<span id="cb67-6"><a href="#cb67-6" aria-hidden="true" tabindex="-1"></a>            <span class="at">x=</span>x, </span>
+<span id="cb67-7"><a href="#cb67-7" aria-hidden="true" tabindex="-1"></a>            <span class="at">size =</span> <span class="fu">length</span>(x), </span>
+<span id="cb67-8"><a href="#cb67-8" aria-hidden="true" tabindex="-1"></a>            <span class="at">replace =</span> <span class="cn">TRUE</span> <span class="co"># This is what makes it bootstrapping</span></span>
+<span id="cb67-9"><a href="#cb67-9" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb67-10"><a href="#cb67-10" aria-hidden="true" tabindex="-1"></a>        out[i] <span class="ot">&lt;-</span> <span class="fu">mean</span>(this_resample)</span>
+<span id="cb67-11"><a href="#cb67-11" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb67-12"><a href="#cb67-12" aria-hidden="true" tabindex="-1"></a>    out</span>
+<span id="cb67-13"><a href="#cb67-13" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb67-14"><a href="#cb67-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb67-15"><a href="#cb67-15" aria-hidden="true" tabindex="-1"></a>bootstrapped_means <span class="ot">&lt;-</span> <span class="fu">bootstrap_means</span>(real_sample_data<span class="sc">$</span>outcome)</span>
+<span id="cb67-16"><a href="#cb67-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb67-17"><a href="#cb67-17" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(bootstrapped_means)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.750 0.625 0.700 0.775 0.800 0.700</code></pre>
+</div>
+</div>
+<p>What does this look like as a histogram?</p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb69"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb69-1"><a href="#cb69-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tibble</span>(<span class="at">value =</span> bootstrapped_means) <span class="sc">|&gt;</span></span>
+<span id="cb69-2"><a href="#cb69-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> value)) <span class="sc">+</span> </span>
+<span id="cb69-3"><a href="#cb69-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_histogram</span>(<span class="at">bins =</span> <span class="dv">50</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-42-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>We can see the familiar bell-shaped distribution of values here. What about for blues and reds separately?</p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb70"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb70-1"><a href="#cb70-1" aria-hidden="true" tabindex="-1"></a>bootstrapped_means_reds <span class="ot">&lt;-</span> <span class="fu">bootstrap_means</span>(</span>
+<span id="cb70-2"><a href="#cb70-2" aria-hidden="true" tabindex="-1"></a>    real_sample_data <span class="sc">|&gt;</span></span>
+<span id="cb70-3"><a href="#cb70-3" aria-hidden="true" tabindex="-1"></a>        <span class="fu">filter</span>(coin_colour <span class="sc">==</span> <span class="st">"red"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb70-4"><a href="#cb70-4" aria-hidden="true" tabindex="-1"></a>        <span class="fu">pull</span>(<span class="st">'outcome'</span>)  </span>
+<span id="cb70-5"><a href="#cb70-5" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb70-6"><a href="#cb70-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb70-7"><a href="#cb70-7" aria-hidden="true" tabindex="-1"></a>bootstrapped_means_blues <span class="ot">&lt;-</span> <span class="fu">bootstrap_means</span>(</span>
+<span id="cb70-8"><a href="#cb70-8" aria-hidden="true" tabindex="-1"></a>    real_sample_data <span class="sc">|&gt;</span></span>
+<span id="cb70-9"><a href="#cb70-9" aria-hidden="true" tabindex="-1"></a>        <span class="fu">filter</span>(coin_colour <span class="sc">==</span> <span class="st">"blue"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb70-10"><a href="#cb70-10" aria-hidden="true" tabindex="-1"></a>        <span class="fu">pull</span>(<span class="st">'outcome'</span>)  </span>
+<span id="cb70-11"><a href="#cb70-11" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb70-12"><a href="#cb70-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb70-13"><a href="#cb70-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb70-14"><a href="#cb70-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb70-15"><a href="#cb70-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb70-16"><a href="#cb70-16" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(bootstrapped_means_reds)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.65 0.70 0.85 0.85 1.00 0.60</code></pre>
+</div>
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb72"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb72-1"><a href="#cb72-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(bootstrapped_means_blues)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.45 0.60 0.50 0.45 0.70 0.55</code></pre>
+</div>
+</div>
+<p>And what do these two distributions look like?</p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb74"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb74-1"><a href="#cb74-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tibble</span>(</span>
+<span id="cb74-2"><a href="#cb74-2" aria-hidden="true" tabindex="-1"></a>    <span class="at">rep =</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(bootstrapped_means_reds),</span>
+<span id="cb74-3"><a href="#cb74-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">red =</span> bootstrapped_means_reds,</span>
+<span id="cb74-4"><a href="#cb74-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">blue =</span> bootstrapped_means_blues</span>
+<span id="cb74-5"><a href="#cb74-5" aria-hidden="true" tabindex="-1"></a>) <span class="sc">|&gt;</span></span>
+<span id="cb74-6"><a href="#cb74-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">pivot_longer</span>(</span>
+<span id="cb74-7"><a href="#cb74-7" aria-hidden="true" tabindex="-1"></a>        <span class="at">cols =</span> <span class="fu">c</span>(red, blue),</span>
+<span id="cb74-8"><a href="#cb74-8" aria-hidden="true" tabindex="-1"></a>        <span class="at">names_to =</span> <span class="st">"colour"</span>,</span>
+<span id="cb74-9"><a href="#cb74-9" aria-hidden="true" tabindex="-1"></a>        <span class="at">values_to =</span> <span class="st">"value"</span></span>
+<span id="cb74-10"><a href="#cb74-10" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">|&gt;</span></span>
+<span id="cb74-11"><a href="#cb74-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> value, <span class="at">fill =</span> colour)) <span class="sc">+</span> </span>
+<span id="cb74-12"><a href="#cb74-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_histogram</span>(<span class="at">bins =</span> <span class="dv">50</span>, <span class="at">position =</span> <span class="st">"dodge"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-44-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>So it’s clear the distributions for mean values of the two different coin types are different, even though there’s some overlap.</p>
+<p>Let’s now look at doing some post-stratification, where we sample from the two groups in proportion to the relative probabilities of encountering observations from the two groups in <em>the population</em> as compared with <em>the sample</em>. Let’s think through what this means:</p>
+<table class="table">
+<caption>Proportions by group in sample and population</caption>
+<thead>
+<tr class="header">
+<th>Group</th>
+<th>Sample</th>
+<th>Population</th>
+<th>Ratio</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Blue</td>
+<td>0.5</td>
+<td>0.75</td>
+<td><span class="math inline">\(3/2\)</span></td>
+</tr>
+<tr class="even">
+<td>Red</td>
+<td>0.5</td>
+<td>0.25</td>
+<td><span class="math inline">\(1/2\)</span></td>
+</tr>
+<tr class="odd">
+<td>Column Sum</td>
+<td>1.00</td>
+<td>1.00</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>In this table, the ratio is the row-wise ratio of the population value divided by the sample value. Note that the ratios have a common denominator, 2, which we can drop in defining the probability weights, leaving us with <code>3</code> for <code>blue</code> and <code>1</code> for <code>red</code>.</p>
+<p>We can adapt the standard bootstrapping approach by using the <code>prob</code> argument in the <code>sample()</code> function, using these weights:</p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb75"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb75-1"><a href="#cb75-1" aria-hidden="true" tabindex="-1"></a>sample_weights <span class="ot">&lt;-</span> </span>
+<span id="cb75-2"><a href="#cb75-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">tibble</span>(</span>
+<span id="cb75-3"><a href="#cb75-3" aria-hidden="true" tabindex="-1"></a>        <span class="at">coin_colour =</span> <span class="fu">c</span>(<span class="st">"blue"</span>, <span class="st">"red"</span>),</span>
+<span id="cb75-4"><a href="#cb75-4" aria-hidden="true" tabindex="-1"></a>        <span class="at">wt =</span> <span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">1</span>)</span>
+<span id="cb75-5"><a href="#cb75-5" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb75-6"><a href="#cb75-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb75-7"><a href="#cb75-7" aria-hidden="true" tabindex="-1"></a>real_sample_data_wt <span class="ot">&lt;-</span> </span>
+<span id="cb75-8"><a href="#cb75-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">left_join</span>(</span>
+<span id="cb75-9"><a href="#cb75-9" aria-hidden="true" tabindex="-1"></a>        real_sample_data, sample_weights</span>
+<span id="cb75-10"><a href="#cb75-10" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb75-11"><a href="#cb75-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb75-12"><a href="#cb75-12" aria-hidden="true" tabindex="-1"></a>real_sample_data_wt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>   coin_colour outcome wt
+1          red       1  1
+2          red       1  1
+3          red       1  1
+4          red       1  1
+5          red       1  1
+6          red       1  1
+7          red       1  1
+8          red       1  1
+9          red       0  1
+10         red       0  1
+11         red       1  1
+12         red       1  1
+13         red       0  1
+14         red       1  1
+15         red       1  1
+16         red       1  1
+17         red       1  1
+18         red       0  1
+19         red       1  1
+20         red       1  1
+21        blue       1  3
+22        blue       0  3
+23        blue       0  3
+24        blue       0  3
+25        blue       0  3
+26        blue       1  3
+27        blue       0  3
+28        blue       0  3
+29        blue       1  3
+30        blue       1  3
+31        blue       0  3
+32        blue       1  3
+33        blue       0  3
+34        blue       1  3
+35        blue       0  3
+36        blue       1  3
+37        blue       1  3
+38        blue       1  3
+39        blue       0  3
+40        blue       1  3</code></pre>
+</div>
+</div>
+<p>And now a slightly modified version of the bootstrapping function:</p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb77"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb77-1"><a href="#cb77-1" aria-hidden="true" tabindex="-1"></a>bootstrap_means_wt <span class="ot">&lt;-</span> <span class="cf">function</span>(x, wt, <span class="at">nReps =</span> <span class="dv">10000</span>){ <span class="co">#wt is the weighting</span></span>
+<span id="cb77-2"><a href="#cb77-2" aria-hidden="true" tabindex="-1"></a>    out <span class="ot">&lt;-</span> <span class="fu">vector</span>(<span class="st">"numeric"</span>, nReps) </span>
+<span id="cb77-3"><a href="#cb77-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb77-4"><a href="#cb77-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>nReps){</span>
+<span id="cb77-5"><a href="#cb77-5" aria-hidden="true" tabindex="-1"></a>        this_resample <span class="ot">&lt;-</span> <span class="fu">sample</span>(</span>
+<span id="cb77-6"><a href="#cb77-6" aria-hidden="true" tabindex="-1"></a>            <span class="at">x=</span>x, </span>
+<span id="cb77-7"><a href="#cb77-7" aria-hidden="true" tabindex="-1"></a>            <span class="at">size =</span> <span class="fu">length</span>(x), </span>
+<span id="cb77-8"><a href="#cb77-8" aria-hidden="true" tabindex="-1"></a>            <span class="at">prob =</span> wt, <span class="co"># This is the new argument</span></span>
+<span id="cb77-9"><a href="#cb77-9" aria-hidden="true" tabindex="-1"></a>            <span class="at">replace =</span> <span class="cn">TRUE</span> <span class="co"># This is what makes it bootstrapping</span></span>
+<span id="cb77-10"><a href="#cb77-10" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb77-11"><a href="#cb77-11" aria-hidden="true" tabindex="-1"></a>        out[i] <span class="ot">&lt;-</span> <span class="fu">mean</span>(this_resample)</span>
+<span id="cb77-12"><a href="#cb77-12" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb77-13"><a href="#cb77-13" aria-hidden="true" tabindex="-1"></a>    out</span>
+<span id="cb77-14"><a href="#cb77-14" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>And to run:</p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb78"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb78-1"><a href="#cb78-1" aria-hidden="true" tabindex="-1"></a>bootstrapped_means_poststratified <span class="ot">&lt;-</span> <span class="fu">bootstrap_means_wt</span>(</span>
+<span id="cb78-2"><a href="#cb78-2" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> real_sample_data_wt<span class="sc">$</span>outcome,</span>
+<span id="cb78-3"><a href="#cb78-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">wt =</span> real_sample_data_wt<span class="sc">$</span>wt</span>
+<span id="cb78-4"><a href="#cb78-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb78-5"><a href="#cb78-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb78-6"><a href="#cb78-6" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(bootstrapped_means_poststratified)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.750 0.550 0.625 0.525 0.575 0.600</code></pre>
+</div>
+</div>
+<p>Now, analytically, we can calculate what the mean of the population should be given the proportion of blues and reds, and the proportion of blues that are heads, and proportion of reds that are heads:</p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb80"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb80-1"><a href="#cb80-1" aria-hidden="true" tabindex="-1"></a>heads_if_blue <span class="ot">&lt;-</span> <span class="fl">0.47</span></span>
+<span id="cb80-2"><a href="#cb80-2" aria-hidden="true" tabindex="-1"></a>heads_if_red <span class="ot">&lt;-</span> <span class="fl">0.65</span></span>
+<span id="cb80-3"><a href="#cb80-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb80-4"><a href="#cb80-4" aria-hidden="true" tabindex="-1"></a>expected_pop_prop_heads <span class="ot">&lt;-</span> (<span class="dv">3</span><span class="sc">/</span><span class="dv">4</span>) <span class="sc">*</span> heads_if_blue <span class="sc">+</span> (<span class="dv">1</span><span class="sc">/</span><span class="dv">4</span>) <span class="sc">*</span> heads_if_red</span>
+<span id="cb80-5"><a href="#cb80-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb80-6"><a href="#cb80-6" aria-hidden="true" tabindex="-1"></a>expected_pop_prop_heads</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.515</code></pre>
+</div>
+</div>
+<p>So within the population we would expect 51.5% of coins to come up heads.</p>
+<p>Let’s now look at the bootstrapped and reweighted distribution to see where 0.515 fits within this distribution:</p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb82"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb82-1"><a href="#cb82-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span> </span>
+<span id="cb82-2"><a href="#cb82-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">x =</span> bootstrapped_means_poststratified), <span class="at">bins=</span><span class="dv">50</span>) <span class="sc">+</span> </span>
+<span id="cb82-3"><a href="#cb82-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_vline</span>(<span class="fu">aes</span>(<span class="at">xintercept =</span> expected_pop_prop_heads), <span class="at">linewidth =</span> <span class="fl">1.2</span>, <span class="at">colour =</span> <span class="st">"purple"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-49-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>So we can see that the true population mean falls within the reweighted bootstrapped distribution of the values of the mean estimated. How about if we had not performed reweighting on the sample?</p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb83"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb83-1"><a href="#cb83-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tibble</span>(<span class="at">value =</span> bootstrapped_means) <span class="sc">|&gt;</span></span>
+<span id="cb83-2"><a href="#cb83-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>() <span class="sc">+</span> </span>
+<span id="cb83-3"><a href="#cb83-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">x =</span> value), <span class="at">bins=</span><span class="dv">50</span>) <span class="sc">+</span> </span>
+<span id="cb83-4"><a href="#cb83-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_vline</span>(<span class="fu">aes</span>(<span class="at">xintercept =</span> expected_pop_prop_heads), <span class="at">linewidth =</span> <span class="fl">1.2</span>, <span class="at">colour =</span> <span class="st">"purple"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-50-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>So, although on this occasion, the true population value is also within the range of the un-reweighted bootstrapped distribution, it is further from the centre of this distribution’s mass.</p>
+<p>Let’s give some numbers to the above. What proportion of the bootstrapped values are below the true population value?</p>
+<p>First without reweighting:</p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb84"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb84-1"><a href="#cb84-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(bootstrapped_means <span class="sc">&lt;</span> expected_pop_prop_heads)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.0343</code></pre>
+</div>
+</div>
+<p>Only about 3.4% of the means from the unweighted bootstrapping were more extreme than the true population value.</p>
+<p>And now with reweighting:</p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb86"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb86-1"><a href="#cb86-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(bootstrapped_means_poststratified <span class="sc">&lt;</span> expected_pop_prop_heads)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.2102</code></pre>
+</div>
+</div>
+<p>Now 22.4% of values of the means from the reweighted/post-stratified bootstrapped distribution are below the true value. This is the difference between the true value being in the 90% central interval or not.</p>
+</section>
+<section id="summary-2" class="level3">
+<h3 class="anchored" data-anchor-id="summary-2">Summary</h3>
+<p>In this post we’ve illustrated the importance of post-stratifying data were we know a sample is biased in terms of the relative weight given to the strata it contains as compared with the population. We’ve also shown, using Base R functions alone, how to perform this post-stratification using just two additional changes: a vector of weights, which was fairly straightforward to calculate; and the passing of this vector of weights to the <code>prob</code> argument in the <code>sample()</code> function. In this section we’ve focused on a hypothetical example, and built the requisite functions and code from scratch.</p>
+</section>
+</section>
+<section id="overall-summary" class="level2">
+<h2 class="anchored" data-anchor-id="overall-summary">Overall summary</h2>
+<p>This page was originally a series of posts to my blog, with material originally a bit out of order. This means I covered some of the same topics in multiple ways. Some of what remains on this page might still be a bit disjointed as a result of this.</p>
+<p>After running through a number of examples in base R, building bootstrapping and permutation functions from scratch. I then moved onto the <code>infer</code> package, which makes resampling a bit more straightforward.</p>
+<p>In practice the <code>infer</code> package is mainly intended for teaching the intuitions of hypothesis testing more generally. For using bootstrapping and other Hacker Stats in practice it can still be helpful either to build the requisite functions in Base R, or to use packages like like <a href="https://stats.oarc.ucla.edu/r/faq/how-do-i-analyze-survey-data-with-stratification-after-sampling-poststratification/"><code>survey</code></a> and <a href="https://cran.r-project.org/web/packages/svrep/vignettes/bootstrap-replicates.html"><code>svrep</code></a> for post-stratification, and <a href="https://cran.r-project.org/web/packages/boot/index.html">boot</a> for bootstrapping and permutation testing.</p>
+
+
+</section>
+
+
+<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+
+<ol>
+<li id="fn1"><p>This isn’t a made-up example, but broadly the approach used by <a href="https://www.microsoft.com/en-us/research/wp-content/uploads/2016/04/forecasting-with-nonrepresentative-polls.pdf">Wang et al 2014</a> to produce pretty accurate estimates of a then-upcoming US election<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>Technically, the Chi-Squared test here is two sided, looking for much smaller and much higher values than the Null distribution, whereas in the example below where we used a one-sided test.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section></div></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  let localAlternateSentinel = 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

@@ -169,5 +169,11 @@
   },
   "pages/extra-courses/time-series/index.qmd": {
     "index.html": "7aa7ee83"
+  },
+  "pages/extra-courses/hacker-stats/index.qmd": {
+    "index.html": "161a8362"
+  },
+  "pages/main-course/statistics-as-circuits/index.qmd": {
+    "index.html": "6dea92d7"
   }
 }
