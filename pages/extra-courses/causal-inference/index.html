@@ -1,0 +1,1603 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.450">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>JonStats - Causal Inference: An Opinionated Introduction</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../">
+<script src="../../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script src="../../../site_libs/quarto-diagram/mermaid.min.js"></script>
+<script src="../../../site_libs/quarto-diagram/mermaid-init.js"></script>
+<link href="../../../site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<link rel="stylesheet" href="../../../styles.css">
+</head>
+
+<body class="nav-sidebar floating nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../../../index.html">
+    <span class="navbar-title">JonStats</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../../index.html" rel="" target="">
+ <span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../about.html" rel="" target="">
+ <span class="menu-text">About</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-main-course-statistical-inference-and-simulation" role="button" data-bs-toggle="dropdown" aria-expanded="false" rel="" target="">
+ <span class="menu-text">Main Course: Statistical Inference and Simulation</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-main-course-statistical-inference-and-simulation">    
+        <li>
+    <a class="dropdown-item" href="../../../pages/main-course/statistics-as-circuits/index.html" rel="" target="">
+ <span class="dropdown-text">(0) Statistics as Circuit Boards</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../../pages/main-course/intro-to-glms/index.html" rel="" target="">
+ <span class="dropdown-text">(1) Intro to GLMs</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../../pages/main-course/likelihood-and-simulation-theory/index.html" rel="" target="">
+ <span class="dropdown-text">(2) Likelihood and Simulation Theory</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../../pages/main-course/complete-simulation-example/index.html" rel="" target="">
+ <span class="dropdown-text">(3) Complete Simulation Example</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-supplementary-courses" role="button" data-bs-toggle="dropdown" aria-expanded="false" rel="" target="">
+ <span class="menu-text">Supplementary Courses</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-supplementary-courses">    
+        <li>
+    <a class="dropdown-item" href="../../../pages/extra-courses/causal-inference/index.html" rel="" target="">
+ <span class="dropdown-text">Causal Inference</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../../pages/extra-courses/time-series/index.html" rel="" target="">
+ <span class="dropdown-text">Time Series</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../../pages/extra-courses/hacker-stats/index.html" rel="" target="">
+ <span class="dropdown-text">Hacker Stats</span></a>
+  </li>  
+    </ul>
+  </li>
+</ul>
+            <div class="quarto-navbar-tools ms-auto">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../../pages/extra-courses/causal-inference/index.html">Causal Inference</a></li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../pages/extra-courses/causal-inference/index.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Causal Inference</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../pages/extra-courses/time-series/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Time Series</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../pages/extra-courses/hacker-stats/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Hacker Stats</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#high-level-notewarning" id="toc-high-level-notewarning" class="nav-link active" data-scroll-target="#high-level-notewarning">High level note/warning</a></li>
+  <li><a href="#causal-inference-a-non-technical-introduction" id="toc-causal-inference-a-non-technical-introduction" class="nav-link" data-scroll-target="#causal-inference-a-non-technical-introduction">Causal Inference: A non-technical Introduction</a>
+  <ul class="collapse">
+  <li><a href="#henry-dundas-hero-or-villain" id="toc-henry-dundas-hero-or-villain" class="nav-link" data-scroll-target="#henry-dundas-hero-or-villain">Henry Dundas: Hero or Villain?</a></li>
+  <li><a href="#the-unobserved-counterfactual" id="toc-the-unobserved-counterfactual" class="nav-link" data-scroll-target="#the-unobserved-counterfactual">The unobserved counterfactual</a></li>
+  </ul></li>
+  <li><a href="#causal-inference-technical-descriptions" id="toc-causal-inference-technical-descriptions" class="nav-link" data-scroll-target="#causal-inference-technical-descriptions">Causal Inference: Technical Descriptions</a>
+  <ul class="collapse">
+  <li><a href="#models-dont-care-about-causality-but-we-do" id="toc-models-dont-care-about-causality-but-we-do" class="nav-link" data-scroll-target="#models-dont-care-about-causality-but-we-do">Models don’t care about causality… but we do</a></li>
+  <li><a href="#the-impossible-platinum-standard" id="toc-the-impossible-platinum-standard" class="nav-link" data-scroll-target="#the-impossible-platinum-standard">The (Impossible) Platinum Standard</a></li>
+  <li><a href="#the-everyday-fools-gold-standard" id="toc-the-everyday-fools-gold-standard" class="nav-link" data-scroll-target="#the-everyday-fools-gold-standard">The Everyday Fool’s Gold Standard</a></li>
+  <li><a href="#why-randomised-controlled-trials-are-the-real-gold-standard" id="toc-why-randomised-controlled-trials-are-the-real-gold-standard" class="nav-link" data-scroll-target="#why-randomised-controlled-trials-are-the-real-gold-standard">Why Randomised Controlled Trials are the real Gold Standard</a></li>
+  <li><a href="#summing-up" id="toc-summing-up" class="nav-link" data-scroll-target="#summing-up">Summing up</a></li>
+  </ul></li>
+  <li><a href="#multiple-regression-and-matching-approaches-in-practice" id="toc-multiple-regression-and-matching-approaches-in-practice" class="nav-link" data-scroll-target="#multiple-regression-and-matching-approaches-in-practice">Multiple Regression and Matching Approaches in Practice</a>
+  <ul class="collapse">
+  <li><a href="#getting-started" id="toc-getting-started" class="nav-link" data-scroll-target="#getting-started">Getting started</a></li>
+  <li><a href="#data" id="toc-data" class="nav-link" data-scroll-target="#data">Data</a></li>
+  <li><a href="#matching-with-matchit" id="toc-matching-with-matchit" class="nav-link" data-scroll-target="#matching-with-matchit">Matching with MatchIt</a></li>
+  <li><a href="#estimating-treatment-effect-sizes-after-matching" id="toc-estimating-treatment-effect-sizes-after-matching" class="nav-link" data-scroll-target="#estimating-treatment-effect-sizes-after-matching">Estimating Treatment Effect Sizes <em>after</em> matching</a></li>
+  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary">Summary</a></li>
+  </ul></li>
+  <li><a href="#the-schools-of-causal-inference" id="toc-the-schools-of-causal-inference" class="nav-link" data-scroll-target="#the-schools-of-causal-inference">The Schools of Causal Inference</a>
+  <ul class="collapse">
+  <li><a href="#causal-inference-two-paradigms" id="toc-causal-inference-two-paradigms" class="nav-link" data-scroll-target="#causal-inference-two-paradigms">Causal Inference: Two paradigms</a></li>
+  <li><a href="#the-omitted-variable-bias-vs-post-treatment-bias-trade-off-as-a-potential-bridge-between-the-two-paradigms" id="toc-the-omitted-variable-bias-vs-post-treatment-bias-trade-off-as-a-potential-bridge-between-the-two-paradigms" class="nav-link" data-scroll-target="#the-omitted-variable-bias-vs-post-treatment-bias-trade-off-as-a-potential-bridge-between-the-two-paradigms">The Omitted Variable Bias vs Post Treatment Bias Trade-off as a potential bridge between the two paradigms</a></li>
+  <li><a href="#with-apologies-to-economists-and-epidemiologists-alike" id="toc-with-apologies-to-economists-and-epidemiologists-alike" class="nav-link" data-scroll-target="#with-apologies-to-economists-and-epidemiologists-alike">With apologies to economists and epidemiologists alike…</a></li>
+  <li><a href="#summary-thoughts-on-social-complexity-and-the-need-for-epistemic-humility" id="toc-summary-thoughts-on-social-complexity-and-the-need-for-epistemic-humility" class="nav-link" data-scroll-target="#summary-thoughts-on-social-complexity-and-the-need-for-epistemic-humility">Summary thoughts: on social complexity and the need for epistemic humility</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Causal Inference: An Opinionated Introduction</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<section id="high-level-notewarning" class="level2">
+<h2 class="anchored" data-anchor-id="high-level-notewarning">High level note/warning</h2>
+<p>There are broadly two schools of thought when it comes to thinking about the problems of causal inference. One which interprets the challenge of causal inference mainly as a missing data problem; and another which interprets it mainly in terms of a modelling problem. The posts in this series are largely drawn from the missing data interpretation. If you want an overview of the two approaches (albeit subject to my own ignorance and biases), please skip briefly to <a href="#the-schools-of-causal-inference">the end of these notes</a> before continuing.</p>
+</section>
+<section id="causal-inference-a-non-technical-introduction" class="level2">
+<h2 class="anchored" data-anchor-id="causal-inference-a-non-technical-introduction">Causal Inference: A non-technical Introduction</h2>
+<section id="henry-dundas-hero-or-villain" class="level3">
+<h3 class="anchored" data-anchor-id="henry-dundas-hero-or-villain">Henry Dundas: Hero or Villain?</h3>
+<div class="quarto-layout-panel">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="dundas-observed.png" class="img-fluid figure-img" alt="Henry Dundas, as observed"></p>
+<figcaption class="figure-caption">Henry Dundas, as observed</figcaption>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="dundas-good-counterfactual.png" class="img-fluid figure-img" alt="Henry Dundas: the unobserved good counterfactual"></p>
+<figcaption class="figure-caption">Henry Dundas, the unobserved good counterfactual</figcaption>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="dundas-bad-counterfactual.png" class="img-fluid figure-img" alt="Henry Dundas: the unobserved bad counterfactual"></p>
+<figcaption class="figure-caption">Henry Dundas, the unobserved bad counterfactual</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<p>A few minutes’ walk from where I live is St Andrew Square. And in the middle of St Andrew Square is the <a href="https://en.wikipedia.org/wiki/Melville_Monument">Melville Monument</a>, a 40 metre tall column, on which stands a statue of <a href="https://en.wikipedia.org/wiki/Henry_Dundas,_1st_Viscount_Melville">Henry Dundas, 1st Viscount Melville</a>.</p>
+<p>Though the Melville Monument was constructed in the 19th century to commemorate and celebrate this 18th century figure, in 2020 the City of Edimburgh Council chose to add more context to Dundas’ legacy by unveiling <a href="https://upload.wikimedia.org/wikipedia/commons/4/44/Melville_Plaque.jpg">a plaque</a> with the following message::</p>
+<blockquote class="blockquote">
+<p>At the top of this neoclassial column stands a statue of Hentry Dundas, 1st Viscount Melville (1742-1811). He was the Scottish Lord Advocate, an MP for Edinburgh and Midlothian, and the First Lord of the Admiralty. Dundas was a contentious figure, provoking controversies that resonate to this day. While Home Secretary in 1792, and first Secretary of State for War in 1796 he was instrumental in deferring the abolition of the Atlantic slave trade. Slave trading by British ships was not abolished until 1807. As a result of this delay, more than half a million enslaved Africans crossed the Atlantic.</p>
+</blockquote>
+<p>So, the claim of the council plaque was that Dundas <em>caused</em> the enslavement of hundreds of thousands of Africans, by promoting a gradualist policy of abolition.</p>
+<p>The descendents of Dundas contested these claims, however, <a href="https://www.edinburghnews.scotsman.com/heritage-and-retro/retro/dundas-plaque-row-descendants-of-dundas-surprised-and-disappointed-at-false-plaque-wording-3172579">instead arguing</a>:</p>
+<blockquote class="blockquote">
+<p>The claim that Henry Dundas caused the enslavement of more than half a million Africans is patently false. The truth is: Dundas was the first MP to advocate in Parliament for the emancipation of slaves in the British territories along with the abolition of the slave trade. Dundas’s efforts resulted in the House of Commons voting in favour of ending the Atlantic slave trade for the first time in its history.</p>
+</blockquote>
+<p>So, the claim of the descendents was that Dundas <em>prevented</em> the enslavement of (at least) hundreds of thousands of Africans, by promoting a gradualist policy of abolition.</p>
+<p>How can the same agreed-upon historical facts lead to such diametrically opposing interpretations of the effects of Dundas and his actions?</p>
+<p>The answer to this question is at the heart of causal inference, and an example of why, when trying to estimate causal effects, <em>at least half of the data are always missing</em>.</p>
+</section>
+<section id="the-unobserved-counterfactual" class="level3">
+<h3 class="anchored" data-anchor-id="the-unobserved-counterfactual">The unobserved counterfactual</h3>
+<p>Both parties in the Dundas debate have, as mentioned, access to the same historical facts. They agree on the same observed historical reality. And both are making bold claims about the impact of Dundas in relation to the Transatlantic slave trade. In doing this, they are both comparing this observed historical reality with something else: <strong>the unobserved counterfactual</strong>.</p>
+<p>The unobserved counterfactual is <em>the data that would have been observed if what had happened, hadn’t happened</em> <a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> However, what happened <em>did</em> happen, so this data <em>isn’t</em> observed. So, as it hasn’t been observed, it doesn’t exist in any historic facts. Instead, the unobserved counterfactual has to be <em>imputed</em>, or <em>inferred</em>… in effect, <em>made up</em>.</p>
+<p>Causal inference <em>always</em> involves some kind of comparison between an observed reality and an unobserved counterfactual. The issue at heart of the Dundas debate is that both parties have compared the observed reality with a different unobserved counterfactual, and from this different Dundas effects have been inferred.</p>
+<p>For the council, the unobserved counterfactual appears to be something like the following:</p>
+<blockquote class="blockquote">
+<p>Dundas doesn’t propose a gradualist amendment to a bill in parliament. The more radical and rapid version of the bill passes, and slavery is abolished earlier, leading to fewer people becoming enslaved.</p>
+</blockquote>
+<p>Whereas for the descendents, the unobserved counterfactual appears to be something like this:</p>
+<blockquote class="blockquote">
+<p>Dundas doesn’t propose a gradualist amendment to a bill in parliament. Because of this, the more radical version of the bill doesn’t have enough support in parliament (perhaps because it would be acting too much against the financial interests of some parliamentarians and powerful business interests), and so is defeated. As a result of this, the abolition of slavery is delayed, leading to more people becoming enslaved.</p>
+</blockquote>
+<p>So, by having the same observed historical facts, the observed Dundas, but radically different counterfactuals, the two parties have used the same methodology to derive near antithetical estimates of the ‘Dundas Effect’.</p>
+</section>
+</section>
+<section id="causal-inference-technical-descriptions" class="level2">
+<h2 class="anchored" data-anchor-id="causal-inference-technical-descriptions">Causal Inference: Technical Descriptions</h2>
+<section id="models-dont-care-about-causality-but-we-do" class="level3">
+<h3 class="anchored" data-anchor-id="models-dont-care-about-causality-but-we-do">Models don’t care about causality… but we do</h3>
+<p>The first stage when using a statistical model is to take a big rectangle of data, <span class="math inline">\(D\)</span>, and split the columns of the data into two types:</p>
+<ul>
+<li><strong>Predictor variables</strong>, usually denoted <span class="math inline">\(X\)</span></li>
+<li><strong>Response variables</strong>, usually denoted <span class="math inline">\(y\)</span></li>
+</ul>
+<p>With the predictor variables and the response variables defined, the challenge of model fitting is then to find some combination of model parameters <span class="math inline">\(\theta\)</span> that minimises in some way the gap between the <em>observed</em> response values <span class="math inline">\(y\)</span>, and the <em>predicted</em> response values from the model <span class="math inline">\(Y\)</span>.</p>
+<p>The first point to note is that, from the perspective of the model, it does not matter which variable or variables from <span class="math inline">\(D\)</span> we choose to put in the predictor side <span class="math inline">\(X\)</span> or the response side <span class="math inline">\(y\)</span>. Even if we put a variable from the future in as a predictor of something in the past, the optimisation algorithms will still work in exactly the same way, working to minimise the gap between observed and predicted responses. The only problem is such a model would make no sense from a causal perspective.</p>
+<p>The model also does not ‘care’ about how we think about and go about defining any of the variables that go into the predictor side of the equation, <span class="math inline">\(X\)</span>. But again, we do. In particular, when thinking about causality it can be immensely helpful to imagine splitting the predictor columns up into some conceptually different types. This will be helpful for thinking about causal inference using some algebra.</p>
+</section>
+<section id="the-impossible-platinum-standard" class="level3">
+<h3 class="anchored" data-anchor-id="the-impossible-platinum-standard">The (Impossible) Platinum Standard</h3>
+<p>In some previous expressions of the data, <span class="math inline">\(D\)</span>, we used the subscript <span class="math inline">\(i\)</span> to indicate the <em>rows</em> of the data which go into the model. Each of these rows is, by convention, a different observation. So, instead of saying the purpose of the model is to predict <span class="math inline">\(y\)</span> on <span class="math inline">\(X\)</span>, it’s more precisely to predict <span class="math inline">\(y_i\)</span> on <span class="math inline">\(X_i\)</span>, for all <span class="math inline">\(i\)</span> in the data (i.e.&nbsp;all rows in <span class="math inline">\(D\)</span>).</p>
+<p>Now let’s do some predictor variable fission and say, for our purposes, that:</p>
+<p><span class="math display">\[
+X_i = \{X_i^*, Z_i\}
+\]</span></p>
+<p>Here <span class="math inline">\(Z_i\)</span> is an <em>assignment variable</em>, and takes either a value of <code>1</code>, meaning ‘is assigned’, or <code>0</code>, meaning ‘is not assigned’. The variable <span class="math inline">\(X_i^*\)</span>, by contrast, means ‘all other predictor variables’.</p>
+<p>For individual observations <span class="math inline">\(D_i\)</span> where <span class="math inline">\(Z_i = 1\)</span>, the individual is <em>exposed</em> (or <em>treated</em>) to something. And for individual observations <span class="math inline">\(D_i\)</span> where <span class="math inline">\(Z_i = 0\)</span>, the individual is <em>not exposed</em> (or <em>not treated</em>) to that thing.</p>
+<p>The causal effect of assignment, or treatment, for any individual observation is:</p>
+<p><span class="math display">\[
+TE_i = y_i|(X_i^*, Z = 1) - y_i| (X_i^*, Z = 0)
+\]</span></p>
+<p><strong>The fundamental problem of causal inference, however, is that for any individual observation <span class="math inline">\(i\)</span>, one of the two parts of this expression is always missing.</strong> If an individual <span class="math inline">\(i\)</span> <em>had</em> been assigned, then <span class="math inline">\(y_i|(X_i^*, Z=1)\)</span> <em>is observed</em>, but <span class="math inline">\(y_i|(X_i^*, Z=0)\)</span> <em>is unobserved</em>. By contrast, if an individual <span class="math inline">\(i\)</span> <em>had not been assigned</em>, then <span class="math inline">\(y_i|(X_i^*, Z=0)\)</span> <em>is observed</em>, but <span class="math inline">\(y_i|(X_i^*, Z=1)\)</span> <em>is unobserved</em>.</p>
+<p>Another way to think about this is as a table, where the treatment effect for an individual involves comparing the outcomes reported in two columns of the same row, but the cells in one of these two columns is always missing:</p>
+<table class="table">
+<colgroup>
+<col style="width: 19%">
+<col style="width: 28%">
+<col style="width: 23%">
+<col style="width: 28%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>individual</th>
+<th>outcome if treated</th>
+<th>outcome if not treated</th>
+<th>treatment effect</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>4.8</td>
+<td>??</td>
+<td>??</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>3.7</td>
+<td>??</td>
+<td>??</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>??</td>
+<td>2.3</td>
+<td>??</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>3.1</td>
+<td>??</td>
+<td>??</td>
+</tr>
+<tr class="odd">
+<td>5</td>
+<td>??</td>
+<td>3.4</td>
+<td>??</td>
+</tr>
+<tr class="even">
+<td>6</td>
+<td>??</td>
+<td>2.9</td>
+<td>??</td>
+</tr>
+</tbody>
+</table>
+<p>The Platinum Standard of causal effect estimation would therefore be if the missing cells in the outcome columns could be accurately filled in, allowing the treatment effect for each individual to be calculated.</p>
+<p>However, this isn’t possible. It’s <strong>social science fiction</strong>, as we can’t split the universe and compare parallel realities: one in which what happened didn’t happen, and the other in which what didn’t happen happened.</p>
+<p>So, what can be done?</p>
+</section>
+<section id="the-everyday-fools-gold-standard" class="level3">
+<h3 class="anchored" data-anchor-id="the-everyday-fools-gold-standard">The Everyday Fool’s Gold Standard</h3>
+<p>There’s one thing you might be tempted to do with the kind of data shown in the table above: compare the average outcome in the treated group with the average outcome in the untreated group, i.e.:</p>
+<p><span class="math display">\[
+ATE = E(y | Z = 1) - E(y | Z = 0)
+\]</span></p>
+<p>Let’s do this with the example above:</p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>e_y_z1 <span class="ot">&lt;-</span> <span class="fu">mean</span>(<span class="fu">c</span>(<span class="fl">4.8</span>, <span class="fl">3.7</span>, <span class="fl">3.1</span>))</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>e_y_z0 <span class="ot">&lt;-</span> <span class="fu">mean</span>(<span class="fu">c</span>(<span class="fl">2.3</span>, <span class="fl">3.4</span>, <span class="fl">2.9</span>))</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co"># And the difference?</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>e_y_z1 <span class="sc">-</span> e_y_z0</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1</code></pre>
+</div>
+</div>
+<p>In this example, the difference in the averages between the two groups is <code>1.0</code>.<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> Based on this, we might imagine the first individual, who was treated, would have had a score of <code>3.8</code> rather than <code>4.8</code>, and the third individual, who was not treated, would have received a score of <code>3.3</code> rather than <code>2.3</code> if they had been treated.</p>
+<p>So, what’s the problem with just comparing the averages in this way? Potentially, nothing. But potentially, a lot. It depends on the data and the problem. More specifically, it depends on the relationship between the assignment variable, <span class="math inline">\(Z\)</span>, and the other characteristics of the individual, which includes but is not usually entirely captured by the known additional characteristics of the individual, <span class="math inline">\(X_i^*\)</span>.</p>
+<p>Let’s give a specific example: What if I were to tell you that the outcomes <span class="math inline">\(y_i\)</span> were waiting times at public toilets/bathrooms, and the assignment variable, <span class="math inline">\(Z\)</span>, takes the value <code>1</code> if the individual has been assigned to a facility containing urinals, and <code>0</code> if the individual has been assigned to a facility containing no urinals? Would it be right to infer that the difference in the average is the average causal effect of urinals in public toilets/bathrooms?</p>
+<p>I’d suggest not, because there are characteristics of the individual which govern assignment to bathroom type. What this means is that <span class="math inline">\(Z_i\)</span> and <span class="math inline">\(X_i^*\)</span> are coupled or related to each other in some way. So, any difference in the average outcome between those assigned to (or ‘treated with’) urinals <em>could be</em> due to the urinals themselves; or <em>could be</em> due to other ways that ‘the treated’ and ‘the untreated’ differ from each other systematically. We may be able to observe a difference, and to report that it’s statistically significant. But we don’t know how much, if any, of that difference is due to the exposure or treatment of primary interest to us, and how much is due to other ways in the ‘treated’ and ‘untreated’ groups differ.</p>
+<p>So, we need some way of breaking the link between <span class="math inline">\(Z\)</span> and <span class="math inline">\(X^*\)</span>. How do we do this?</p>
+</section>
+<section id="why-randomised-controlled-trials-are-the-real-gold-standard" class="level3">
+<h3 class="anchored" data-anchor-id="why-randomised-controlled-trials-are-the-real-gold-standard">Why Randomised Controlled Trials are the real Gold Standard</h3>
+<p>The clue’s in the subheading. Randomised Controlled Trials (RCTs) are known as the Gold Standard for scientific evaluation of effects for a reason, and the reason is this: they’re explicitly designed to break the link between <span class="math inline">\(Z\)</span> and <span class="math inline">\(X^*\)</span>. And not just <span class="math inline">\(X^*\)</span>, but any unobserved or unincluded characteristics of the individuals, <span class="math inline">\(W^*\)</span>, which might also otherwise influence assignment or selection to <span class="math inline">\(Z\)</span> but we either couldn’t measure or didn’t choose to include.</p>
+<p>The key idea of an RCT is that assignment to either a treated or untreated group, or to any additional arms of the trial, has nothing to do with the characteristics of any individual in the trial. Instead, the allocation is random, determined by a figurature (or historically occasionally literal) coin toss. <a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a></p>
+<p>What this random assignment means is that assignment <span class="math inline">\(Z\)</span> should be unrelated to the known characteristics <span class="math inline">\(X^*\)</span>, as well as unknown characteristics <span class="math inline">\(W^*\)</span>. The technical term for this (if I remember correctly) is that assignment is <em>orthogonal</em> to other characteristics, represented algebraically as <span class="math inline">\(Z \perp X^*\)</span> and <span class="math inline">\(Z \perp W^*\)</span>.</p>
+<p>This doesn’t mean that, for any particular trial, there will be zero correlation between <span class="math inline">\(Z\)</span> and other characteristics. Nor does it mean that the characteristics of participants will be the same across trial arms. Because of random variation there are always going to be differences between arms in any specific RCT. However, we know that, because we are aware of the mechanism used to allocate participants to treated or non-treated groups (or more generally to trial arms), the <em>expected</em> difference in characteristics will be zero across <em>many</em> RCTs. Along with increased observations, this is the reason why, in principle, a meta-analysis of methodologically identical RCTs should offer even greater precision as to the causal effect of a treatment than just relying on a single RCT. <a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a></p>
+</section>
+<section id="summing-up" class="level3">
+<h3 class="anchored" data-anchor-id="summing-up">Summing up</h3>
+<p>A key point to note is that, when analysing a properly conducted RCT to estimate a treatment effect, the ATE formula shown above, which is naive and likely to be biased when working with observational data, <em>is likely to produce an unbiased estimate of the treatment effect</em>. Because the trial design is sophisticated in the way it breaks the link between <span class="math inline">\(Z\)</span> and everything else, the statistical analysis does not have to be sophisticated.</p>
+<p>The flip side of this, however, is that when the data are observational, and it would be naive (as with the urinals and waiting times example) to assume that <span class="math inline">\(Z\)</span> is unlinked to everything else known (<span class="math inline">\(X^*\)</span>) and unknown (<span class="math inline">\(W^*\)</span>), then more careful and bespoke statistical modelling approaches are likely to be required to recover non-biased causal effects. Such modelling approaches need to be mindful of both the platinum and gold standards presented above, and rely on modelling and other assumptions to try to simulate what the treatment effects would be if these unobtainable (platinum) and unobtained (gold) standards had been obtained.</p>
+</section>
+</section>
+<section id="multiple-regression-and-matching-approaches-in-practice" class="level2">
+<h2 class="anchored" data-anchor-id="multiple-regression-and-matching-approaches-in-practice">Multiple Regression and Matching Approaches in Practice</h2>
+<p>This post will go explore some application of the first two approaches: controlling for variables using multiple regression; and using matching methods. A fuller consideration of the issues is provided in <span class="citation" data-cites="Ho_Imai_King_Stuart_2007">Ho et al. (<a href="#ref-Ho_Imai_King_Stuart_2007" role="doc-biblioref">2007</a>)</span>, and the main package and dataset used will be that of the associated <code>MatchIt</code> package <span class="citation" data-cites="MatchIt">Ho et al. (<a href="#ref-MatchIt" role="doc-biblioref">2011</a>)</span> and <a href="https://cran.r-project.org/web/packages/MatchIt/vignettes/MatchIt.html">vignette using the <code>lalonde</code> dataset</a>.</p>
+<section id="getting-started" class="level3">
+<h3 class="anchored" data-anchor-id="getting-started">Getting started</h3>
+<p>We start by loading the <code>Matchit</code> package and exploring the <code>lalonde</code> dataset.</p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(MatchIt)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>unmatched_data <span class="ot">&lt;-</span> <span class="fu">tibble</span>(lalonde)</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>unmatched_data</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 614 × 9
+   treat   age  educ race   married nodegree  re74  re75   re78
+   &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;fct&gt;    &lt;int&gt;    &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;
+ 1     1    37    11 black        1        1     0     0  9930.
+ 2     1    22     9 hispan       0        1     0     0  3596.
+ 3     1    30    12 black        0        0     0     0 24909.
+ 4     1    27    11 black        0        1     0     0  7506.
+ 5     1    33     8 black        0        1     0     0   290.
+ 6     1    22     9 black        0        1     0     0  4056.
+ 7     1    23    12 black        0        0     0     0     0 
+ 8     1    32    11 black        0        1     0     0  8472.
+ 9     1    22    16 black        0        0     0     0  2164.
+10     1    33    12 white        1        0     0     0 12418.
+# ℹ 604 more rows</code></pre>
+</div>
+</div>
+</section>
+<section id="data" class="level3">
+<h3 class="anchored" data-anchor-id="data">Data</h3>
+<p>The description of the <code>lalonde</code> dataset is as follows:</p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">help</span>(lalonde)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<blockquote class="blockquote">
+<h3 id="description" class="anchored">Description</h3>
+<p>This is a subsample of the data from the treated group in the National Supported Work Demonstration (NSW) and the comparison sample from the Population Survey of Income Dynamics (PSID). This data was previously analyzed extensively by Lalonde (1986) and Dehejia and Wahba (1999).</p>
+<h3 id="format" class="anchored">Format</h3>
+<p>A data frame with 614 observations (185 treated, 429 control). There are 9 variables measured for each individual.</p>
+<ul>
+<li><p>“treat” is the treatment assignment (1=treated, 0=control).</p></li>
+<li><p>“age” is age in years.</p></li>
+<li><p>“educ” is education in number of years of schooling.</p></li>
+<li><p>“race” is the individual’s race/ethnicity, (Black, Hispanic, or White). Note previous versions of this dataset used indicator variables <code>black</code> and <code>hispan</code> instead of a single race variable.</p></li>
+<li><p>“married” is an indicator for married (1=married, 0=not married).</p></li>
+<li><p>“nodegree” is an indicator for whether the individual has a high school degree (1=no degree, 0=degree).</p></li>
+<li><p>“re74” is income in 1974, in U.S. dollars.</p></li>
+<li><p>“re75” is income in 1975, in U.S. dollars.</p></li>
+<li><p>“re78” is income in 1978, in U.S. dollars.</p></li>
+</ul>
+<p>“treat” is the treatment variable, “re78” is the outcome, and the others are pre-treatment covariates.</p>
+</blockquote>
+<p>Let’s look at the data to get a sense of it:</p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>unmatched_data <span class="sc">|&gt;</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">treat =</span> <span class="fu">as.factor</span>(treat)) <span class="sc">|&gt;</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(re78 <span class="sc">&lt;</span> <span class="dv">25000</span>) <span class="sc">|&gt;</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">y =</span> re78, <span class="at">x =</span> re75, <span class="at">shape =</span> treat, <span class="at">colour =</span> treat)) <span class="sc">+</span> </span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="fu">geom_point</span>() <span class="sc">+</span> </span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="fu">geom_abline</span>(<span class="at">intercept =</span> <span class="dv">0</span>, <span class="at">slope =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="fu">coord_equal</span>() <span class="sc">+</span> </span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="fu">stat_smooth</span>(<span class="at">se =</span> <span class="cn">FALSE</span>, <span class="at">method =</span> <span class="st">"lm"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Clearly this is quite complicated data, where the single implied control, wages in 1975 (<code>re75</code>) is not sufficient. There are also a great many observations where wages in either of both years were 0, hence the horizontal and vertical streaks apparent.</p>
+<p>The two lines are the linear regression lines for the two treatment groups as a function of earlier wage. The lines are not fixed to have the same slope, so the differences in any crude treatment effect estimate vary by earlier wage, but for most previous wages the wages in 1978 appear to be lower in the treatment group (blue), than the control group (red). This would suggest either that the treatment may be harmful to wages… or that there is severe imbalance between the characteristics of persons in both treatment conditions.</p>
+<p>Let’s now start to use a simple linear regression to estimate an average treatment effect, before adding more covariates to see how these model-derived estimates change</p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Model of treatment assignment only</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>mod_01 <span class="ot">&lt;-</span> <span class="fu">lm</span>(re78 <span class="sc">~</span> treat, unmatched_data)</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod_01) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = re78 ~ treat, data = unmatched_data)
+
+Residuals:
+   Min     1Q Median     3Q    Max 
+ -6984  -6349  -2048   4100  53959 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)   6984.2      360.7  19.362   &lt;2e-16 ***
+treat         -635.0      657.1  -0.966    0.334    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 7471 on 612 degrees of freedom
+Multiple R-squared:  0.001524,  Adjusted R-squared:  -0.0001079 
+F-statistic: 0.9338 on 1 and 612 DF,  p-value: 0.3342</code></pre>
+</div>
+</div>
+<p>On average the treated group had (annual?) wages $635 lower than the control group. However the difference is not statistically significant.</p>
+<p>Now let’s add previous wage from 1975</p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>mod_02 <span class="ot">&lt;-</span> <span class="fu">lm</span>(re78 <span class="sc">~</span> re75 <span class="sc">+</span> treat, unmatched_data)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod_02)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = re78 ~ re75 + treat, data = unmatched_data)
+
+Residuals:
+   Min     1Q Median     3Q    Max 
+-15918  -5457  -2025   3824  54103 
+
+Coefficients:
+              Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept) 5547.63718  412.84637  13.438  &lt; 2e-16 ***
+re75           0.58242    0.08937   6.517  1.5e-10 ***
+treat        -90.79498  641.40291  -0.142    0.887    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 7230 on 611 degrees of freedom
+Multiple R-squared:  0.06642,   Adjusted R-squared:  0.06336 
+F-statistic: 21.73 on 2 and 611 DF,  p-value: 7.611e-10</code></pre>
+</div>
+</div>
+<p>Previously observed wage is statistically significant and positive. The point estimate on treatment is smaller, and even less ‘starry’.</p>
+<p>Now let’s add all possible control variables and see what the treatment effect estimate produced is:</p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>mod_03 <span class="ot">&lt;-</span> <span class="fu">lm</span>(re78 <span class="sc">~</span> re75 <span class="sc">+</span> age <span class="sc">+</span> educ <span class="sc">+</span> race <span class="sc">+</span> married <span class="sc">+</span> nodegree <span class="sc">+</span> re74 <span class="sc">+</span> treat, unmatched_data)</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod_03)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = re78 ~ re75 + age + educ + race + married + nodegree + 
+    re74 + treat, data = unmatched_data)
+
+Residuals:
+   Min     1Q Median     3Q    Max 
+-13595  -4894  -1662   3929  54570 
+
+Coefficients:
+              Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept) -1.174e+03  2.456e+03  -0.478   0.6328    
+re75         2.315e-01  1.046e-01   2.213   0.0273 *  
+age          1.298e+01  3.249e+01   0.399   0.6897    
+educ         4.039e+02  1.589e+02   2.542   0.0113 *  
+racehispan   1.740e+03  1.019e+03   1.708   0.0882 .  
+racewhite    1.241e+03  7.688e+02   1.614   0.1071    
+married      4.066e+02  6.955e+02   0.585   0.5590    
+nodegree     2.598e+02  8.474e+02   0.307   0.7593    
+re74         2.964e-01  5.827e-02   5.086 4.89e-07 ***
+treat        1.548e+03  7.813e+02   1.982   0.0480 *  
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 6948 on 604 degrees of freedom
+Multiple R-squared:  0.1478,    Adjusted R-squared:  0.1351 
+F-statistic: 11.64 on 9 and 604 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+</div>
+<p>With all of these variables as controls, the effect of treatment is now statistically significant and positive, associated with on average an increase of $155 over the control group.</p>
+<p>However, we should probably be concerned about how dependent this estimate is on the specific model specification we used. For example, it is fairly common to try to ‘control for’ nonlinearities in age effects by adding a squared term. If modeller decisions like this don’t make much difference, then its addition shouldn’t affect the treatment effect estimate. Let’s have a look:</p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>mod_04 <span class="ot">&lt;-</span> <span class="fu">lm</span>(re78 <span class="sc">~</span> re75 <span class="sc">+</span> <span class="fu">poly</span>(age, <span class="dv">2</span>) <span class="sc">+</span> educ <span class="sc">+</span> race <span class="sc">+</span> married <span class="sc">+</span> nodegree <span class="sc">+</span> re74 <span class="sc">+</span> treat, unmatched_data)</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod_04)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = re78 ~ re75 + poly(age, 2) + educ + race + married + 
+    nodegree + re74 + treat, data = unmatched_data)
+
+Residuals:
+   Min     1Q Median     3Q    Max 
+-13692  -4891  -1514   3884  54313 
+
+Coefficients:
+                Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)   -5.395e+02  2.172e+03  -0.248   0.8039    
+re75           2.190e-01  1.057e-01   2.072   0.0387 *  
+poly(age, 2)1  3.895e+03  7.994e+03   0.487   0.6262    
+poly(age, 2)2 -6.787e+03  7.918e+03  -0.857   0.3917    
+educ           3.889e+02  1.599e+02   2.432   0.0153 *  
+racehispan     1.682e+03  1.021e+03   1.648   0.0999 .  
+racewhite      1.257e+03  7.692e+02   1.634   0.1028    
+married        2.264e+02  7.267e+02   0.312   0.7555    
+nodegree       3.185e+02  8.504e+02   0.375   0.7081    
+re74           2.948e-01  5.832e-02   5.055 5.73e-07 ***
+treat          1.369e+03  8.090e+02   1.692   0.0911 .  
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 6949 on 603 degrees of freedom
+Multiple R-squared:  0.1488,    Adjusted R-squared:  0.1347 
+F-statistic: 10.54 on 10 and 603 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+</div>
+<p>The inclusion of the squared term to age has changed the point estimate of treatment from around $1550 to $1370. However it has also changed the statistical significance of the effect from p &lt; 0.05 to p &lt; 0.10, i.e.&nbsp;from ‘statistically significant’ to ‘not statistically significant’. If we were playing the stargazing game, this might be the difference between a publishable finding and an unpublishable finding.</p>
+<p>And what if we excluded age, because none of the terms are statistically significant at the standard level?</p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>mod_05 <span class="ot">&lt;-</span> <span class="fu">lm</span>(re78 <span class="sc">~</span> re75 <span class="sc">+</span> educ <span class="sc">+</span> race <span class="sc">+</span> married <span class="sc">+</span> nodegree <span class="sc">+</span> re74 <span class="sc">+</span> treat, unmatched_data)</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod_05)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = re78 ~ re75 + educ + race + married + nodegree + 
+    re74 + treat, data = unmatched_data)
+
+Residuals:
+   Min     1Q Median     3Q    Max 
+-13681  -4912  -1652   3877  54648 
+
+Coefficients:
+              Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept) -676.43048 2115.37702  -0.320   0.7493    
+re75           0.22705    0.10395   2.184   0.0293 *  
+educ         389.00786  154.33865   2.520   0.0120 *  
+racehispan  1710.16654 1015.15590   1.685   0.0926 .  
+racewhite   1241.00510  768.22972   1.615   0.1067    
+married      478.55017  671.28910   0.713   0.4762    
+nodegree     201.04497  833.99164   0.241   0.8096    
+re74           0.30209    0.05645   5.351 1.24e-07 ***
+treat       1564.68896  779.65173   2.007   0.0452 *  
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 6943 on 605 degrees of freedom
+Multiple R-squared:  0.1475,    Adjusted R-squared:  0.1363 
+F-statistic: 13.09 on 8 and 605 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+</div>
+<p>Now the exclusion of this term, which the coefficient tables suggested wasn’t statistically significant, but intuitively we recognise as an important determinant of labour market activity, has led to yet another point estimate. It’s switched back to ‘statistically significant’ again, but now the point estimate is about $1565 more. Such estimates aren’t vastly different, but they definitely aren’t the same, and come from just a tiny same of the potentially hundreds of different model specifications we could have considered and decided to present to others.</p>
+</section>
+<section id="matching-with-matchit" class="level3">
+<h3 class="anchored" data-anchor-id="matching-with-matchit">Matching with MatchIt</h3>
+<p>As the title of <span class="citation" data-cites="Ho_Imai_King_Stuart_2007">Ho et al. (<a href="#ref-Ho_Imai_King_Stuart_2007" role="doc-biblioref">2007</a>)</span> indicates, matching methods are presented as a way of <em>preprocessing</em> the data to reduce the kind of model dependence we’ve just started to explore. Let’s run the first example they present in <a href="https://cran.r-project.org/web/packages/MatchIt/vignettes/MatchIt.html">the MatchIt vignette</a> then discuss what it means:</p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>m.out0 <span class="ot">&lt;-</span> <span class="fu">matchit</span>(treat <span class="sc">~</span> age <span class="sc">+</span> educ <span class="sc">+</span> race <span class="sc">+</span> married <span class="sc">+</span> </span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>                   nodegree <span class="sc">+</span> re74 <span class="sc">+</span> re75, <span class="at">data =</span> lalonde,</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>                 <span class="at">method =</span> <span class="cn">NULL</span>, <span class="at">distance =</span> <span class="st">"glm"</span>)</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(m.out0)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+matchit(formula = treat ~ age + educ + race + married + nodegree + 
+    re74 + re75, data = lalonde, method = NULL, distance = "glm")
+
+Summary of Balance for All Data:
+           Means Treated Means Control Std. Mean Diff. Var. Ratio eCDF Mean
+distance          0.5774        0.1822          1.7941     0.9211    0.3774
+age              25.8162       28.0303         -0.3094     0.4400    0.0813
+educ             10.3459       10.2354          0.0550     0.4959    0.0347
+raceblack         0.8432        0.2028          1.7615          .    0.6404
+racehispan        0.0595        0.1422         -0.3498          .    0.0827
+racewhite         0.0973        0.6550         -1.8819          .    0.5577
+married           0.1892        0.5128         -0.8263          .    0.3236
+nodegree          0.7081        0.5967          0.2450          .    0.1114
+re74           2095.5737     5619.2365         -0.7211     0.5181    0.2248
+re75           1532.0553     2466.4844         -0.2903     0.9563    0.1342
+           eCDF Max
+distance     0.6444
+age          0.1577
+educ         0.1114
+raceblack    0.6404
+racehispan   0.0827
+racewhite    0.5577
+married      0.3236
+nodegree     0.1114
+re74         0.4470
+re75         0.2876
+
+Sample Sizes:
+          Control Treated
+All           429     185
+Matched       429     185
+Unmatched       0       0
+Discarded       0       0</code></pre>
+</div>
+</div>
+<p>With <code>method = NULL</code>, the <code>matchit</code> function presents some summary estimates of differences in characteristics between the Treatment and Control groups. For example, the treated group has an average age of around 25, compared with 28 in the control group, have a slightly higher education score, are more likely to be Black, less likely to be Hispanic, and much less likely to be White (all important differences in the USA context, especially perhaps of the 1970s). They are also less likely to be married, more likely to have no degree, and have substantially earlier wages in both 1974 and 1975. Clearly a straightforward comparision between average outcomes is far from a like-with-like comparisons between groups. The inclusion of other covariates (<span class="math inline">\(X^*\)</span>) does seem to have made a difference, switching the reported direction of effect and its statistical significance, but if we could find a subsample of the control group whose characteristics better match those of the treatment groups, we would hopefully get a more precise and reliable estimate of the effect of the labour market programme.</p>
+<p>The next part of the vignette shows MatchIt working with some fairly conventional settings:</p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>m.out1 <span class="ot">&lt;-</span> <span class="fu">matchit</span>(treat <span class="sc">~</span> age <span class="sc">+</span> educ <span class="sc">+</span> race <span class="sc">+</span> married <span class="sc">+</span> </span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>                   nodegree <span class="sc">+</span> re74 <span class="sc">+</span> re75, <span class="at">data =</span> lalonde,</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>                 <span class="at">method =</span> <span class="st">"nearest"</span>, <span class="at">distance =</span> <span class="st">"glm"</span>)</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>m.out1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>A matchit object
+ - method: 1:1 nearest neighbor matching without replacement
+ - distance: Propensity score
+             - estimated with logistic regression
+ - number of obs.: 614 (original), 370 (matched)
+ - target estimand: ATT
+ - covariates: age, educ, race, married, nodegree, re74, re75</code></pre>
+</div>
+</div>
+<p>The propensity score, i.e.&nbsp;the probability of being in the treatment group, has been predicted using the other covariates, and using logistic regression. For each individual in the treatment group, a ‘nearest neighbour’ in the control group has been identified with the most similar propensity score, which we hope also will also mean the characteristics of the treatment group, and <em>matched</em> pairs from the control group, will be more similar too.</p>
+<p>We can start to see what this means in practice by looking at the summary of the above object</p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(m.out1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+matchit(formula = treat ~ age + educ + race + married + nodegree + 
+    re74 + re75, data = lalonde, method = "nearest", distance = "glm")
+
+Summary of Balance for All Data:
+           Means Treated Means Control Std. Mean Diff. Var. Ratio eCDF Mean
+distance          0.5774        0.1822          1.7941     0.9211    0.3774
+age              25.8162       28.0303         -0.3094     0.4400    0.0813
+educ             10.3459       10.2354          0.0550     0.4959    0.0347
+raceblack         0.8432        0.2028          1.7615          .    0.6404
+racehispan        0.0595        0.1422         -0.3498          .    0.0827
+racewhite         0.0973        0.6550         -1.8819          .    0.5577
+married           0.1892        0.5128         -0.8263          .    0.3236
+nodegree          0.7081        0.5967          0.2450          .    0.1114
+re74           2095.5737     5619.2365         -0.7211     0.5181    0.2248
+re75           1532.0553     2466.4844         -0.2903     0.9563    0.1342
+           eCDF Max
+distance     0.6444
+age          0.1577
+educ         0.1114
+raceblack    0.6404
+racehispan   0.0827
+racewhite    0.5577
+married      0.3236
+nodegree     0.1114
+re74         0.4470
+re75         0.2876
+
+Summary of Balance for Matched Data:
+           Means Treated Means Control Std. Mean Diff. Var. Ratio eCDF Mean
+distance          0.5774        0.3629          0.9739     0.7566    0.1321
+age              25.8162       25.3027          0.0718     0.4568    0.0847
+educ             10.3459       10.6054         -0.1290     0.5721    0.0239
+raceblack         0.8432        0.4703          1.0259          .    0.3730
+racehispan        0.0595        0.2162         -0.6629          .    0.1568
+racewhite         0.0973        0.3135         -0.7296          .    0.2162
+married           0.1892        0.2108         -0.0552          .    0.0216
+nodegree          0.7081        0.6378          0.1546          .    0.0703
+re74           2095.5737     2342.1076         -0.0505     1.3289    0.0469
+re75           1532.0553     1614.7451         -0.0257     1.4956    0.0452
+           eCDF Max Std. Pair Dist.
+distance     0.4216          0.9740
+age          0.2541          1.3938
+educ         0.0757          1.2474
+raceblack    0.3730          1.0259
+racehispan   0.1568          1.0743
+racewhite    0.2162          0.8390
+married      0.0216          0.8281
+nodegree     0.0703          1.0106
+re74         0.2757          0.7965
+re75         0.2054          0.7381
+
+Sample Sizes:
+          Control Treated
+All           429     185
+Matched       185     185
+Unmatched     244       0
+Discarded       0       0</code></pre>
+</div>
+</div>
+<p>Previously, there were 185 people in the treatment group, and 429 people in the control group. After matching there are 185 people in the treatment group… and also 185 people in the control group. So, each of the 185 people in the treatment group has been matched up with a ‘data twin’ in the control group, so the ATT should involve more of a like-with-like comparison.</p>
+<p>The summary presents covariate-wise differences between the Treatment and Control groups for All Data, then for Matched Data. We would hope that, in the Matched Data, the differences are smaller for each covariate, though this isn’t necessarily the case. After matching, for example, we can see that the Black proportion in the Control group is now 0.47 rather than 0.20, and that the earlier income levels are lower, in both cases bringing the values in the Control group closer to, but not identical to, those in the Treatment group. Another way of seeing how balancing has changed things is to look at density plots:</p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(m.out1, <span class="at">type =</span> <span class="st">"density"</span>, <span class="at">interactive =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">which.xs =</span> <span class="sc">~</span>age <span class="sc">+</span> married <span class="sc">+</span> re75<span class="sc">+</span> race <span class="sc">+</span> nodegree <span class="sc">+</span> re74)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-13-2.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>In these density charts, the darker lines indicate the Treatment group and the lighter lines the Control groups. The matched data are on the right hand side, with All data on the left. We are looking to see if, on the right hand side, the two sets of density lines are more similar than they are on the right. Indeed they do appear to be, though we can also tell they are far from identical.</p>
+</section>
+<section id="estimating-treatment-effect-sizes-after-matching" class="level3">
+<h3 class="anchored" data-anchor-id="estimating-treatment-effect-sizes-after-matching">Estimating Treatment Effect Sizes <em>after</em> matching</h3>
+<p>Historically, the MatchIt package was designed to work seamlessly with <a href="https://gking.harvard.edu/zelig">Zelig</a>, which made it much easier to use a single library and framework to produce ‘quantities of interest’ using multiple model structures. However Zelig has since been deprecated, meaning the vignette now recommends using the <code>marginaleffects</code> package. We’ll follow their lead:</p>
+<p>First the vignette recommends extracting matched data from the matchit output:</p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>m.data <span class="ot">&lt;-</span> <span class="fu">match.data</span>(m.out1)</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>m.data <span class="ot">&lt;-</span> <span class="fu">as_tibble</span>(m.data)</span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>m.data</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 370 × 12
+   treat   age  educ race   married nodegree  re74  re75   re78 distance weights
+   &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;fct&gt;    &lt;int&gt;    &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;    &lt;dbl&gt;   &lt;dbl&gt;
+ 1     1    37    11 black        1        1     0     0  9930.   0.639        1
+ 2     1    22     9 hispan       0        1     0     0  3596.   0.225        1
+ 3     1    30    12 black        0        0     0     0 24909.   0.678        1
+ 4     1    27    11 black        0        1     0     0  7506.   0.776        1
+ 5     1    33     8 black        0        1     0     0   290.   0.702        1
+ 6     1    22     9 black        0        1     0     0  4056.   0.699        1
+ 7     1    23    12 black        0        0     0     0     0    0.654        1
+ 8     1    32    11 black        0        1     0     0  8472.   0.790        1
+ 9     1    22    16 black        0        0     0     0  2164.   0.780        1
+10     1    33    12 white        1        0     0     0 12418.   0.0429       1
+# ℹ 360 more rows
+# ℹ 1 more variable: subclass &lt;fct&gt;</code></pre>
+</div>
+</div>
+<p>Whereas the unmatched data contains 614 observations, the matched data contains 370 observations. Note that the Treatment group contained 185 observations, and that 370 is 185 times two. So, the matched data contains one person in the Control group for each person in the Treatment group.</p>
+<p>We can also see that, in addition to the metrics originally included, the matched data contains three additional variables: ‘distance’, ‘weights’ and ‘subclass’. The ‘subclass’ field is perhaps especially useful for understanding the intuition of the approach, because it helps show which individual in the Control group has been paired with which individual in the Treatment group. Let’s look at the first three subgroups:</p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>m.data <span class="sc">|&gt;</span> <span class="fu">filter</span>(subclass <span class="sc">==</span> <span class="st">'1'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 12
+  treat   age  educ race  married nodegree   re74  re75  re78 distance weights
+  &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;fct&gt;   &lt;int&gt;    &lt;int&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;   &lt;dbl&gt;
+1     1    37    11 black       1        1     0      0 9930.    0.639       1
+2     0    22     8 black       1        1 16961.     0  959.    0.203       1
+# ℹ 1 more variable: subclass &lt;fct&gt;</code></pre>
+</div>
+</div>
+<p>So, for the first subclass, a 37 year old married Black person with no degree has been matched to a 22 year old Black married person with no degree.</p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>m.data <span class="sc">|&gt;</span> <span class="fu">filter</span>(subclass <span class="sc">==</span> <span class="st">'2'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 12
+  treat   age  educ race  married nodegree  re74  re75   re78 distance weights
+  &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;fct&gt;   &lt;int&gt;    &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;    &lt;dbl&gt;   &lt;dbl&gt;
+1     1    33    12 white       1        0    0      0 12418.   0.0429       1
+2     0    39    12 white       1        0 1289.     0  1203.   0.0430       1
+# ℹ 1 more variable: subclass &lt;fct&gt;</code></pre>
+</div>
+</div>
+<p>For the second subclass a 33 year old married White person with a degree has been paired with a 39 year old White person with a degree.</p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>m.data <span class="sc">|&gt;</span> <span class="fu">filter</span>(subclass <span class="sc">==</span> <span class="st">'3'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 12
+  treat   age  educ race   married nodegree  re74  re75   re78 distance weights
+  &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;fct&gt;    &lt;int&gt;    &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;    &lt;dbl&gt;   &lt;dbl&gt;
+1     1    31     9 hispan       0        1     0    0  26818.    0.250       1
+2     0    16    10 white        0        1     0  190.  2137.    0.105       1
+# ℹ 1 more variable: subclass &lt;fct&gt;</code></pre>
+</div>
+</div>
+<p>For the third subclass, a 31 year old unmarried Hispanic person with no degree has been paired with a 16 year old White person with no degree.</p>
+<p>In each case, we can see the pairings are similar in some ways but (as with the last example) quite dissimilar in others. The matching algorithm is trying to do the best it can with the data available, especially with the constraint<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a> that once a person in the Control group has been paired up once to someone in the Treatment group, they can’t be paired up again with someone else in the Treatment group.</p>
+<p>The identification of these specific pairings suggests we can used a fairly crude strategy to produce an estimate of the ATT: namely just compare the outcome across each of these pairs. Let’s have a look at this:</p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>trt_effects <span class="ot">&lt;-</span> </span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>    m.data <span class="sc">|&gt;</span></span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>        <span class="fu">group_by</span>(subclass) <span class="sc">|&gt;</span></span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>        <span class="fu">summarise</span>(</span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">ind_treat_effect =</span> re78[treat <span class="sc">==</span> <span class="dv">1</span>] <span class="sc">-</span> re78[treat <span class="sc">==</span> <span class="dv">0</span>]</span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a>        ) <span class="sc">|&gt;</span> </span>
+<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a>        <span class="fu">ungroup</span>()</span>
+<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-9"><a href="#cb32-9" aria-hidden="true" tabindex="-1"></a>trt_effects <span class="sc">|&gt;</span></span>
+<span id="cb32-10"><a href="#cb32-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(ind_treat_effect)) <span class="sc">+</span> </span>
+<span id="cb32-11"><a href="#cb32-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_histogram</span>(<span class="at">bins =</span> <span class="dv">100</span>) <span class="sc">+</span> </span>
+<span id="cb32-12"><a href="#cb32-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="fu">mean</span>(trt_effects<span class="sc">$</span>ind_treat_effect), <span class="at">colour =</span> <span class="st">"red"</span>) <span class="sc">+</span> </span>
+<span id="cb32-13"><a href="#cb32-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="dv">0</span>, <span class="at">colour =</span> <span class="st">'lightgray'</span>, <span class="at">linetype =</span> <span class="st">'dashed'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>This crude paired comparison suggests an average difference that’s slightly positive, of $894.37.</p>
+<p>This is not a particularly sophisticated or ‘kosher’ approach however. Instead the vignette suggests calculating the treatment effect estimate as follows:</p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"marginaleffects"</span>)</span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">lm</span>(re78 <span class="sc">~</span> treat <span class="sc">*</span> (age <span class="sc">+</span> educ <span class="sc">+</span> race <span class="sc">+</span> married <span class="sc">+</span> nodegree <span class="sc">+</span> </span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>             re74 <span class="sc">+</span> re75), <span class="at">data =</span> m.data, <span class="at">weights =</span> weights)</span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a><span class="fu">avg_comparisons</span>(fit,</span>
+<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a>                <span class="at">variables =</span> <span class="st">"treat"</span>,</span>
+<span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a>                <span class="at">vcov =</span> <span class="sc">~</span>subclass,</span>
+<span id="cb33-9"><a href="#cb33-9" aria-hidden="true" tabindex="-1"></a>                <span class="at">newdata =</span> <span class="fu">subset</span>(m.data, treat <span class="sc">==</span> <span class="dv">1</span>),</span>
+<span id="cb33-10"><a href="#cb33-10" aria-hidden="true" tabindex="-1"></a>                <span class="at">wts =</span> <span class="st">"weights"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+  Term          Contrast Estimate Std. Error    z Pr(&gt;|z|)   S 2.5 % 97.5 %
+ treat mean(1) - mean(0)     1121        837 1.34    0.181 2.5  -520   2763
+
+Columns: term, contrast, estimate, std.error, statistic, p.value, s.value, conf.low, conf.high, predicted_lo, predicted_hi, predicted 
+Type:  response </code></pre>
+</div>
+</div>
+<p>Using the recommended approach, the ATT estimate is now $1121. Not statistically significant at the conventional 95% threshold, but also more likely to be positive than negative.</p>
+</section>
+<section id="summary" class="level3">
+<h3 class="anchored" data-anchor-id="summary">Summary</h3>
+<p>In this post we have largely followed along with the introductionary vignette from the <code>MatchIt</code> package, in order to go from the fairly cursory theoretical overview in the previous post, to showing how some of the ideas and methods relating to multiple regression and matching methods work in practice. There are a great many ways that both matching, and multiple regression, can be implemented in practice, and both are likely to affect any causal effect estimates we produce. However, the aspiration of using matching methods is to somewhat reduce the dependency that causal effect estimates have on the specific model specifications we used.</p>
+</section>
+</section>
+<section id="the-schools-of-causal-inference" class="level2">
+<h2 class="anchored" data-anchor-id="the-schools-of-causal-inference">The Schools of Causal Inference</h2>
+<p>Readers who’ve been involved and interested in the topic of causal inference over the last few years might be less surprised by what I have covered than by what I’ve not, namely the causal inference framework developed by Judea Pearl, and (somewhat) popularised by his co-authored book, <strong>The Book of Why: The New Science of Cause and Effect</strong>. (<span class="citation" data-cites="pearl2018book">Pearl and Mackenzie (<a href="#ref-pearl2018book" role="doc-biblioref">2018</a>)</span>)</p>
+<p>This ‘oversight’ in posts so far has been intentional, but in this post the Pearl framework will finally be discussed. I’ll aim to: i) give an overview of the two primary ways of thinking about causal inference: either as a missing data problem; or as a ‘do-logic’ problem; ii) discuss the concept of the omitted variable vs post treatment effect bias trade-off as offering something of a bridge between the two paradigms; iii) give some brief examples of directed acyclic graphs (DAGs) and do-logic, two important ideas from the Pearl framework, as described in <span class="citation" data-cites="pearl2018book">Pearl and Mackenzie (<a href="#ref-pearl2018book" role="doc-biblioref">2018</a>)</span>; iv) make some suggestions about the benefits and uses of the Pearl framework; and finally v) advocate for epistemic humility when it comes to trying to draw causal inferences from observational data, even where a DAG has been clearly articulated and agreed upon within a research community. <a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a> Without further ado, let’s begin:</p>
+<section id="causal-inference-two-paradigms" class="level3">
+<h3 class="anchored" data-anchor-id="causal-inference-two-paradigms">Causal Inference: Two paradigms</h3>
+<p>In the posts so far, I’ve introduced and kept returning to the idea that <em>the fundamental problem of causal inference is that at least half of the data is always missing</em>. i.e., for each individual observation, who has either been treated or not treated, if they had been treated then we do not observe them in the untreated state, and if they had not been treated we do not observe them in the treated state. It’s this framing of the problem which</p>
+<p>In introducing causal inference from this perspective, I’ve ‘taken a side’ in an ongoing debate, or battle, or even war, between two clans of applied epistemologists. Let’s call them the <em>Rubinites</em>, and the <em>Pearlites</em>. Put crudely, the <strong>Rubinites</strong> adopt a <em>data-centred</em> framing of the challenge of causal inference, whereas the <strong>Pearlites</strong> adopt a <em>model-centred</em> framing of the challenge of causal inference. For the Rubinites, the data-centred framing leads to an intepretation of causal inference as a <em>missing data</em> problem, for which the solution is therefore to perform some kind of <em>data imputation</em>. For the Pearlites, by contrast, the solution is focused on developing, describing and drawing out <em>causal models</em>, which describe how we believe <em>one thing leads to another</em> and the paths of effect and influence that one variable has on each other variable.</p>
+<p>It is likely no accident that the broader backgrounds and interests of Rubin and Pearl align with type of solution each proposes. Rubin’s other main interests are in data imputation more generally, including methods of multiple imputation which allow ‘missing values’ to be filled in stochastically, rather than deterministically, to allow some representation of uncertainty and variation in the missing values to be indicated by the range of values that are generated for a missing hole in the data. Pearl worked as a computer scientist, whose key contribution to the field was the development of <em>Bayesian networks</em>, which share many similarities with <em>neural networks</em>. For both types of network, there are <strong>nodes</strong>, and there are <strong>directed links</strong>. The nodes have values, and these values can be influenced and altered by the values of other nodes that are connected to the node in question. This influence that each node has on other nodes, through the paths indicated in the directed links, is perhaps more likely to be described as <em>updating</em> from the perspective of a Bayesian network, and <em>propagation</em> from the perspective of a neural network. But in either case, it really <em>is correct</em> to say that one node really does <em>cause</em> another node’s value to change through the <em>causal pathway</em> of the directed link. The main graphical tool Pearl proposes for reasoning about causality in obervational data is the <strong>directed acyclic graph (DAG)</strong>, and again it should be unsurprising that DAGs look much like Bayesian networks.</p>
+</section>
+<section id="the-omitted-variable-bias-vs-post-treatment-bias-trade-off-as-a-potential-bridge-between-the-two-paradigms" class="level3">
+<h3 class="anchored" data-anchor-id="the-omitted-variable-bias-vs-post-treatment-bias-trade-off-as-a-potential-bridge-between-the-two-paradigms">The Omitted Variable Bias vs Post Treatment Bias Trade-off as a potential bridge between the two paradigms</h3>
+<p>The school of inference I’m most familiar with is that of Gary King, a political scientist, methodologist and (in the hallowed halls of Harvard) populariser of statistical methods in the social sciences. In the crude paradigmatic split I’ve sketched out above, King is a <strong>Rubinite</strong>, and so I guess - mainly through historical accident but partly through conscious decision - I am too. However, I have read <span class="citation" data-cites="pearl2018book">Pearl and Mackenzie (<a href="#ref-pearl2018book" role="doc-biblioref">2018</a>)</span> (maybe not recently enough nor enough times to fully digest it), consider it valuable and insightful in many places, and think there’s at least one place where the epistemic gap between the two paradigms can be bridged.</p>
+<p>The bridge point on the Rubinite side,<a href="#fn7" class="footnote-ref" id="fnref7" role="doc-noteref"><sup>7</sup></a> I’d suggest, comes from thinking carefully about the sources of bias enumerated in section 3.2 of <span class="citation" data-cites="KinZen06">King and Zeng (<a href="#ref-KinZen06" role="doc-biblioref">2006</a>)</span>, which posits that:</p>
+<p><span class="math display">\[
+bias = \Delta_o + \Delta_p + \Delta_i + \Delta_e
+\]</span></p>
+<p>This section states:</p>
+<blockquote class="blockquote">
+<p>These four terms denote exactly the four sources of bias in using observational data, with the subscripts being mnemonics for the components … . The bias components are due to, respectively, <strong>omitted variable bias</strong> (<span class="math inline">\(\Delta_o\)</span>), <strong>post-treatment bias</strong> (<span class="math inline">\(\Delta_p\)</span>), interpolation bias (<span class="math inline">\(\Delta_i\)</span>) and extrapolation bias (<span class="math inline">\(\Delta_e\)</span>). [Emphases added]</p>
+</blockquote>
+<p>Of the four sources of bias listed, it’s the first two which appear to offer a potential link between the two paradigms, and so suggest to Rubinites why some engagement with the Pearlite approach may be valuable. The section continues:</p>
+<blockquote class="blockquote">
+<p>Briefly, <span class="math inline">\(\Delta_o\)</span> is the bias due to omitting relevant variables such as <em>common causes</em> of both the treatment and the outcome variables [whereas] <span class="math inline">\(\Delta_p\)</span> is bias due to controlling for the <em>consequences</em> of the treatment. [Emphases added]</p>
+</blockquote>
+<p>From the Rubinite perspective, it seems that omitted variable bias and post-treatment bias are recognised, in combination, as constituting a <strong>wicked problem</strong>. This is because the inclusion of an specific variable can simultaneously affect both types of bias: reducing omitted variable bias, but also potentially increasing post treatment bias. <em>You’re doomed if you do, but you’re also doomed if you don’t.</em></p>
+</section>
+<section id="with-apologies-to-economists-and-epidemiologists-alike" class="level3">
+<h3 class="anchored" data-anchor-id="with-apologies-to-economists-and-epidemiologists-alike">With apologies to economists and epidemiologists alike…</h3>
+<p>Of the two sources of bias, omitted variable bias seems to be the more discussed. And historically, it seems different social and health science disciplines have placed a different weight of addressing these two sources of bias. In particular, at least in the UK context, it’s seemed that economists tend to be more concerned about omitted variable bias, leading to the inclusion of a large number of variables in their statistical models, whereas epidemiologists (though they might not be familiar with and use the term) tend to be more concerned about post-treatment bias, leading a statistical models with fewer variables.</p>
+<p>The issue of post treatment bias is especially important to consider in the context of root or fundamental causes, which again is often something more of interest to epidemiologists than economists. And the importance of the issue comes into sharp relief if considering factors like sex or race. An economist/econometrician, if asked to estimate the effect of race on (say) the probability of a successful job application to an esteemed organisation, might be very liable to try to include many additional covariates, such as previous work experience and job qualifications, as ‘control variables’ in a statistical model in addition to race. From this, they might find that the covariate associated with race is neither statistically nor substantively, and from this conclude that there is no evidence of (say) racial discrimination in employment, because any disparities in outcomes between racial groups appear to be ‘explained by’ other factors like previous experience and job qualifications.</p>
+<p>To this, a methodologically minded epidemiologist might counter - very reasonably - that the econometrician’s model is <em>over-controlling</em>, and that the inclusion of factors like educational outcomes and previous work experience in the model risks introducing <strong>post treatment bias</strong>. If there were discrimination on the basis of race, or sex, it would be unlikely to <em>just</em> affect the specific outcome on the response side of the model. Instead, discrimination (or other race-based factors) would also likely affect the kind of education available to people of different races, and the kinds of educational expectations placed on people of different racial groups. This would then affect the level of educational achievement by group as well. Similarly, both because of prior differences in educational achievement, and because of concurrent effects of discrimination, race might also be expected to affect job history too. Based on this, the epidemiologist might choose to omit both qualifications and job history from the model, because both are presumed to be causallly downstream of the key factor of interest, race.</p>
+<p>So which type of model is correct? The epidemiologist’s more parsimonious model, which is mindful of post-treatment bias, or the economist’s more complicated model, which is mindful of omitted variable bias? The conclusion from the four-biases position laid out above is that <em>we don’t know</em>, but that all biases potentially exist in observational data, and neither model specification can claim to be free from bias. <em>Perhaps</em> both kinds of model can be run, and <em>perhaps</em> looking at the estimates from both models can give something like a plausible range of possible effects. But fundamentally, we don’t know, and can’t know, and ideally we should seek better quality data, run RCTs and so on.</p>
+<p><span class="citation" data-cites="pearl2018book">Pearl and Mackenzie (<a href="#ref-pearl2018book" role="doc-biblioref">2018</a>)</span> argues that Rubinites don’t see much (or any) value in causal diagrams, stating “The Rubin causal model treats counterfactuals as abstract mathematical objects that are managed by algebraic machinery but not derived from a model.” [p.&nbsp;280] Though I think this characterisation is broadly <em>consciously</em> correct, the recognition within the Rubinite community that such things as post-treatment bias and omitted variables <em>exist</em> suggests to me that, <em>unconsciously</em>, even Rubinites employ something like path-diagram reasoning when considering which sources of bias are likely to affect their effect estimates. Put simply: I don’t see how claims of either omitted variable or post treatment bias could be made or believed but for the kind of graphical, path-like thinking at the centre of the Pearlite paradigm.</p>
+<p>Let’s draw the two types of statistical model implied in the discussion above. Firstly the economist’s model:</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<div>
+<pre class="mermaid mermaid-js">flowchart LR
+
+race(race)
+qual(qualifications)
+hist(job history)
+accept(job offer)
+
+race --&gt;|Z| accept
+qual --&gt;|X*| accept
+hist --&gt;|X*| accept 
+
+</pre>
+</div>
+</div>
+</div>
+</div>
+<p>And now the epidemiologist’s model:</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<div>
+<pre class="mermaid mermaid-js">flowchart LR 
+
+race(race)
+accept(job offer)
+
+race --&gt;|Z| accept
+
+</pre>
+</div>
+</div>
+</div>
+</div>
+<p>Employing a DAG-like causal path diagram would at the very least allow both the economist and epidemiologist to discuss whether or not they agree that the underlying causal pathways are more likely to be something like the follows:</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<div>
+<pre class="mermaid mermaid-js">flowchart LR
+
+
+race(race)
+qual(qualifications)
+hist(job history)
+accept(job offer)
+
+race --&gt; qual
+qual --&gt; hist
+hist --&gt; accept
+
+race --&gt; hist
+qual --&gt; accept
+race --&gt; accept
+
+</pre>
+</div>
+</div>
+</div>
+</div>
+<p>If, having drawn out their presumed causal pathways like this, the economist and epidemiologist end up with the same path diagram, then the Pearlian framework offers plenty of suggestions about how, subject to various assumptions about the types of effect each node has on each downstream node, statistical models based on observational data should be specified, and how the values of various coefficients in the statistical model should be combined in order to produce an overall estimate of the left-most node on the right-most node. Even a Rubinite who does not subscribe to some of these assumptions may still find this kind of graphical, path-based reasoning helpful for thinking through what their concerns are relating to both omitted variable and post-treatment biases are, and whether there’s anything they can do about it. In the path diagram above, for example, the importance of temporal sequence appears important: <em>first</em> there’s education and qualification; <em>then</em> there’s initial labour market experience; <em>and then</em> there’s contemporary labour market experience. This appreciation of the sequence of events might suggest that, perhaps, data employing a longitudinal research design might be preferred to one using only cross-sectional data; and/or that what appeared intially to be only a single research question, investigated through a single statistical model, is actually a series of linked, stepped research questions, each employing a different statistical model, breaking down the cause-effect question into a series of smaller steps.</p>
+</section>
+<section id="summary-thoughts-on-social-complexity-and-the-need-for-epistemic-humility" class="level3">
+<h3 class="anchored" data-anchor-id="summary-thoughts-on-social-complexity-and-the-need-for-epistemic-humility">Summary thoughts: on social complexity and the need for epistemic humility</h3>
+<p>As mentioned before, I probably lean somewhat more towards the Rubinite than the Pearlite framework. A lot of this is simply because this is the causal effect framework I was first introduced to, but some of it comes from more fundamental concerns I have about how some users and advocates of the Pearlite framework seem to think, or suggest, it can solve issues of causal inference from observational data that, fundamentally, I don’t think it may be possible to address.</p>
+<p>One clue about what the Pearlite framework can and cannot do comes from the ‘A’ in DAG: ‘acyclic’. This means that causal pathways of the following form can be specified:</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<div>
+<pre class="mermaid mermaid-js">flowchart LR
+A(A)
+B(B)
+
+A --&gt; B
+</pre>
+</div>
+</div>
+</div>
+</div>
+<p>But causal pathways of the following form cannot:</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<div>
+<pre class="mermaid mermaid-js">flowchart LR
+
+A(A)
+B(B)
+
+A --&gt; B
+B --&gt; A
+
+</pre>
+</div>
+</div>
+</div>
+</div>
+<p>Unfortunately, cyclic relationships between two or more factors, in which the pathways of influence go in both directions, are likely extremely common in social and economic systems, because such systems are <em>complex</em> rather than merely <em>complicated</em>. <a href="#fn8" class="footnote-ref" id="fnref8" role="doc-noteref"><sup>8</sup></a> One approach to trying to fit a representation of a complex coupled system into a DAG-like framework would be to use time to try to break the causal paths:</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<div>
+<pre class="mermaid mermaid-js">flowchart LR
+
+c0(Chicken at T0)
+e1(Egg at T1)
+c2(Chicken at T2)
+e3(Egg at T3)
+
+c0 --&gt; e1
+e1 --&gt; c2
+c2 --&gt; e3
+
+</pre>
+</div>
+</div>
+</div>
+</div>
+<p>But another way of reasoning about such localised coupled complexity might be to use something like factor analysis to identify patterns of co-occurence of variables which may be consistent with this kind of localised complex coupling:</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<div>
+<pre class="mermaid mermaid-js">flowchart LR
+
+ce((ChickenEgg))
+e[egg]
+c[chicken]
+
+ce --&gt; e
+ce --&gt; c
+
+</pre>
+</div>
+</div>
+</div>
+</div>
+<p>Within the above diagram, based on structural equation modelling, the directed arrows have a different meaning. They’re not claims of causal effects, but instead of membership. The circle is an underlying proposed ‘latent variable’, the <strong>ChickenEgg</strong>, which is presumed to manifest through the two observed/manifest variables <strong>egg</strong> and <strong>chicken</strong> represented by the rectangles. In places with a lot of <strong>ChickenEgg</strong>, such as a hen house, we would expect to observe a lot of both <strong>chicken</strong>s and <strong>egg</strong>s. The statistical model in the above case is a <em>measurement model</em>, rather than a <em>causal model</em>, but in this case is one which is informed by an implicit recognition of continual causal influence operating within members of a complex, paired, causal system.</p>
+<p>So, I guess my first concern relating to DAGs is that, whereas they <em>can</em> be really useful in allowing researchers to express some form of causal thinking and assumptions about paths of influence between factors, their <em>acyclic</em> requirement can also lead researchers to disregard or underplay the role of complexity even when considering inherently complex systems. In summary, they offer the potential both to <em>expand</em>, but also to <em>restrict</em>, our ability to reason effectively about causal influence.</p>
+<p>My second, related, concern about the potential over-use or over-reach of DAG-like thinking comes from conventional assumptions built into the paths of influence between nodes. We can get to the heart of this latter concern by looking at , and carefully considering the implications of, something called a <strong>double pendulum</strong>, a video of which is shown below:</p>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/d0Z8wLLPNE0?si=l8IjyVKIxdbGPHfy" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="">
+</iframe>
+<p>A double pendulum is not a <em>complicated</em> system, but it is a <em>complex</em> system, and also a <em>chaotic</em> system. The variables at play include two length variables, two mass variables, a gravity variable, and time. The chaotic complexity of the system comes from the way the length and mass of the first arm interact with the length and and mass of the second arm. This complex interaction is what leads to the position of the outer-most part of the second arm (the grey ball) at any given time.</p>
+<p>Now imagine trying to answer a question of the form “what is <em>the</em> effect of the first arm’s mass on the grey ball’s position?” This kind of question is one that it’s simply not meaningful to even ask. It’s the complex interaction between all components of the system that <em>jointly</em> determines the ball’s position, and attempting to decompose the causal effect of any one variable in the system is simply not a fruitful way of trying to understand the system as a whole.</p>
+<p>This does not mean, however, that we cannot develop a useful understanding of the double pendulum. We know, for example, that the ball cannot be further than the sum of the length of the two arms from the centre of the system. If we were thinking about placing another object near the double pendulum, for example, this would help us work out how far apart from the pendulum we should place it. Also, if one of the arms is much longer or more massive than the other, then maybe we could approximate it with a simple pendulum too. Additionally, all double pendulums tend to behave in similar ways during their initial fall. But the nature of this kind of complex system also means some types of causal question are beyond the realm of being answerable.</p>
+<p>The double pendulum, for me, is an object lesson on the importance of <em>epistemic humility</em>. My overall concern relating to causal inference applies nearly equally to Rubinites and Pearlites alike, and is that excessive engagement with or enthusiasm for any kind of method or framework can lead to us believing we know more than we really know more about <em>how one thing affects another</em>. This can potentially lead both to errors of judgement - such as not planning sufficiently for eventualities our models suggest cannot happen - and potentially to intolerance towards those who ‘join the dots’ in a different way to ourselves. <a href="#fn9" class="footnote-ref" id="fnref9" role="doc-noteref"><sup>9</sup></a></p>
+<p>In short: stay methodologically engaged, but also stay epistemically modest.</p>
+
+
+
+</section>
+</section>
+
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<div id="ref-Ho_Imai_King_Stuart_2007" class="csl-entry" role="listitem">
+Ho, Daniel E., Kosuke Imai, Gary King, and Elizabeth A. Stuart. 2007. <span>“Matching as Nonparametric Preprocessing for Reducing Model Dependence in Parametric Causal Inference.”</span> <em>Political Analysis</em> 15 (3): 199–236. <a href="https://doi.org/10.1093/pan/mpl013">https://doi.org/10.1093/pan/mpl013</a>.
+</div>
+<div id="ref-MatchIt" class="csl-entry" role="listitem">
+———. 2011. <span>“<span>MatchIt</span>: Nonparametric Preprocessing for Parametric Causal Inference.”</span> <em>Journal of Statistical Software</em> 42 (8): 1–28. <a href="https://doi.org/10.18637/jss.v042.i08">https://doi.org/10.18637/jss.v042.i08</a>.
+</div>
+<div id="ref-KinZen06" class="csl-entry" role="listitem">
+King, Gary, and Langche Zeng. 2006. <span>“The Dangers of Extreme Counterfactuals.”</span> <em>Political Analysis</em> 14: 131159.
+</div>
+<div id="ref-pearl2018book" class="csl-entry" role="listitem">
+Pearl, J., and D. Mackenzie. 2018. <em>The Book of Why: The New Science of Cause and Effect</em>. Basic Books. <a href="https://books.google.co.uk/books?id=BzM0DwAAQBAJ">https://books.google.co.uk/books?id=BzM0DwAAQBAJ</a>.
+</div>
+</div></section><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+
+<ol>
+<li id="fn1"><p>The data that would have been observed if what hadn’t happened, had happened, is the other type of unobserved counterfactual.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>This is pure fluke. I didn’t choose the values to get a difference of exactly 1, but there we go…<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>In the gold-plated gold standard of the double-blind RCT, not even the people running the trial and interacting with participants would be aware of which treatment a participant has been assigned. They would simply be given a participant ID, find a pack containing the participant’s treatment, and give this pack to the participant. Only a statistician, who has access to a random number cypher, would know which participants are assigned to which treatment, and they might not know until the trial has concluded. The idea of all of these layers of secrecy in assignment is to reduce the possibility that those running the experiment could intentionally or unintentially inform participants about which treatment they’re receiving, and so create expectations in participants about the effectiveness or otherwise of the treatments, which could have an additional effect on the outcomes.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn4"><p>In practice, issues like methodological variation, and publication bias, mean that meta-analyses of RCTs are unlikely to provide as accurate and unbiased an estimate of treatment effect as we would hope for.<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn5"><p>I think this is implied by the use of <code>method = "nearest"</code>, which is the default, meaning ‘greedy nearest neighbour matching’.<a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn6"><p>I might not cover these areas in the order listed above, and thinking about this further this might be too much territory for a single post. Let’s see how this post develops…<a href="#fnref6" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn7"><p>The bridge point on the Pearlite side might be a recognition of the apparent <em>bloody obviousness</em> of the fact that, if an observational unit was treated, we don’t observe untreated, and vice versa. The kind of table with missing cells, as shown earlier, would appear to follow straightforwardly from conceding this point. However, <span class="citation" data-cites="pearl2018book">Pearl and Mackenzie (<a href="#ref-pearl2018book" role="doc-biblioref">2018</a>)</span> includes an example of this kind of table (table 8.1; p.&nbsp;273), and argues forcefully against this particular framing.<a href="#fnref7" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn8"><p>The economist’s model is more <em>complicated</em> than the epidemiologist’s model, but both are equally <em>complex</em>, i.e.&nbsp;not complex at all, because they don’t involve any pathways going from right to left.<a href="#fnref8" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn9"><p>A majority of political disagreement, for example, seems to occur when people agree on the facts, but disagree about the primary causal pathway.<a href="#fnref9" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section></div></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  let localAlternateSentinel = 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>
