@@ -2,58 +2,62 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://JonMinton.github.io/JonStats/pages/main-course/likelihood-and-simulation-theory/index.html</loc>
-    <lastmod>2024-09-02T10:41:49.828Z</lastmod>
+    <lastmod>2024-12-07T19:36:42.011Z</lastmod>
   </url>
   <url>
     <loc>https://JonMinton.github.io/JonStats/pages/main-course/statistics-as-circuits/index.html</loc>
-    <lastmod>2024-09-02T10:41:40.598Z</lastmod>
+    <lastmod>2024-12-07T19:36:32.335Z</lastmod>
   </url>
   <url>
     <loc>https://JonMinton.github.io/JonStats/pages/extra-courses/causal-inference/index.html</loc>
-    <lastmod>2024-09-02T10:41:29.628Z</lastmod>
+    <lastmod>2024-12-07T19:36:20.487Z</lastmod>
   </url>
   <url>
     <loc>https://JonMinton.github.io/JonStats/pages/extra-courses/hacker-stats/post-stratification/index.html</loc>
-    <lastmod>2024-09-02T10:41:23.844Z</lastmod>
+    <lastmod>2024-12-07T19:36:14.383Z</lastmod>
   </url>
   <url>
     <loc>https://JonMinton.github.io/JonStats/pages/extra-courses/hacker-stats/index.html</loc>
-    <lastmod>2024-09-02T10:41:21.123Z</lastmod>
+    <lastmod>2024-12-07T19:36:11.248Z</lastmod>
   </url>
   <url>
     <loc>https://JonMinton.github.io/JonStats/pages/extra-courses/hacker-stats/infer-introduction/index.html</loc>
-    <lastmod>2024-09-02T10:41:07.212Z</lastmod>
-  </url>
-  <url>
-    <loc>https://JonMinton.github.io/JonStats/about.html</loc>
-    <lastmod>2024-09-02T10:40:41.717Z</lastmod>
-  </url>
-  <url>
-    <loc>https://JonMinton.github.io/JonStats/index.html</loc>
-    <lastmod>2024-09-02T10:40:41.430Z</lastmod>
+    <lastmod>2024-12-07T19:35:56.122Z</lastmod>
   </url>
   <url>
     <loc>https://JonMinton.github.io/JonStats/pages/extra-courses/time-series/index.html</loc>
-    <lastmod>2024-09-02T10:40:58.210Z</lastmod>
+    <lastmod>2024-12-07T19:35:44.016Z</lastmod>
+  </url>
+  <url>
+    <loc>https://JonMinton.github.io/JonStats/index.html</loc>
+    <lastmod>2024-12-07T19:35:26.238Z</lastmod>
+  </url>
+  <url>
+    <loc>https://JonMinton.github.io/JonStats/about.html</loc>
+    <lastmod>2024-12-07T19:35:26.568Z</lastmod>
+  </url>
+  <url>
+    <loc>https://JonMinton.github.io/JonStats/pages/extra-courses/p-values-stat-sig/index.html</loc>
+    <lastmod>2024-12-07T19:35:46.617Z</lastmod>
   </url>
   <url>
     <loc>https://JonMinton.github.io/JonStats/pages/extra-courses/hacker-stats/bootstrapping/index.html</loc>
-    <lastmod>2024-09-02T10:41:09.402Z</lastmod>
+    <lastmod>2024-12-07T19:35:58.382Z</lastmod>
   </url>
   <url>
     <loc>https://JonMinton.github.io/JonStats/pages/extra-courses/hacker-stats/resampling-approaches-intro/index.html</loc>
-    <lastmod>2024-09-02T10:41:21.674Z</lastmod>
+    <lastmod>2024-12-07T19:36:11.960Z</lastmod>
   </url>
   <url>
     <loc>https://JonMinton.github.io/JonStats/pages/extra-courses/hacker-stats/permutation-with-base-r/index.html</loc>
-    <lastmod>2024-09-02T10:41:25.144Z</lastmod>
+    <lastmod>2024-12-07T19:36:15.797Z</lastmod>
   </url>
   <url>
     <loc>https://JonMinton.github.io/JonStats/pages/main-course/complete-simulation-example/index.html</loc>
-    <lastmod>2024-09-02T10:41:39.997Z</lastmod>
+    <lastmod>2024-12-07T19:36:31.722Z</lastmod>
   </url>
   <url>
     <loc>https://JonMinton.github.io/JonStats/pages/main-course/intro-to-glms/index.html</loc>
-    <lastmod>2024-09-02T10:41:43.889Z</lastmod>
+    <lastmod>2024-12-07T19:36:35.904Z</lastmod>
   </url>
 </urlset>
