@@ -175,5 +175,8 @@
   },
   "pages/main-course/statistics-as-circuits/index.qmd": {
     "index.html": "6dea92d7"
+  },
+  "pages/extra-courses/p-values-stat-sig/index.qmd": {
+    "index.html": "68728692"
   }
 }
