@@ -1468,7 +1468,7 @@ The summary is now reported for each of the two outcomes: first `gdp`, then `e0`
 
 Remember that the outcome is percentage annual change in the outcome of interest from the previous year. i.e. both series have already been 'differenced' to produce approximately stationary series. It also means that the intercept terms are especially important, as they indicate the long-term trends observed in each series.
 
-In this case the intercepts for both series are positive and statistically significant: over the long term, GDP has grown on average around 2% each year, and life expectancy by around 0.28%. As [the post this relates to](../../still-the-economy/index.qmd) makes clear, however, these long-term trends may no longer apply.
+In this case the intercepts for both series are positive and statistically significant: over the long term, GDP has grown on average around 2% each year, and life expectancy by around 0.28%. As [the blog post this relates to](https://jonminton.github.io/jon-blog/posts/still-the-economy/index.html) makes clear, however, these long-term trends may no longer apply.
 
 Of the four lag (`AR(1)`) terms in the model(s), three are not statistically significant; not even close. The exception is the `lag_e0` term for the `e0` response model, which is statistically significant and negative. Its coefficient is also of similar magnitude to the intercept too. 
 
