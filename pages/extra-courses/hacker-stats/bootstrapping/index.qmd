@@ -25,7 +25,7 @@ n.b. The same page (In **History**) also states: "Other names ... suggested for 
 
 ## A brief example
 
-I'm not going to look for length-of-stay data; instead I'm going to look at *length-of-teeth*, and the hamster experiment dataset I used in [a few previous posts](../../complete-simulation-example/lms-are-glms-part-11/index.qmd).
+I'm not going to look for length-of-stay data; instead I'm going to look at *length-of-teeth*, and the hamster experiment dataset I used in [a previous post](../../main-course/complete-simulation-example/index.qmd).
 
 ```{r}
 library(tidyverse)

@@ -173,6 +173,28 @@ Track specific typo fixes and corrections identified when comparing blog posts (
 **Fix**: Change to "interpreting"
 **Source**: Blog statistics-as-circuits post
 
+### 2025-12-01 - Link Fixes (Broken Blog-style Links)
+
+#### Fix 16: Broken link in bootstrapping page
+**File**: pages/extra-courses/hacker-stats/bootstrapping/index.qmd
+**Line**: 28
+**Issue**: Link to "../../complete-simulation-example/lms-are-glms-part-11/index.qmd" (blog structure)
+**Fix**: Change to "../../main-course/complete-simulation-example/index.qmd"
+**Reason**: Blog posts consolidated into single page on stats site
+
+#### Fix 17: Broken link in p-values page
+**File**: pages/extra-courses/p-values-stat-sig/index.qmd
+**Line**: 433
+**Issue**: Link to "../../complete-simulation-example/lms-are-glms-part-11/index.qmd"
+**Fix**: Change to "../../main-course/complete-simulation-example/index.qmd"
+**Reason**: Blog posts consolidated into single page on stats site
+
+#### Fix 18-20: Broken links in time-series page
+**File**: pages/extra-courses/time-series/index.qmd
+**Issues**: Multiple links to "../lms-are-glms-part-XX/index.qmd" format (lines 565, 691)
+**Fix**: Remove these links as they reference individual blog posts that don't exist on stats site
+**Reason**: Time series content consolidated from 7 blog posts into single page
+
 ---
 
 ## Notes

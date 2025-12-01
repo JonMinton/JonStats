@@ -430,7 +430,7 @@ Having derived the components of standard statistical model outputs, we can hope
 - **The problem of multiple testing**: If we do not start with a specific hypothesis, and simply star-gaze a large table of coefficients, we are more likely to see a statistically significant result by chance alone. 
 - **The problem of inappropriate Null hypotheses**: For instance, if we are fairly sure that, were a predictor to have an effect on the response variable, it would be in the positive direction, then our test should be one-sided. By contrast the P values reported in statistical model summaries are for two sided tests. 
 
-To help think further about the latter point, let's return to [the model specification that was the focal example of the the third section of my statistics series](../../complete-simulation-example/lms-are-glms-part-11/index.qmd). This specification is as follows:
+To help think further about the latter point, let's return to [the model specification that was the focal example of the third section of my statistics series](../../main-course/complete-simulation-example/index.qmd). This specification is as follows:
 
 ```{r}
 head(ToothGrowth)

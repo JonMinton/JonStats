@@ -562,7 +562,7 @@ $$
 D = h^{-1}(Z)
 $$
 
-The process of **integrating the differences**, including a series of forecast values from the time series models, constitutes this inverse transform function in the context of time series modelling, as we saw in the [last post](../lms-are-glms-part-20/index.qmd), on integration.
+The process of **integrating the differences**, including a series of forecast values from the time series models, constitutes this inverse transform function in the context of time series modelling, as we saw in the [previous section on integration](#integration).
 
 Autoregression is a technique for working with either the untransformed data, $D$, or the transformed data $Z$, which operates on the **systematic component** of the mother model. For example, an `AR(3)` autoregressive model, working on data which have been differenced once ($Z_t = Y_t - Y_{t-1}$), may look as follows:
 
@@ -688,7 +688,7 @@ And the 'sound' of a moving average model is almost invariably likely to be less
 
 ## Full ARIMA Examples
 
-The last three posts have covered three of the main techniques - [autoregression](../lms-are-glms-part-19/index.qmd), [integration](../lms-are-glms-part-20/index.qmd), and [moving average](../lms-are-glms-part-21/index.qmd) modelling - which combine to form the ARIMA model framework for time series analysis. 
+The last three sections have covered three of the main techniques - [autoregression](#autoregression), [integration](#integration), and [moving average](#the-moving-average-model-in-context-of-arima) modelling - which combine to form the ARIMA model framework for time series analysis. 
 
 We'll now look at an example (or maybe two) showing how ARIMA models - including AR, I, and MA components - are fit and employed in practice. 
 
