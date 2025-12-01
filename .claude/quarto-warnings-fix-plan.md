@@ -159,3 +159,58 @@ Upon investigation, the duplicate footnote warnings are a Pandoc/Quarto quirk wh
 - Updated typo-fixes-tracker.md will include these fixes
 - Created single commit (53fbd62) with all link path corrections
 - Duplicate footnote warnings left as-is (cosmetic only, don't affect rendering)
+
+---
+
+## Post-Merge Analysis (After merging experimental/claude to main)
+
+### Remaining Warning Investigation
+
+**Warning**: `Unable to resolve link target: pages/extra-courses/main-course/complete-simulation-example/index.qmd`
+
+**Investigation Results**:
+1. ✅ Searched all .qmd files - path does NOT exist in any source file
+2. ✅ Verified bootstrapping/index.qmd line 28 contains CORRECT path: `../../main-course/complete-simulation-example/index.qmd`
+3. ✅ Searched globally for "extra-courses/main-course" - NO matches in source files
+4. ✅ Confirmed `.quarto/xref/` cache directory exists and was last modified today (Dec 1, 09:17)
+
+**Root Cause**: **Stale Quarto cache** - The incorrect path `pages/extra-courses/main-course/` (mixing two directory levels) exists only in Quarto's cross-reference cache (`.quarto/xref/`), not in actual source files.
+
+**Solution**: Clear Quarto cache and rebuild
+
+### Recommended Fix
+
+```bash
+# Clear Quarto cache completely
+rm -rf .quarto/
+
+# Re-render to rebuild cache from scratch
+quarto render
+```
+
+**Expected Outcome**: The phantom link warning should disappear, as all source files now contain correct paths.
+
+### ACTUAL ROOT CAUSE (Discovered after cache clear)
+
+**The real problem**: The relative path in bootstrapping/index.qmd was **still incorrect** even after the commit 0841f6b fix!
+
+**File**: pages/extra-courses/hacker-stats/bootstrapping/index.qmd
+**Line**: 28
+**Previous path**: `../../main-course/complete-simulation-example/index.qmd`
+**Problem**: Only goes up 2 levels, resolving to `pages/extra-courses/main-course/` (incorrect!)
+**Correct path**: `../../../main-course/complete-simulation-example/index.qmd` (3 levels up)
+
+**Directory depth analysis**:
+- File location: `pages/extra-courses/hacker-stats/bootstrapping/index.qmd` (3 levels deep in pages/)
+- Need to go up 3 levels to reach `pages/`, then into `main-course/`
+- `../../` only goes up to `pages/extra-courses/` ← This is why Quarto showed "extra-courses/main-course"
+
+**Fix Applied**: Changed `../../` to `../../../` in line 28
+
+### Duplicate Footnote Warnings (4 remaining)
+
+**Status**: Cosmetic only, do not affect rendering
+- complete-simulation-example/index.qmd: lines 943, 965, 1219
+- intro-to-glms/index.qmd: line 442
+
+**Decision**: Leave as-is unless user specifically requests fix. These warnings are a Pandoc quirk when consolidating multi-post content and don't impact the rendered site.
