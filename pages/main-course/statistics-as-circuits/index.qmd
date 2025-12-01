@@ -36,7 +36,7 @@ And what does 'best' mean? Broadly, that the discrepancy between what comes out 
 
 ![Model fitting](IMG_2905%20Large.jpeg)
 
-There are a number of possible ways of arriving at the 'best' parameter configuration. One approach is to employ an analytical solution, such as with the least-squares or generalised least-squares methods. In these cases some kind of algebraic 'magic' is performed and - *poof!* - the parameters just drop out instantly from the solution, meaning no repeated interation. In all other cases, however, it's likely the predict-compare-calibrate cycle will be repeated many times, either until the error is deemed small enough, or until some kind of resource-based stopping condition - such as "stop after 10,000 tries" - has been reached. 
+There are a number of possible ways of arriving at the 'best' parameter configuration. One approach is to employ an analytical solution, such as with the least-squares or generalised least-squares methods. In these cases some kind of algebraic 'magic' is performed and - *poof!* - the parameters just drop out instantly from the solution, meaning no repeated iteration. In all other cases, however, it's likely the predict-compare-calibrate cycle will be repeated many times, either until the error is deemed small enough, or until some kind of resource-based stopping condition - such as "stop after 10,000 tries" - has been reached. 
 
 This iterative cyclic quality of model fitting applies regardless of whether frequentist models - using maximum likelihood estimation - or Bayesian models - employing something like Hamiltonian Monte-Carlo estimation - have been employed. Both involve trying to minimise a loss function, i.e. the error $\delta$ though updating the current best estimate of the parameter set $\beta$ and $\alpha$. [^1]
 
@@ -65,7 +65,7 @@ Once the fundamentals of simulation using statistical model simulations are unde
 
 ![Simulated 'trial'](IMG_2907%20Large.jpeg)
 
-When it comes to intepretating the outputs, the job is now to compare between the outputs generated when $X_0$ is passed to $M$, and when $X_1$ is passed to $M$. Call these outputs $Y_1$ and $Y_0$ respectively; our treatment or exposure effect estimate is therefore the difference: $Y_1 - Y_0$.
+When it comes to interpreting the outputs, the job is now to compare between the outputs generated when $X_0$ is passed to $M$, and when $X_1$ is passed to $M$. Call these outputs $Y_1$ and $Y_0$ respectively; our treatment or exposure effect estimate is therefore the difference: $Y_1 - Y_0$.
 
 [^3]: If you're a fan of the niche genre of sci-fi-rom-coms, you could also think of these as "sliding door moments".
 

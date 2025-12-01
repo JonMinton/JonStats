@@ -14,7 +14,7 @@ In the long series of statistical posts I've produced so far, one thing I've not
 
 In the posts so far, the idea of hypothesis testing has perhaps been most salient within the series on [bootstrapping](../../hacker-stats/bootstrapping/index.qmd) and [resampling methods](../../hacker-stats/resampling-approaches-intro/index.qmd). Here we discussed the idea that, if we compare a **summary statistic** observed in our data, with a **distribution of that same summary statistic that we would expect to see if there were no real relationship** between two or more variables, then we can get an estimate of how probable it would be to see a summary statistic as extreme or more extreme than the value we did observe in the real data, if there really were no real relationship between the variables of interest. 
 
-Whether using resampling and bootstrapping methods, or more conventional methods, the underyling aim and approach in hypothesis testing is the same. There are always the same elements in play, even if the approaches used to derive, estimate or represent some of these elements differ between methods. These elements comprise: 
+Whether using resampling and bootstrapping methods, or more conventional methods, the underlying aim and approach in hypothesis testing is the same. There are always the same elements in play, even if the approaches used to derive, estimate or represent some of these elements differ between methods. These elements comprise: 
 
 - **Observation**: An observed summary statistic;
 - **Null Distribution**: A distribution of hypothetical observed summary statistics which would be expected under the Null Hypothesis

@@ -10,7 +10,7 @@ bibliography: references.bib
 
 ## Recap 
 
-[Section One](../intro-to-glms/index.qmd) of this course introduced generalised linear models (GLMs) and statistical simuation. [Section Two](../likelihood-and-simulation-theory/index.qmd) then delved more into the underlying theory and technicalities involved in implementing GLMs and using them for simulation. 
+[Section One](../intro-to-glms/index.qmd) of this course introduced generalised linear models (GLMs) and statistical simulation. [Section Two](../likelihood-and-simulation-theory/index.qmd) then delved more into the underlying theory and technicalities involved in implementing GLMs and using them for simulation. 
 
 This section gives a complete example of the methodology developed in these two sections, from start to finish. It also shows how the methodology is similar enough to Bayesian methods of statistical inference that applying a fully Bayesian modelling framework is just a small hop and jump from where we already are. 
 
@@ -39,9 +39,9 @@ df |>
 
 ```
 
-So, although this has just three variables, there is some complexity involved in thinking about how the two predictor variables, `supp` and `dose`, relate to the response variable `len`. These include: 
+So, although this has just three variables, there is some complexity involved in thinking about how the two predictor variables, `supp` and `dose`, relate to the response variable `len`. These include:
 
-- Whether the relationship between `len` and `dose` is linear in a straightforward sense, or associated in a more complicated wway
+- Whether the relationship between `len` and `dose` is linear in a straightforward sense, or associated in a more complicated way
 - Whether `supp` has the same effect on `len` regardless of dose, or whether there is an interaction between `dose` and `supp`. 
 
 
@@ -90,7 +90,7 @@ logLik(mod_02)
 
 ```
 
-Both report the same number of degrees of freedom ('df'), which shouldn't be suprising as they involve the same number of parameters. But the log likelihood for `mod_02` is higher, which like the Adjusted R-squared metric suggests a better fit. 
+Both report the same number of degrees of freedom ('df'), which shouldn't be surprising as they involve the same number of parameters. But the log likelihood for `mod_02` is higher, which like the Adjusted R-squared metric suggests a better fit. 
 
 Another approach, which generalises better to other types of model, is to compare the [AICs](https://en.wikipedia.org/wiki/Akaike_information_criterion), which are metrics that try to show the trade off between model complexity (based on number of parameters), and model fit (based on the log likelihood). By this criterion, the lower the score, the better the model:
 
@@ -117,7 +117,7 @@ summary(mod_03b)
 
 ```
 
-We can see from the summaries that both ways of specifying the models lead to exactly the same model, with exactly the same estimates, standared errors, adjusted $R^2$s, and so on. The adjusted $R^2$ is now 0.76, a slight improvement on the 0.75 value for the model without the interaction term. As before, we can also compare the trade-off between additional complexity and improved fit using AIC
+We can see from the summaries that both ways of specifying the models lead to exactly the same model, with exactly the same estimates, standard errors, adjusted $R^2$s, and so on. The adjusted $R^2$ is now 0.76, a slight improvement on the 0.75 value for the model without the interaction term. As before, we can also compare the trade-off between additional complexity and improved fit using AIC
 
 
 ```{r}

@@ -8,7 +8,7 @@ bibliography: references.bib
 
 ## Aim
 
-The aims of this web page is to provide an overview of generalised linear models, and ways of thinking about modelling that go beyond 'star-gazing'. 
+The aim of this web page is to provide an overview of generalised linear models, and ways of thinking about modelling that go beyond 'star-gazing'. 
 
 
 ## What are statistical models and how are they fit?
@@ -120,8 +120,10 @@ $$
 **Linear Regression**
 
 $$
-Y_i \sim N(\mu_i, \sigma^2) 
-$$ $$
+Y_i \sim N(\mu_i, \sigma^2)
+$$
+
+$$
  \mu_i = X_i\beta
 $$
 
@@ -322,7 +324,7 @@ mod_lm
 
 The coefficients $\boldsymbol{\beta} = \{\beta_0, \beta_1, \beta_2\}$ are $\{0.73, 0.34, 0.99\}$, and refer to the intercept, Sepal Length and `is_setosa` respectively.
 
-If we assume a Sepel Length of 6, for example, then the expected Sepal Width (the thing we are predicting) is `0.73 + 6 * 0.34 + 0.99` or about `3.77` in the case where `is_setosa` is true, and `0.73 + 6 * 0.34` or about `2.78` where `is_setosa` is false.
+If we assume a Sepal Length of 6, for example, then the expected Sepal Width (the thing we are predicting) is `0.73 + 6 * 0.34 + 0.99` or about `3.77` in the case where `is_setosa` is true, and `0.73 + 6 * 0.34` or about `2.78` where `is_setosa` is false.
 
 The difference between these two values, `3.77` and `2.78`, i.e. the 'influence of setosa' on the outcome, is `0.99`, i.e. the $\beta_2$ coefficient shown before. In fact, for any conceivable (and non-conceivable, i.e. negative) value of Sepal Length, the difference is still `0.99`.
 
@@ -423,7 +425,7 @@ In this case, we have a standardised $b$ coefficient of `-9.44` for `wt_z`, and 
 
 > a given increase in weight is around four times as important in *negatively predicting* manual transmission (i.e. in predicting an automatic transmission) as an equivalent increase in horsepower is in *positively predicting* manual transmission.
 
-This isn't a statement that's easy to parse, but does at least allow slightly more information to be gleamed from the model. For example, it implies that, if a proposed change to a vehicle leads to similar relative (standardised) increases in both weight and horsepower then, as the weight effect is greater than the horsepower effect, the model will predict a *decreased* probability of manualness as a result.
+This isn't a statement that's easy to parse, but does at least allow slightly more information to be gleaned from the model. For example, it implies that, if a proposed change to a vehicle leads to similar relative (standardised) increases in both weight and horsepower then, as the weight effect is greater than the horsepower effect, the model will predict a *decreased* probability of manualness as a result.
 
 But what about the motivating question, "What's *the* effect of a straight engine (`vs=1`) on the probability of manual transmission (`am=1`)?"
 
