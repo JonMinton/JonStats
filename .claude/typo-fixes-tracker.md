@@ -7,9 +7,9 @@ Track specific typo fixes and corrections identified when comparing blog posts (
 
 ---
 
-## Status: COMPLETE - 15 Fixes Applied Across All Priority Pages
+## Status: COMPLETE - 22 Total Fixes (15 Typos + 5 Link Fixes + 2 Anchor Links)
 
-**Summary**: Identified and fixed 15 typos/errors across 6 pages by comparing with blog sources updated Nov 30, 2025.
+**Summary**: Identified and fixed 15 typos/errors across 6 pages by comparing with blog sources updated Nov 30, 2025. Additionally fixed 5 broken cross-page links and improved 2 within-page references with anchor links.
 
 **Pages Fixed**:
 - Intro to GLMs: 4 fixes (grammar, formatting, spelling, word choice)
@@ -192,8 +192,24 @@ Track specific typo fixes and corrections identified when comparing blog posts (
 #### Fix 18-20: Broken links in time-series page
 **File**: pages/extra-courses/time-series/index.qmd
 **Issues**: Multiple links to "../lms-are-glms-part-XX/index.qmd" format (lines 565, 691)
-**Fix**: Remove these links as they reference individual blog posts that don't exist on stats site
+**Fix**: Changed to anchor links within same page (#autoregression, #integration, #the-moving-average-model-in-context-of-arima)
 **Reason**: Time series content consolidated from 7 blog posts into single page
+
+### 2025-12-01 - Anchor Link Improvements (Within-Page Navigation)
+
+#### Fix 21: Self-reference in likelihood-and-simulation-theory page
+**File**: pages/main-course/likelihood-and-simulation-theory/index.qmd
+**Line**: 424
+**Issue**: "Back in part five" refers to earlier section within same page (textual reference only)
+**Fix**: Changed to anchor link "[Earlier in this section](#likelihood-for-linear-regression)"
+**Reason**: Page consolidates blog Parts 5-10; "part five" content is at the beginning of this same page
+
+#### Fix 22: Self-reference in causal-inference page
+**File**: pages/extra-courses/causal-inference/index.qmd
+**Line**: 11
+**Issue**: "skip briefly to the end of these notes" refers to later section within same page (textual reference only)
+**Fix**: Changed to anchor link "[skip to the section on the two schools of causal inference](#the-schools-of-causal-inference)"
+**Reason**: Page consolidates blog Parts 14-18; improves navigation to schools comparison section at end
 
 ---
 
