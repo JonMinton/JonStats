@@ -8,7 +8,7 @@ bibliography: references.bib
 
 ## High level note/warning
 
-There are broadly two schools of thought when it comes to thinking about the problems of causal inference. One which interprets the challenge of causal inference mainly as a missing data problem; and another which interprets it mainly in terms of a modelling problem. The posts in this series are largely drawn from the missing data interpretation. If you want an overview of the two approaches (albeit subject to my own ignorance and biases), please skip briefly to the end of these notes before continuing.
+There are broadly two schools of thought when it comes to thinking about the problems of causal inference. One which interprets the challenge of causal inference mainly as a missing data problem; and another which interprets it mainly in terms of a modelling problem. The posts in this series are largely drawn from the missing data interpretation. If you want an overview of the two approaches (albeit subject to my own ignorance and biases), please [skip to the section on the two schools of causal inference](#the-schools-of-causal-inference) before continuing.
 
 ## Causal Inference: A non-technical Introduction
 
