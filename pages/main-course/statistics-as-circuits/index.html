@@ -268,7 +268,7 @@ ul.task-list li input[type="checkbox"] {
 <figcaption class="figure-caption">Model fitting</figcaption>
 </figure>
 </div>
-<p>There are a number of possible ways of arriving at the ‘best’ parameter configuration. One approach is to employ an analytical solution, such as with the least-squares or generalised least-squares methods. In these cases some kind of algebraic ‘magic’ is performed and - <em>poof!</em> - the parameters just drop out instantly from the solution, meaning no repeated interation. In all other cases, however, it’s likely the predict-compare-calibrate cycle will be repeated many times, either until the error is deemed small enough, or until some kind of resource-based stopping condition - such as “stop after 10,000 tries” - has been reached.</p>
+<p>There are a number of possible ways of arriving at the ‘best’ parameter configuration. One approach is to employ an analytical solution, such as with the least-squares or generalised least-squares methods. In these cases some kind of algebraic ‘magic’ is performed and - <em>poof!</em> - the parameters just drop out instantly from the solution, meaning no repeated iteration. In all other cases, however, it’s likely the predict-compare-calibrate cycle will be repeated many times, either until the error is deemed small enough, or until some kind of resource-based stopping condition - such as “stop after 10,000 tries” - has been reached.</p>
 <p>This iterative cyclic quality of model fitting applies regardless of whether frequentist models - using maximum likelihood estimation - or Bayesian models - employing something like Hamiltonian Monte-Carlo estimation - have been employed. Both involve trying to minimise a loss function, i.e.&nbsp;the error <span class="math inline">\(\delta\)</span> though updating the current best estimate of the parameter set <span class="math inline">\(\beta\)</span> and <span class="math inline">\(\alpha\)</span>. <a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
 </section>
 <section id="model-simulation" class="level2">
@@ -295,7 +295,7 @@ ul.task-list li input[type="checkbox"] {
 <figcaption class="figure-caption">Simulated ‘trial’</figcaption>
 </figure>
 </div>
-<p>When it comes to intepretating the outputs, the job is now to compare between the outputs generated when <span class="math inline">\(X_0\)</span> is passed to <span class="math inline">\(M\)</span>, and when <span class="math inline">\(X_1\)</span> is passed to <span class="math inline">\(M\)</span>. Call these outputs <span class="math inline">\(Y_1\)</span> and <span class="math inline">\(Y_0\)</span> respectively; our treatment or exposure effect estimate is therefore the difference: <span class="math inline">\(Y_1 - Y_0\)</span>.</p>
+<p>When it comes to interpreting the outputs, the job is now to compare between the outputs generated when <span class="math inline">\(X_0\)</span> is passed to <span class="math inline">\(M\)</span>, and when <span class="math inline">\(X_1\)</span> is passed to <span class="math inline">\(M\)</span>. Call these outputs <span class="math inline">\(Y_1\)</span> and <span class="math inline">\(Y_0\)</span> respectively; our treatment or exposure effect estimate is therefore the difference: <span class="math inline">\(Y_1 - Y_0\)</span>.</p>
 </section>
 <section id="simulating-with-honest-uncertainty" class="level3">
 <h3 class="anchored" data-anchor-id="simulating-with-honest-uncertainty">Simulating with honest uncertainty</h3>

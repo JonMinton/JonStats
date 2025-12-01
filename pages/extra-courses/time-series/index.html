@@ -1013,7 +1013,7 @@ Z = h(D)
 <p><span class="math display">\[
 D = h^{-1}(Z)
 \]</span></p>
-<p>The process of <strong>integrating the differences</strong>, including a series of forecast values from the time series models, constitutes this inverse transform function in the context of time series modelling, as we saw in the <a href="../lms-are-glms-part-20/index.qmd">last post</a>, on integration.</p>
+<p>The process of <strong>integrating the differences</strong>, including a series of forecast values from the time series models, constitutes this inverse transform function in the context of time series modelling, as we saw in the <a href="#integration">previous section on integration</a>.</p>
 <p>Autoregression is a technique for working with either the untransformed data, <span class="math inline">\(D\)</span>, or the transformed data <span class="math inline">\(Z\)</span>, which operates on the <strong>systematic component</strong> of the mother model. For example, an <code>AR(3)</code> autoregressive model, working on data which have been differenced once (<span class="math inline">\(Z_t = Y_t - Y_{t-1}\)</span>), may look as follows:</p>
 <p><span class="math display">\[
 Z_t \sim N(\mu, \sigma^2)
@@ -1151,7 +1151,7 @@ X_t = \mu + \epsilon_t + \theta_1 \epsilon_{t-1} + \theta_2 \epsilon_{t-2}
 </section>
 <section id="full-arima-examples" class="level2">
 <h2 class="anchored" data-anchor-id="full-arima-examples">Full ARIMA Examples</h2>
-<p>The last three posts have covered three of the main techniques - <a href="../lms-are-glms-part-19/index.qmd">autoregression</a>, <a href="../lms-are-glms-part-20/index.qmd">integration</a>, and <a href="../lms-are-glms-part-21/index.qmd">moving average</a> modelling - which combine to form the ARIMA model framework for time series analysis.</p>
+<p>The last three sections have covered three of the main techniques - <a href="#autoregression">autoregression</a>, <a href="#integration">integration</a>, and <a href="#the-moving-average-model-in-context-of-arima">moving average</a> modelling - which combine to form the ARIMA model framework for time series analysis.</p>
 <p>We’ll now look at an example (or maybe two) showing how ARIMA models - including AR, I, and MA components - are fit and employed in practice.</p>
 <section id="setup" class="level3">
 <h3 class="anchored" data-anchor-id="setup">Setup</h3>
@@ -2196,7 +2196,7 @@ F-statistic: 4.144 on 2 and 68 DF,  p-value: 0.02003</code></pre>
 </div>
 <p>The summary is now reported for each of the two outcomes: first <code>gdp</code>, then <code>e0</code>.</p>
 <p>Remember that the outcome is percentage annual change in the outcome of interest from the previous year. i.e.&nbsp;both series have already been ‘differenced’ to produce approximately stationary series. It also means that the intercept terms are especially important, as they indicate the long-term trends observed in each series.</p>
-<p>In this case the intercepts for both series are positive and statistically significant: over the long term, GDP has grown on average around 2% each year, and life expectancy by around 0.28%. As <a href="../../still-the-economy/index.qmd">the post this relates to</a> makes clear, however, these long-term trends may no longer apply.</p>
+<p>In this case the intercepts for both series are positive and statistically significant: over the long term, GDP has grown on average around 2% each year, and life expectancy by around 0.28%. As <a href="https://jonminton.github.io/jon-blog/posts/still-the-economy/index.html">the blog post this relates to</a> makes clear, however, these long-term trends may no longer apply.</p>
 <p>Of the four lag (<code>AR(1)</code>) terms in the model(s), three are not statistically significant; not even close. The exception is the <code>lag_e0</code> term for the <code>e0</code> response model, which is statistically significant and negative. Its coefficient is also of similar magnitude to the intercept too.</p>
 <p>What does this mean in practice? In effect, that annual mortality improvement trends have a tendency to <em>oscillate</em>: a better-than-average year tends to be followed by a worse-than-average year, and a worse-than-average year to be followed by a better-than-average year, in both cases at higher-than-chance rates.</p>
 <p>What could be the cause of this oscillatory phenomenon? When it comes to longevity, the phenomenon is somewhat well understood (though perhaps not widely enough), and referred to as either ‘forward mortality displacement’ or, more chillingly, ‘harvesting’. This outcome likely comes about because, if there were an exceptionally bad year in terms of (say) influenza mortality, the most frail and vulnerable are likely to be those who die disproportionately from this additional mortality event. This means that the ‘stock’ of people remaining the following year have been selected, on average, to be slightly less frail and vulnerable than those who started the previous year. Similarly, an exceptionally ‘good’ year can mean that the average ‘stock’ of the population in the following year is slightly more frail than in an average year, so more susceptible to mortality. And so, by this means, comparatively-bad-years tend to be followed by comparatively-good-years, and comparatively-good-years by comparatively-bad-years.</p>

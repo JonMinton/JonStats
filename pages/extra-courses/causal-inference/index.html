@@ -315,7 +315,7 @@ div.csl-indent {
 
 <section id="high-level-notewarning" class="level2">
 <h2 class="anchored" data-anchor-id="high-level-notewarning">High level note/warning</h2>
-<p>There are broadly two schools of thought when it comes to thinking about the problems of causal inference. One which interprets the challenge of causal inference mainly as a missing data problem; and another which interprets it mainly in terms of a modelling problem. The posts in this series are largely drawn from the missing data interpretation. If you want an overview of the two approaches (albeit subject to my own ignorance and biases), please skip briefly to the end of these notes before continuing.</p>
+<p>There are broadly two schools of thought when it comes to thinking about the problems of causal inference. One which interprets the challenge of causal inference mainly as a missing data problem; and another which interprets it mainly in terms of a modelling problem. The posts in this series are largely drawn from the missing data interpretation. If you want an overview of the two approaches (albeit subject to my own ignorance and biases), please <a href="#the-schools-of-causal-inference">skip to the section on the two schools of causal inference</a> before continuing.</p>
 </section>
 <section id="causal-inference-a-non-technical-introduction" class="level2">
 <h2 class="anchored" data-anchor-id="causal-inference-a-non-technical-introduction">Causal Inference: A non-technical Introduction</h2>
@@ -350,9 +350,9 @@ div.csl-indent {
 </div>
 </div>
 <p>A few minutes’ walk from where I live is St Andrew Square. And in the middle of St Andrew Square is the <a href="https://en.wikipedia.org/wiki/Melville_Monument">Melville Monument</a>, a 40 metre tall column, on which stands a statue of <a href="https://en.wikipedia.org/wiki/Henry_Dundas,_1st_Viscount_Melville">Henry Dundas, 1st Viscount Melville</a>.</p>
-<p>Though the Melville Monument was constructed in the 19th century to commemorate and celebrate this 18th century figure, in 2020 the City of Edimburgh Council chose to add more context to Dundas’ legacy by unveiling <a href="https://upload.wikimedia.org/wikipedia/commons/4/44/Melville_Plaque.jpg">a plaque</a> with the following message::</p>
+<p>Though the Melville Monument was constructed in the 19th century to commemorate and celebrate this 18th century figure, in 2020 the City of Edinburgh Council chose to add more context to Dundas’ legacy by unveiling <a href="https://upload.wikimedia.org/wikipedia/commons/4/44/Melville_Plaque.jpg">a plaque</a> with the following message::</p>
 <blockquote class="blockquote">
-<p>At the top of this neoclassial column stands a statue of Hentry Dundas, 1st Viscount Melville (1742-1811). He was the Scottish Lord Advocate, an MP for Edinburgh and Midlothian, and the First Lord of the Admiralty. Dundas was a contentious figure, provoking controversies that resonate to this day. While Home Secretary in 1792, and first Secretary of State for War in 1796 he was instrumental in deferring the abolition of the Atlantic slave trade. Slave trading by British ships was not abolished until 1807. As a result of this delay, more than half a million enslaved Africans crossed the Atlantic.</p>
+<p>At the top of this neoclassical column stands a statue of Henry Dundas, 1st Viscount Melville (1742-1811). He was the Scottish Lord Advocate, an MP for Edinburgh and Midlothian, and the First Lord of the Admiralty. Dundas was a contentious figure, provoking controversies that resonate to this day. While Home Secretary in 1792, and first Secretary of State for War in 1796 he was instrumental in deferring the abolition of the Atlantic slave trade. Slave trading by British ships was not abolished until 1807. As a result of this delay, more than half a million enslaved Africans crossed the Atlantic.</p>
 </blockquote>
 <p>So, the claim of the council plaque was that Dundas <em>caused</em> the enslavement of hundreds of thousands of Africans, by promoting a gradualist policy of abolition.</p>
 <p>The descendents of Dundas contested these claims, however, <a href="https://www.edinburghnews.scotsman.com/heritage-and-retro/retro/dundas-plaque-row-descendants-of-dundas-surprised-and-disappointed-at-false-plaque-wording-3172579">instead arguing</a>:</p>
@@ -513,7 +513,7 @@ ATE = E(y | Z = 1) - E(y | Z = 0)
 </section>
 <section id="method-one-controlling-for-variables" class="level3">
 <h3 class="anchored" data-anchor-id="method-one-controlling-for-variables">Method One: ‘Controlling for’ variables</h3>
-<p>The most familiar approach for trying to estimate the causal effect of treatment <span class="math inline">\(Z\)</span> on outcome <span class="math inline">\(Y\)</span> is to construct a multivariate <a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a> regression model. Here we make sure to include those ‘nuisance parameters’ <span class="math inline">\(X^*\)</span> on the predictor side of the model’s equation, along with our treatment parameter of interest <span class="math inline">\(Z\)</span>. For each individual <span class="math inline">\(i\)</span> in the dataset <span class="math inline">\(D\)</span> we can therefore use the model, calibrated on the data, to produce a prediction of the outcome <span class="math inline">\(Y_i\)</span> under both the treated scenario <span class="math inline">\(Z_i = 1\)</span> and the untreated scenario <span class="math inline">\(Z_i = 0\)</span>. As <a href="../lms-are-glms-part-04/index.qmd">post four</a> discussed, in the specific case of linear regression, but few other model specifications, this causal effect estimate of treatment <span class="math inline">\(Y_i | Z=1 - Y_i | Z = 0\)</span> can be gleamed directly from the <span class="math inline">\(\beta\)</span> coefficient for <span class="math inline">\(Z\)</span>. As post four also makes clear, for other model specifications, the process for estimating causal effects can be more involved.</p>
+<p>The most familiar approach for trying to estimate the causal effect of treatment <span class="math inline">\(Z\)</span> on outcome <span class="math inline">\(Y\)</span> is to construct a multivariate <a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a> regression model. Here we make sure to include those ‘nuisance parameters’ <span class="math inline">\(X^*\)</span> on the predictor side of the model’s equation, along with our treatment parameter of interest <span class="math inline">\(Z\)</span>. For each individual <span class="math inline">\(i\)</span> in the dataset <span class="math inline">\(D\)</span> we can therefore use the model, calibrated on the data, to produce a prediction of the outcome <span class="math inline">\(Y_i\)</span> under both the treated scenario <span class="math inline">\(Z_i = 1\)</span> and the untreated scenario <span class="math inline">\(Z_i = 0\)</span>. As <a href="../../../pages/main-course/intro-to-glms/index.html">discussed in the intro to GLMs section</a>, in the specific case of linear regression, but few other model specifications, this causal effect estimate of treatment <span class="math inline">\(Y_i | Z=1 - Y_i | Z = 0\)</span> can be gleaned directly from the <span class="math inline">\(\beta\)</span> coefficient for <span class="math inline">\(Z\)</span>. As that section also makes clear, for other model specifications, the process for estimating causal effects can be more involved.</p>
 <p>It is worth pointing out that, when using models in this way, we are really ‘just’ producing estimates of <strong>first differences</strong>, the quantity of interest which we focused on in parts of the main course. The model prediction approach is not fundamentally any different to that discussed previously, except for two things: firstly, that we will usually be averaging across first differences for multiple observations rather a single scenario; and secondly, that we will be <em>interpreting</em> the first differences (or rather their aggregation) as being a causal effect estimate.</p>
 <p>There are actually two types of causal effect estimate we can produce using this approach, the <strong>Average Treatment Effect (ATE)</strong>, and the <strong>Average Treatment Effect on the Treated (ATT)</strong>. <a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a> The difference between ATE and ATT is that, for ATE, the counterfactuals are simulated for all observations in the dataset <span class="math inline">\(D\)</span>, and that these counterfactuals will be both for individuals which were observed as treated <span class="math inline">\(Z=1\)</span> and untreated <span class="math inline">\(Z=0\)</span>. By contrast, for ATT, only those observations in the data which were observed as treated <span class="math inline">\(Z=1\)</span> are included in the causal effect estimation,<a href="#fn7" class="footnote-ref" id="fnref7" role="doc-noteref"><sup>7</sup></a> meaning that the counterfactual being modelled will always be of the scenario <span class="math inline">\(Z=0\)</span>.</p>
 <p>So, what are the potential problems with modelling in this way?</p>
@@ -882,7 +882,7 @@ Discarded       0       0</code></pre>
 <span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>m.out1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
-<pre><code>A matchit object
+<pre><code>A `matchit` object
  - method: 1:1 nearest neighbor matching without replacement
  - distance: Propensity score
              - estimated with logistic regression
@@ -1031,10 +1031,10 @@ Discarded       0       0</code></pre>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 2 × 12
-  treat   age  educ race  married nodegree  re74  re75   re78 distance weights
-  &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;fct&gt;   &lt;int&gt;    &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;    &lt;dbl&gt;   &lt;dbl&gt;
-1     1    33    12 white       1        0    0      0 12418.   0.0429       1
-2     0    39    12 white       1        0 1289.     0  1203.   0.0430       1
+  treat   age  educ race   married nodegree  re74  re75  re78 distance weights
+  &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;fct&gt;    &lt;int&gt;    &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;   &lt;dbl&gt;
+1     1    22     9 hispan       0        1    0     0  3596.    0.225       1
+2     0    16    10 white        0        1 1027. 1225. 6848.    0.103       1
 # ℹ 1 more variable: subclass &lt;fct&gt;</code></pre>
 </div>
 </div>
@@ -1046,10 +1046,10 @@ Discarded       0       0</code></pre>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 2 × 12
-  treat   age  educ race   married nodegree  re74  re75   re78 distance weights
-  &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;fct&gt;    &lt;int&gt;    &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;    &lt;dbl&gt;   &lt;dbl&gt;
-1     1    31     9 hispan       0        1     0    0  26818.    0.250       1
-2     0    16    10 white        0        1     0  190.  2137.    0.105       1
+  treat   age  educ race  married nodegree  re74  re75   re78 distance weights
+  &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;fct&gt;   &lt;int&gt;    &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;    &lt;dbl&gt;   &lt;dbl&gt;
+1     1    30    12 black       0        0    0     0  24909.    0.678       1
+2     0    22    12 black       1        0 9730. 7373.  2231.    0.374       1
 # ℹ 1 more variable: subclass &lt;fct&gt;</code></pre>
 </div>
 </div>
@@ -1095,11 +1095,12 @@ Discarded       0       0</code></pre>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>
-  Term          Contrast Estimate Std. Error    z Pr(&gt;|z|)   S 2.5 % 97.5 %
- treat mean(1) - mean(0)     1121        837 1.34    0.181 2.5  -520   2763
+ Estimate Std. Error    z Pr(&gt;|z|)   S 2.5 % 97.5 %
+     1121        837 1.34    0.181 2.5  -520   2763
 
-Columns: term, contrast, estimate, std.error, statistic, p.value, s.value, conf.low, conf.high, predicted_lo, predicted_hi, predicted 
-Type:  response </code></pre>
+Term: treat
+Type: response
+Comparison: 1 - 0</code></pre>
 </div>
 </div>
 <p>Using the recommended approach, the ATT estimate is now $1121. Not statistically significant at the conventional 95% threshold, but also more likely to be positive than negative.</p>

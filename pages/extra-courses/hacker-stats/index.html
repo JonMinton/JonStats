@@ -676,7 +676,7 @@ d_{5}^{fake} = \{d_{5,1} , d_{5,2}\}
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(bs_diff_meds <span class="sc">&lt;</span> <span class="dv">0</span>) <span class="sc">/</span> Nreps</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 1e-04</code></pre>
+<pre><code>[1] 4e-04</code></pre>
 </div>
 </div>
 <p>Tiny!</p>
@@ -1152,7 +1152,7 @@ Null Hypothesis: independence
 <div class="cell-output cell-output-stdout">
 <pre><code>Response: partyid (factor)
 Explanatory: college (factor)
-Null Hypothesis: independence
+Null Hypothesis: ind...
 # A tibble: 5,000,000 × 3
 # Groups:   replicate [10,000]
    partyid college   replicate
@@ -1213,7 +1213,7 @@ Null Hypothesis: independence
 <div class="cell-output cell-output-stdout">
 <pre><code>Response: partyid (factor)
 Explanatory: college (factor)
-Null Hypothesis: independence
+Null Hypothesis: ind...
 # A tibble: 1 × 1
    stat
   &lt;dbl&gt;
@@ -1233,7 +1233,7 @@ Null Hypothesis: independence
 <div class="cell-output cell-output-stdout">
 <pre><code>Response: partyid (factor)
 Explanatory: college (factor)
-Null Hypothesis: independence
+Null Hypothesis: ind...
 # A tibble: 10,000 × 2
    replicate  stat
        &lt;int&gt; &lt;dbl&gt;
@@ -1329,7 +1329,7 @@ Null Hypothesis: independence
 <h2 class="anchored" data-anchor-id="post-stratification-1">Post Stratification</h2>
 <section id="introduction-2" class="level3">
 <h3 class="anchored" data-anchor-id="introduction-2">Introduction</h3>
-<p>At the top of this page on Hacker Stats, I mentioned that resampling methods can be used to perform post-stratification, meaning reweighting of observations from a sample in such a way as to make them more representative of the population of interest to us. Let’s look at this using a variation of the <a href="../permutation-with-base-r/index.qmd">red coin/blue coin</a> example from a couple of posts ago.</p>
+<p>At the top of this page on Hacker Stats, I mentioned that resampling methods can be used to perform post-stratification, meaning reweighting of observations from a sample in such a way as to make them more representative of the population of interest to us. Let’s look at this using a variation of the <a href="../../../pages/extra-courses/hacker-stats/permutation-with-base-r/index.html">red coin/blue coin</a> example from a couple of posts ago.</p>
 </section>
 <section id="red-coinblue-coin" class="level3">
 <h3 class="anchored" data-anchor-id="red-coinblue-coin">Red Coin/Blue Coin</h3>
