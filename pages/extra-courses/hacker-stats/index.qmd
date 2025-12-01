@@ -835,7 +835,7 @@ In some ways, `infer` seems largely intended as a pedagogic/teaching tool, for u
 
 ### Introduction
 
-At the top of this page on Hacker Stats, I mentioned that resampling methods can be used to perform post-stratification, meaning reweighting of observations from a sample in such a way as to make them more representative of the population of interest to us. Let's look at this using a  variation of the [red coin/blue coin](../permutation-with-base-r/index.qmd) example from a couple of posts ago.
+At the top of this page on Hacker Stats, I mentioned that resampling methods can be used to perform post-stratification, meaning reweighting of observations from a sample in such a way as to make them more representative of the population of interest to us. Let's look at this using a  variation of the [red coin/blue coin](permutation-with-base-r/index.qmd) example from a couple of posts ago.
 
 ### Red Coin/Blue Coin
 
