@@ -495,19 +495,19 @@ quantile(predictions_ev, probs = c(0.025, 0.500, 0.975))
 
 ```
 
-So, the 95% interval for the expected value is between `21.31` and `24.14`, with a middle (median) estimate of `22.73`.[^1] Let's check this against estimates from the `predict()` function:
+So, the 95% interval for the expected value is between `21.31` and `24.14`, with a middle (median) estimate of `22.73`.[^4] Let's check this against estimates from the `predict()` function:
 
-[^1]: These are the values produced the first time I ran the simulation. They are likely to be a little different each time, so may not be identical to the number of decimal places reported when I next render this document. These estimates are *approximations*. 
+[^4]: These are the values produced the first time I ran the simulation. They are likely to be a little different each time, so may not be identical to the number of decimal places reported when I next render this document. These estimates are *approximations*. 
 
 ```{r}
 predict(best_model, newdata = data.frame(dose = 1.25, supp = "OJ"), interval = 'confidence')
 ```
 
-The expected values using the predict function give a 95% confidence interval of `21.27`  to `24.19`, with a point estimate of `22.73`. These are not identical, as the methods employed are not identical,[^2] but they are hopefully similar enough to demonstrate they are attempts at getting at the same quantities of interest. 
+The expected values using the predict function give a 95% confidence interval of `21.27`  to `24.19`, with a point estimate of `22.73`. These are not identical, as the methods employed are not identical,[^5] but they are hopefully similar enough to demonstrate they are attempts at getting at the same quantities of interest.
 
 
 
-[^2]: Because the simulation approach relies on random numbers, the draws will never be the same unless the same random number seed is using using `set.seed()`. However with more simulations, using the `n` parameter from `mvrnorm`, the distributions of estimates should become ever closer to each other. 
+[^5]: Because the simulation approach relies on random numbers, the draws will never be the same unless the same random number seed is using using `set.seed()`. However with more simulations, using the `n` parameter from `mvrnorm`, the distributions of estimates should become ever closer to each other. 
 
 ### Predicted values
 
@@ -675,18 +675,18 @@ So, because of the behaviour of the jumping bean, you only have to act on it onc
 
 In the analogies above, *the marble is to frequentist statistics as the jumping bean is to Bayesian statistics*. A technical distinction between the marble and the jumping bean is that *the marble converges towards a point* (meaning it reaches a point of rest on the surface) whereas *the jumping bean converges towards a distribution* (meaning it never rests).
 
-It's Bayesian statistics' [^1] property of converging to a distribution rather than a point that makes the *converged posterior distribution* of parameter estimates Bayesian models produce *ideal* for the kind of honest prediction so much of this blog series has been focused on. 
+It's Bayesian statistics' [^6] property of converging to a distribution rather than a point that makes the *converged posterior distribution* of parameter estimates Bayesian models produce *ideal* for the kind of honest prediction so much of this blog series has been focused on.
 
-[^1]: Or perhaps more accurately Bayesian statistical model estimation rather than Bayesian statistics more generally? Bayes' Rule can be usefully applied to interpret results derived from frequentist models. But the term Bayesian Modelling generally implies that Bayes' Rule is used as part of the model parameter estimation process, in which a prior distribution is *updated* according to some algorithm, and then crucially the *posterior distribution* produced then forms the *prior distribution* at the next step in the estimation. The specific algorithm that works as the 'jumping bean' is usually something like [Hamiltonian Monte Carlo](https://en.wikipedia.org/wiki/Hamiltonian_Monte_Carlo), HMC,  and the general simulation framework in which a posterior distribution generated from applying Bayes' Rule is repeatedly fed back into the Bayes' Rule equation as the prior distribution is known as [Markov Chain Monte Carlo](https://en.wikipedia.org/wiki/Markov_chain_Monte_Carlo), MCMC. 
+[^6]: Or perhaps more accurately Bayesian statistical model estimation rather than Bayesian statistics more generally? Bayes' Rule can be usefully applied to interpret results derived from frequentist models. But the term Bayesian Modelling generally implies that Bayes' Rule is used as part of the model parameter estimation process, in which a prior distribution is *updated* according to some algorithm, and then crucially the *posterior distribution* produced then forms the *prior distribution* at the next step in the estimation. The specific algorithm that works as the 'jumping bean' is usually something like [Hamiltonian Monte Carlo](https://en.wikipedia.org/wiki/Hamiltonian_Monte_Carlo), HMC,  and the general simulation framework in which a posterior distribution generated from applying Bayes' Rule is repeatedly fed back into the Bayes' Rule equation as the prior distribution is known as [Markov Chain Monte Carlo](https://en.wikipedia.org/wiki/Markov_chain_Monte_Carlo), MCMC. 
 
 Let's now do some Bayesian modelling to compare...
 
 
 ### Bayesian modelling: now significantly less terrifying than it used to be
 
-There are a lot of packages and approaches for building Bayesian models. In fact there are whole statistical programming languages -  like JAGS, BUGS [^4] and Stan - dedicated to precisely describing every assumption the statistician wants to make about how a Bayesian model should be built. For more complicated and bespoke models these are ideal. 
+There are a lot of packages and approaches for building Bayesian models. In fact there are whole statistical programming languages -  like JAGS, BUGS [^7] and Stan - dedicated to precisely describing every assumption the statistician wants to make about how a Bayesian model should be built. For more complicated and bespoke models these are ideal.
 
-[^4]: Ominously named.
+[^7]: Ominously named.
 
 However there are also an increasingly large number of Bayesian modelling packages that abstract away some of the assumptions and complexity apparent in the above specialised Bayesian modelling languages, and allow Bayesian versions of the kinds of model we're already familiar with to be specified using formulae interfaces almost identical to what we've already worked with. Let's look at one of them, `rstanarm`, which allows us to use stan, a full Bayesian statistical programming language, without quite as much thinking and set-up being required on our part. 
 
@@ -710,9 +710,9 @@ summary(best_model_frequentist)
 
 ### Building the Bayesian equivalent 
 
-Now how would we build a Bayesian equivalent of this? Firstly let's load (and if necessary install[^5])  `rstanarm`.
+Now how would we build a Bayesian equivalent of this? Firstly let's load (and if necessary install[^8])  `rstanarm`.
 
-[^5]: `rstanarm` has a lot of dependencies. It's the friendly, cuddly face of a *beast*!
+[^8]: `rstanarm` has a lot of dependencies. It's the friendly, cuddly face of a *beast*!
 ```{r}
 library(rstanarm)
 
