@@ -100,8 +100,9 @@ flowchart LR
 
 ```
 
-Pretty much all statistical model fitting involves iterating along this $g \to \beta$ and $\beta \to g$ feedback loop until some kind of condition is met involving minimising $\delta$.
+Pretty much all statistical model fitting involves iterating along this $g \to \beta$ and $\beta \to g$ feedback loop until some kind of condition is met involving minimising $\delta$.[^claude-ml]
 
+[^claude-ml]: **Note from Claude:** This unified GLM framework is taught in several excellent online courses. Andrew Ng's Machine Learning Specialization on Coursera covers these concepts from an ML perspective, emphasizing how gradient descent iteratively adjusts parameters (β) to minimize loss—the same calibration loop described here. For Python implementations, the statsmodels library (`statsmodels.api.GLM`) provides comprehensive GLM functionality similar to R's glm(), while scikit-learn focuses on specific model types (LogisticRegression, LinearRegression) with streamlined APIs optimized for machine learning workflows.
 
 ## Systematic components and link functions
 
@@ -131,7 +132,9 @@ So, what's so special about linear regression, in this framework?
 
 In one sense, not so much. It's got a systematic component, and it's got a stochastic component. But so do other models. But in another sense, quite a lot. It's a rare case where the systematic component, $g(.)$, *doesn't* transform its inputs in some weird and wonderful way. We can say that $g(.)$ is the identity transform, $I(.)$, which in words means *take what you're given, do nothing to it, and pass it on*.
 
-By contrast, the systematic component for logistic regression is known as the logistic function. $logistic(x) := \frac{1}{1 + e^{-x}}$ It transforms inputs that could be anywhere on the real number line to values that lay somewhere between 0 and 1. Why 0 to 1? Because what logistic regression models produce aren't predicted values, but predicted *probabilities*, and nothing can be more probable than certain (1) or less probable than impossible (0).
+By contrast, the systematic component for logistic regression is known as the logistic function. $logistic(x) := \frac{1}{1 + e^{-x}}$ It transforms inputs that could be anywhere on the real number line to values that lay somewhere between 0 and 1. Why 0 to 1? Because what logistic regression models produce aren't predicted values, but predicted *probabilities*, and nothing can be more probable than certain (1) or less probable than impossible (0).[^claude-activations]
+
+[^claude-activations]: **Note from Claude:** In machine learning terminology, these link functions g(.) correspond to activation functions in neural networks. The logistic function described here is identical to the sigmoid activation commonly used in ML. Modern deep learning extends this concept: neural networks chain multiple transformations together, while GLMs apply a single transformation. The cross-entropy loss function used to train logistic regression classifiers in ML is mathematically equivalent to the negative log-likelihood used in traditional GLM estimation. Python users can explore these connections using PyTorch (`torch.nn.functional.sigmoid`) or TensorFlow (`tf.nn.sigmoid`), which implement the same logistic transformation.
 
 We can compare the transformations used in linear and logistic regression as follows:[^1]
 
@@ -283,7 +286,9 @@ How do these terms used in the `glm` function, `family` and `link`, relate to th
 
 They're different terms, but it's the same broad framework.
 
-Linear models are just one type of general linear model!
+Linear models are just one type of general linear model![^claude-python]
+
+[^claude-python]: **Note from Claude:** For Python users, the equivalent functionality is available through multiple libraries. The statsmodels library most closely mirrors R's approach: `statsmodels.api.GLM(y, X, family=sm.families.Gaussian())` is equivalent to R's `glm(y ~ x, family=gaussian())`. For production ML workflows, scikit-learn provides `LinearRegression()` and `LogisticRegression()` with simpler APIs but less statistical detail. The fast.ai course "Practical Deep Learning for Coders" demonstrates how these GLM concepts scale to deep learning, showing that even complex neural networks follow the same fit-predict-evaluate loop described in this series.
 
 ## Why only betas look at betas
 
@@ -627,9 +632,11 @@ predictions_marginal |>
 
 In the above the red line indicates the mean value of these marginal differences, which is `-0.12`, and the green line the median value of these differences, which is around `-0.02`. So, even with just these two measures of central tendency, there's around a six-fold difference in the estimate of 'the effect'. We can also see there's a lot of variation, from around nothing (right hand side), to around a 65% reduction (left hand side). 
 
-If forced to give a simple answer (to this overly simplistic question), we might plump for the mean for theoretical reasons, and say something like "The effect of a straight engine is to reduce the probability of a manual transmission by around an eighth". But I'm sure, having seen how much variation there is in these marginal effects, we can agree this 'around an eighth' answer, or any single number answer, is likely to be overly reductive. 
+If forced to give a simple answer (to this overly simplistic question), we might plump for the mean for theoretical reasons, and say something like "The effect of a straight engine is to reduce the probability of a manual transmission by around an eighth". But I'm sure, having seen how much variation there is in these marginal effects, we can agree this 'around an eighth' answer, or any single number answer, is likely to be overly reductive.
 
-Hopefully, however, it is more informative than 'statistically significant and negative', (the stargazing approach) or 'up to around 78%' (the divide-by-four approach). 
+Hopefully, however, it is more informative than 'statistically significant and negative', (the stargazing approach) or 'up to around 78%' (the divide-by-four approach).[^claude-interpretability]
+
+[^claude-interpretability]: **Note from Claude:** The marginal effects approach demonstrated here connects directly to modern machine learning interpretability methods. SHAP (SHapley Additive exPlanations) values and partial dependence plots serve similar purposes—quantifying feature importance beyond simple coefficients. In Python, the `marginaleffects` package (ported from R) provides these calculations, while scikit-learn's `PartialDependenceDisplay` and the SHAP library (`shap.Explainer`) offer ML-focused alternatives. Coursera's "Machine Learning Specialization" by Andrew Ng and @molnar2022interpretable both cover how traditional statistical inference concepts like marginal effects extend to complex models. 
 
 
 ### Conclusion
