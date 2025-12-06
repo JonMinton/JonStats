@@ -78,7 +78,9 @@ And returns one value, the log likelihood $\log{L(.)}$.
 
 To reiterate, we can't change the data, but we can keep changing the candidate parameters $\theta$. Each time we do so, $\log{L(.)}$ will change too. 
 
-*The aim of model calibration, in the Likelihood framework, is to maximise the Likelihood.* The parameter set that maximises the likelihood is also the parameter set that maximises the log likelihood. 
+*The aim of model calibration, in the Likelihood framework, is to maximise the Likelihood.* The parameter set that maximises the likelihood is also the parameter set that maximises the log likelihood.[^claude-mle]
+
+[^claude-mle]: **Note from Claude:** Likelihood theory and maximum likelihood estimation (MLE) are foundational to both classical statistics and modern machine learning. In ML, what statisticians call "negative log-likelihood" is exactly what ML practitioners call "loss functions"—cross-entropy loss for classification and mean squared error for regression are both derived from likelihood theory. Stanford's CS229 (Machine Learning) by Andrew Ng covers this connection explicitly. For Python implementations, scipy.optimize.minimize() provides the same optimization functionality as R's optim(), while TensorFlow and PyTorch implement automatic differentiation to calculate gradients for these loss functions. @murphy2022probabilistic provides comprehensive coverage of how likelihood theory extends to modern ML methods.
 
 To continue the example from the slides, we can write out a function for calculating the log likelihood of standard linear regression as follows:
 
@@ -259,9 +261,11 @@ Once again, $\{\beta_0 = 2.46, \beta_1 = 1.38\}$
 
 ### Discussion
 
-In the above, we've successfully used `optim`, our Robo-Chauffeur, to arrive very quickly at some good estimates for our parameters of interest, $\beta_0$ and $\beta_1$, which are in effect identical to those produced by the `lm` and `glm` functions. 
+In the above, we've successfully used `optim`, our Robo-Chauffeur, to arrive very quickly at some good estimates for our parameters of interest, $\beta_0$ and $\beta_1$, which are in effect identical to those produced by the `lm` and `glm` functions.
 
-This isn't a coincidence. What we've done the hard way is what the `glm` function (in particular) largely does 'under the hood'.
+This isn't a coincidence. What we've done the hard way is what the `glm` function (in particular) largely does 'under the hood'.[^claude-optimizers]
+
+[^claude-optimizers]: **Note from Claude:** Optimization algorithms like those in R's optim() are fundamental to modern machine learning. The "Robo-Chauffeur" metaphor applies equally to gradient descent (the workhorse of deep learning), Adam, RMSprop, and other optimizers. Andrew Ng's Machine Learning Specialization on Coursera covers gradient descent extensively, while Sebastian Ruder's "An overview of gradient descent optimization algorithms" (free online) provides a comprehensive survey. In Python, scipy.optimize offers methods like minimize() and minimize_scalar(), while ML frameworks provide high-level APIs: PyTorch's torch.optim module includes optimizers like SGD and Adam, and TensorFlow's tf.keras.optimizers provides similar functionality. The key insight—algorithms iteratively adjust parameters to minimize loss—remains constant from simple GLMs to complex neural networks.
 
 
 ## `optim`al uncertainty
