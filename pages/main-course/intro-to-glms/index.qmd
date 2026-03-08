@@ -104,6 +104,11 @@ Pretty much all statistical model fitting involves iterating along this $g \to \
 
 [^claude-ml]: **Note from Claude:** This unified GLM framework is taught in several excellent online courses. Andrew Ng's Machine Learning Specialization on Coursera covers these concepts from an ML perspective, emphasizing how gradient descent iteratively adjusts parameters (β) to minimize loss—the same calibration loop described here. For Python implementations, the statsmodels library (`statsmodels.api.GLM`) provides comprehensive GLM functionality similar to R's glm(), while scikit-learn focuses on specific model types (LogisticRegression, LinearRegression) with streamlined APIs optimized for machine learning workflows.
 
+::: {.callout-tip}
+## Try it interactively
+Practice choosing the right distribution and link function for different data types with the [GLM Dashboard interactive tutorials](https://jonminton.github.io/glm-dashboard-explainer/).
+:::
+
 ## Systematic components and link functions
 
 The two part equation shown above is too general and abstract to be implemented directly. Instead, specific choices about the $f(.)$ and $g(.)$ need to be made. @KinTomWit00 gives the following examples:
@@ -264,7 +269,7 @@ quasibinomial(link = "logit")
 quasipoisson(link = "log")
 ```
 
-Each family has a default `link` argument, and for this `gaussian` family, this link is the identity function.
+Each family has a default `link` argument, and for this `gaussian` family, this link is the identity function. To see how each of these families works in practice — choosing predictors, link functions, and distributions step-by-step — try the corresponding [GLM Dashboard](https://jonminton.github.io/glm-dashboard-explainer/) tutorials: [Gaussian](https://jonminton.github.io/glm-dashboard-explainer/tutorials/01-gaussian/systematic.html), [Binomial/Logistic](https://jonminton.github.io/glm-dashboard-explainer/tutorials/02-logistic/systematic.html), and [Poisson](https://jonminton.github.io/glm-dashboard-explainer/tutorials/03-poisson/systematic.html).
 
 We can also see that, for both the `binomial` and `quasibinomial` family, the default link is `logit`, which transforms all predictors onto a 0-1 scale, as shown in the last post.
 
@@ -650,7 +655,9 @@ This section of the course has aimed to reintroduce statistics from the perspect
 
 - That linear regression is just one member of a broader 'family' of regression models
 - That all regression models can be thought of as just 'types' of GLM, with more in common than divides them
-- That we can and should aim for *substantive significance* when using the outputs of GLMs, i.e. use them for prediction and simulation rather than focus on whether individual coefficients are 'statistically significant' or not. 
+- That we can and should aim for *substantive significance* when using the outputs of GLMs, i.e. use them for prediction and simulation rather than focus on whether individual coefficients are 'statistically significant' or not.
 
-The [next section](../likelihood-and-simulation-theory/index.qmd) of the course delves further into the fundamentals of model fitting and statistical inference, including likelihood theory. 
+For an interactive companion to this material, the [GLM Dashboard](https://jonminton.github.io/glm-dashboard-explainer/) lets you work through the same framework hands-on — choosing distributions, link functions, and fitting models for different data types.
+
+The [next section](../likelihood-and-simulation-theory/index.qmd) of the course delves further into the fundamentals of model fitting and statistical inference, including likelihood theory.
 
