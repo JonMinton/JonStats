@@ -9,7 +9,12 @@ website:
         text: Home
       - about.qmd
       - sidebar:main-course
+      - sidebar:extended-glms
       - sidebar:extra-courses
+    right:
+      - text: "Interactive Dashboard"
+        href: https://jonminton.github.io/glm-dashboard-explainer/
+        target: _blank
 
   sidebar:
     - id: main-course
@@ -23,6 +28,12 @@ website:
           text: "(2) Likelihood and Simulation Theory"
         - href: pages/main-course/complete-simulation-example/index.qmd
           text: "(3) Complete Simulation Example"
+
+    - id: extended-glms
+      title: "Extended GLM Families"
+      contents:
+        - href: pages/main-course/ordinal-regression/index.qmd
+          text: "Ordinal Regression"
 
     - id: extra-courses
       title: "Supplementary Courses"
