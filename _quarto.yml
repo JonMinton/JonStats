@@ -56,10 +56,17 @@ website:
 
 format:
   html:
-    theme: 
+    theme:
       light: cosmo
       dark: slate
     css: styles.css
     toc: true
+    # Render maths with KaTeX instead of Quarto's default MathJax. The MathJax
+    # path injects a third-party polyfill <script>; before Quarto 1.5 its host
+    # was polyfill.io, which was sold in 2024 and began serving malware (a
+    # supply-chain attack). KaTeX needs no polyfill, so this removes that
+    # dependency entirely and cannot regress if the site is rebuilt with an
+    # older Quarto. See the equivalent fix in the jon-blog repo.
+    html-math-method: katex
 
 
