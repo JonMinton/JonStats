@@ -1,0 +1,211 @@
+---
+title: "Negative Binomial Regression"
+subtitle: "When counts vary more than Poisson allows"
+code-fold: show
+warning: false
+message: false
+---
+
+::: {.callout-note}
+## About this page: an AI-first draft
+
+Like the [Ordinal Regression](../ordinal-regression/index.qmd) page, this was drafted
+*first* by an AI assistant (Claude Fable) and is offered as a starting point for me to
+revise. It is part of closing a gap that opened when the [GLM Dashboard
+Explainer](https://jonminton.github.io/glm-dashboard-explainer/) ran ahead of these notes:
+the dashboard has a full negative-binomial tutorial, while JonStats had nothing on
+overdispersion at all. The R code is real and runnable; the prose deserves a careful read.
+:::
+
+## Where this fits
+
+The organising idea of these notes is the two-part model (after King, Tomz & Wittenberg,
+2000): a **stochastic component** for what kind of random thing the response is, and a
+**systematic component** for how the predictors move it.
+
+$$
+Y_i \sim f(\theta_i, \alpha) \qquad\qquad \theta_i = g(X_i, \beta)
+$$
+
+[Poisson regression](../intro-to-glms/index.qmd) is the standard first model for counts:
+$f$ is the Poisson distribution and $g$ is the log link. But Poisson comes with a hidden
+promise that real count data routinely breaks. Negative binomial regression keeps the same
+systematic side and the same log link — it only changes $f$, and in doing so it puts the
+usually-ignored parameter $\alpha$ to work.
+
+```{mermaid}
+flowchart LR
+  X
+  beta
+  eta
+  f
+  alpha
+  Y
+  X --> eta
+  beta --> eta
+  eta --> f
+  alpha --> f
+  f --> Y
+```
+
+Everything on this page is about that $\alpha$ — the **dispersion** — flowing into $f$.
+
+## The data: counts that won't sit still
+
+We'll use `MASS::quine`: the number of days each of 146 Australian schoolchildren was
+absent in a year, with predictors for ethnicity, sex, age group and learning ability.
+
+```{r}
+library(MASS)
+data(quine)
+c(mean = mean(quine$Days), variance = var(quine$Days))
+```
+
+The variance is roughly **sixteen times** the mean. That single fact is the whole problem,
+because of a peculiarity of the Poisson distribution.
+
+## Why Poisson isn't enough
+
+The Poisson distribution has exactly one parameter, and it does double duty: the mean and
+the variance are *the same number*,
+
+$$
+\operatorname{Var}(Y) = \operatorname{E}(Y) = \mu.
+$$
+
+That is a strong, testable claim — and counts in the wild rarely honour it. Real count data
+are usually **overdispersed**: more variable than their mean, because of unmeasured
+heterogeneity (some children are simply more absence-prone than their predictors reveal).
+
+We can see the strain directly. If the Poisson model were adequate, its residual deviance
+should be roughly equal to its residual degrees of freedom:
+
+```{r}
+m_pois <- glm(Days ~ Eth + Sex + Age + Lrn, family = poisson, data = quine)
+c(resid_deviance = deviance(m_pois),
+  df             = df.residual(m_pois),
+  ratio          = deviance(m_pois) / df.residual(m_pois))
+```
+
+A ratio near twelve, where we wanted one, is the model telling us it cannot account for how
+spread out the data are. The coefficients may not be badly wrong, but the *uncertainty* the
+model reports will be — far too small, as we'll see.
+
+## The negative binomial fix
+
+The negative binomial keeps the mean model $\mu_i = \exp(X_i\beta)$ untouched and adds a
+single **dispersion parameter** $\theta$ that lets the variance grow faster than the mean:
+
+$$
+\operatorname{Var}(Y) = \mu + \frac{\mu^2}{\theta}.
+$$
+
+This is a **variance function** — a statement about how spread depends on level — and it is
+the first time in this course that the "uninteresting" stochastic parameter $\alpha$ has
+become the point of the exercise. As $\theta \to \infty$ the extra term vanishes and the
+negative binomial collapses back to the Poisson; small $\theta$ means heavy overdispersion.
+Picturing the two variance functions side by side makes the difference concrete:
+
+```{r}
+#| fig-cap: "Poisson forces the variance to equal the mean (the straight line). The negative binomial lets it curve upward, with the fitted dispersion theta controlling how sharply."
+#| fig-width: 7
+#| fig-height: 3.4
+library(ggplot2)
+m_nb  <- glm.nb(Days ~ Eth + Sex + Age + Lrn, data = quine)
+theta <- m_nb$theta
+mu    <- seq(0, 60, length.out = 200)
+
+vf <- rbind(
+  data.frame(mu = mu, variance = mu,                  model = "Poisson:  Var = mu"),
+  data.frame(mu = mu, variance = mu + mu^2 / theta,   model = "Negative binomial:  Var = mu + mu^2 / theta")
+)
+
+ggplot(vf, aes(mu, variance, colour = model)) +
+  geom_line(linewidth = 1) +
+  labs(x = "mean count (mu)", y = "variance", colour = NULL,
+       title = "Two variance functions") +
+  theme_minimal() +
+  theme(legend.position = "top")
+```
+
+## Fitting it in R
+
+`MASS::glm.nb` fits the negative binomial, estimating $\theta$ alongside the coefficients:
+
+```{r}
+summary(m_nb)
+```
+
+The coefficient block reads exactly like a Poisson fit — same log link, same kind of
+log-rate coefficients. What is new is the line beneath it reporting the estimated
+dispersion:
+
+```{r}
+m_nb$theta
+```
+
+A small $\theta$ like this confirms heavy overdispersion. And the model comparison is
+decisive — the negative binomial is an enormously better fit for the same predictors:
+
+```{r}
+AIC(m_pois, m_nb)
+```
+
+## Why only betas look at betas (again)
+
+A recurring lesson in these notes is that the raw coefficients are seldom the thing to read
+off directly. With a log link they are log **rate ratios**, so the interpretable quantity is
+their exponential:
+
+```{r}
+round(exp(coef(m_nb)), 3)
+```
+
+Each value multiplies the *expected count*. So switching the `Eth` indicator multiplies the
+expected number of absences by about $0.57$ (roughly a 43% reduction), holding the other
+predictors fixed.
+
+But the deeper lesson here is about the numbers you *didn't* ask to see — the standard
+errors. The Poisson and negative binomial models give nearly the same point estimates, yet
+very different standard errors, because the Poisson model wrongly believes the data are far
+tidier than they are. Fitting Poisson to overdispersed counts produces standard errors that
+are too small, $t$-statistics that are too large, and a procession of significance stars
+that should not be there. This is the count-data face of the warning in the [P-Values and
+Statistical Significance](../../extra-courses/p-values-stat-sig/index.qmd) notes: a model
+that misstates the variance will misstate your confidence, and overdispersion is one of the
+commonest ways for that to happen quietly.
+
+## Quasi-Poisson and other routes
+
+The negative binomial is not the only response to overdispersion.
+
+- **Quasi-Poisson** (`family = quasipoisson`) takes a blunter approach: it keeps the Poisson
+  mean model but multiplies all the standard errors by an estimated dispersion factor. It
+  fixes the inference without committing to a full distribution for the counts — useful, but
+  it cannot be compared by AIC because it has no likelihood.
+- **Zero-inflation** is a different problem again — an *excess of zeros* over what any single
+  count distribution predicts, handled by a two-part mixture. The dashboard covers it as a
+  separate tutorial; it stretches the framework further than this page does.
+
+## Try it interactively
+
+::: {.callout-tip}
+## Try it interactively
+The companion [GLM Dashboard
+Explainer](https://jonminton.github.io/glm-dashboard-explainer/) has an interactive
+negative-binomial walkthrough that lets you watch overdispersion break a Poisson fit and
+then be absorbed by the dispersion parameter: [Tutorial 4: Overdispersed
+Counts](https://jonminton.github.io/glm-dashboard-explainer/tutorials/04-negbin/systematic.html).
+:::
+
+## Further reading and connections
+
+- **The framework.** [Intro to GLMs](../intro-to-glms/index.qmd) introduces the Poisson
+  model and the log link that this page reuses unchanged.
+- **The inference angle.** [P-Values and Statistical
+  Significance](../../extra-courses/p-values-stat-sig/index.qmd) is the natural companion:
+  overdispersion is a concrete reason a model's reported certainty can be untrustworthy.
+- **The interactive companion.** The other extended families — gamma, beta, ordinal and
+  zero-inflated counts — have tutorials on the [GLM Dashboard
+  Explainer](https://jonminton.github.io/glm-dashboard-explainer/), some not yet written up
+  here.

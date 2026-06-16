@@ -34,6 +34,10 @@ website:
       contents:
         - href: pages/main-course/ordinal-regression/index.qmd
           text: "Ordinal Regression"
+        - href: pages/main-course/negative-binomial-regression/index.qmd
+          text: "Negative Binomial Regression"
+        - href: pages/main-course/beta-regression/index.qmd
+          text: "Beta Regression"
 
     - id: extra-courses
       title: "Supplementary Courses"
