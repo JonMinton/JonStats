@@ -102,7 +102,7 @@
     "href": "pages/main-course/statistics-as-circuits/index.html#conclusion",
     "title": "Statistics as Circuit Boards",
     "section": "Conclusion",
-    "text": "Conclusion\nThis post aimed to re-introduce many of the key intuitions I’ve tried to develop in my main stats post series, but with a focus on the graphical intuition and concepts involved in statistical simulation, rather than just the algebra and R code examples. I hope this provides a useful complementary set of materials for thinking about statistical inference and statistical simulation. As mentioned at the start of the post, this is largely how I tend to think about statistical modelling, and so hopefully this way of thinking is useful for others who want to use statistical models more effectively too."
+    "text": "Conclusion\nThis post aimed to re-introduce many of the key intuitions I’ve tried to develop in my main stats post series, but with a focus on the graphical intuition and concepts involved in statistical simulation, rather than just the algebra and R code examples. I hope this provides a useful complementary set of materials for thinking about statistical inference and statistical simulation. For an interactive version of the GLM ‘circuit’ — where you can choose distributions, link functions, and predictors yourself — see the GLM Dashboard. As mentioned at the start of the post, this is largely how I tend to think about statistical modelling, and so hopefully this way of thinking is useful for others who want to use statistical models more effectively too."
   },
   {
     "objectID": "pages/main-course/statistics-as-circuits/index.html#footnotes",
@@ -761,5 +761,295 @@
     "title": "Introduction to Generalised Linear Models",
     "section": "Footnotes",
     "text": "Footnotes\n\n\nNote from Claude: This unified GLM framework is taught in several excellent online courses. Andrew Ng’s Machine Learning Specialization on Coursera covers these concepts from an ML perspective, emphasizing how gradient descent iteratively adjusts parameters (β) to minimize loss—the same calibration loop described here. For Python implementations, the statsmodels library (statsmodels.api.GLM) provides comprehensive GLM functionality similar to R’s glm(), while scikit-learn focuses on specific model types (LogisticRegression, LinearRegression) with streamlined APIs optimized for machine learning workflows.↩︎\nNote from Claude: In machine learning terminology, these link functions g(.) correspond to activation functions in neural networks. The logistic function described here is identical to the sigmoid activation commonly used in ML. Modern deep learning extends this concept: neural networks chain multiple transformations together, while GLMs apply a single transformation. The cross-entropy loss function used to train logistic regression classifiers in ML is mathematically equivalent to the negative log-likelihood used in traditional GLM estimation. Python users can explore these connections using PyTorch (torch.nn.functional.sigmoid) or TensorFlow (tf.nn.sigmoid), which implement the same logistic transformation.↩︎\nUsing some base R graphics functions as I’m feeling masochistic↩︎\nNote from Claude: For Python users, the equivalent functionality is available through multiple libraries. The statsmodels library most closely mirrors R’s approach: statsmodels.api.GLM(y, X, family=sm.families.Gaussian()) is equivalent to R’s glm(y ~ x, family=gaussian()). For production ML workflows, scikit-learn provides LinearRegression() and LogisticRegression() with simpler APIs but less statistical detail. The fast.ai course “Practical Deep Learning for Coders” demonstrates how these GLM concepts scale to deep learning, showing that even complex neural networks follow the same fit-predict-evaluate loop described in this series.↩︎\nNote here I’m using \\(x_j\\), not \\(x_i\\), and that \\(X\\beta\\) is shorthand for \\(\\beta_0 + \\beta_1 x_1 + \\beta_2 x_2 + \\beta_3 x_3\\) and so on. In using the \\(j\\) suffix, I’m referring to just one of the specific \\(x\\) values, \\(x_1\\), \\(x_2\\), \\(x_3\\), which is equivalent to selecting one of the columns in \\(X\\). By contrast \\(i\\) should be considered shorthand for selection of one of the rows of \\(X\\), i.e. one of the series of observations that goes into the dataset \\(D\\).↩︎\n\\(E(.)\\) is the expectation operator, and \\(|\\) indicates a condition. So, the two terms mean, respectively, what is the expected value of the outcome if the variable of interest is ‘switched on’?, and what is the expected value of the outcome if the variable of interest is ‘switched off’?↩︎\nThe logistic function maps any real number z onto the value range 0 to 1. z is \\(X\\beta\\), which in non-matrix notation is equivalent to a sum of products \\(\\sum_{k=0}^{K}x_k\\beta_k\\) (where, usually, \\(x_0\\) is 1, i.e. the intercept term). Another way of expressing this would be something like \\(\\sum_{k \\in S}x_k\\beta_k\\) where by default \\(S = \\{0, 1, 2, ..., K\\}\\). We can instead imagine partitioning out \\(S = \\{S^{-J}, S^{J}\\}\\) where the superscript \\(J\\) indicates the Jth variable, and \\(-J\\) indicates everything in \\(S\\) apart from the Jth variable. Where J is a discrete variable, the effect of J on \\(P(Y=1)\\) is \\(logistic({\\sum_{k \\in S^{-J}}x_k\\beta_k + \\beta_J}) - logistic({\\sum_{k \\in S^{-J}}x_k\\beta_k})\\), where \\(logistic(z) = \\frac{1}{1 + e^{-z}}\\). The marginal effect of the \\(\\beta_J\\) coefficient thus depends on the other term \\(\\sum_{k \\in S^{-J}}x_k\\beta_k\\). Where this other term is set to 0 the marginal effect of \\(\\beta_J\\) becomes \\(logistic(\\beta_J) - logistic(0)\\). According to p.82 of this chapter by Gelman we can equivalently ask the question ‘what is the first derivative of the logistic regression with respect to \\(\\beta\\)?’. Asking more about this to Wolfram Alpha we get this page of information, and scrolling down to the section on the global minimum we indeed get an absolute value of \\(\\frac{1}{4}\\), so the maximum change in \\(P(Y=1)\\) given a unit change in \\(\\beta\\) is indeed one quarter of the value of \\(\\beta\\), hence why the ‘divide-by-four’ heuristic ‘works’. This isn’t quite a full derivation, but more explanation than I was planning for a footnote! In general, it’s better just to remember ‘divide-by-four’ than go down the rabbit warren of derivation each time! (As I’ve just learned, to my cost, writing this footnote!)↩︎\nWe should always expect the absolute value of a coefficient for a discrete variable to be less than four, for this reason.↩︎\nThe lower bound for the marginal effect of a discrete variable, or any variable, is zero. This is when the absolute value of the sum of the product of the other variables is infinite.↩︎\nOr the base R expand.grid function↩︎\nNote from Claude: The marginal effects approach demonstrated here connects directly to modern machine learning interpretability methods. SHAP (SHapley Additive exPlanations) values and partial dependence plots serve similar purposes—quantifying feature importance beyond simple coefficients. In Python, the marginaleffects package (ported from R) provides these calculations, while scikit-learn’s PartialDependenceDisplay and the SHAP library (shap.Explainer) offer ML-focused alternatives. Coursera’s “Machine Learning Specialization” by Andrew Ng and Molnar (2022) both cover how traditional statistical inference concepts like marginal effects extend to complex models.↩︎"
+  },
+  {
+    "objectID": "pages/main-course/ordinal-regression/index.html",
+    "href": "pages/main-course/ordinal-regression/index.html",
+    "title": "Ordinal Regression",
+    "section": "",
+    "text": "NoteAbout this page: an AI-first draft\n\n\n\nThis page was drafted first by an AI assistant (Claude Fable), and is offered as a starting point for me to revise rather than as a finished, hand-checked piece.\nIt exists because of a small role-reversal. The written notes here are meant to be the canonical home for the theory, with the GLM Dashboard Explainer acting as the interactive companion. But while building out the dashboard, the companion ran ahead of the course: the dashboard gained a complete ordinal-regression tutorial (and a few other model families) while JonStats had no ordinal material at all. Rather than leave that gap, the dashboard work was used to seed this page.\nTreat the worked numbers below as machine-generated. The R code is real and runnable, but the prose around it deserves a careful read before you rely on it.",
+    "crumbs": [
+      "Ordinal Regression"
+    ]
+  },
+  {
+    "objectID": "pages/main-course/ordinal-regression/index.html#where-ordinal-regression-fits",
+    "href": "pages/main-course/ordinal-regression/index.html#where-ordinal-regression-fits",
+    "title": "Ordinal Regression",
+    "section": "Where ordinal regression fits",
+    "text": "Where ordinal regression fits\nThroughout these notes the organising idea has been the two-part view of a model (after King, Tomz & Wittenberg, 2000): a stochastic component saying what kind of random thing the response is, and a systematic component saying how the predictors push it around.\nStochastic Component\n\nY_i \\sim f(\\theta_i, \\alpha)\n\nSystematic Component\n\n\\theta_i = g(X_i, \\beta)\n\nLinear, logistic and Poisson regression are all just particular choices of f (the family) and g (the link). Ordinal regression is another choice — but it is the first one in this course where the systematic side has to stretch a little, because a single intercept is no longer enough.\n\n\n\n\n\nflowchart LR\n  X\n  beta\n  eta\n  thresholds\n  Y\n  X --&gt; eta\n  beta --&gt; eta\n  eta --&gt; thresholds\n  thresholds --&gt; Y\n\n\n\n\n\n\nThe new ingredient, compared with the pipeline in Intro to GLMs, is the thresholds box between the linear predictor and the observed category. That box is the whole story of this page.",
+    "crumbs": [
+      "Ordinal Regression"
+    ]
+  },
+  {
+    "objectID": "pages/main-course/ordinal-regression/index.html#the-data-ordered-categories",
+    "href": "pages/main-course/ordinal-regression/index.html#the-data-ordered-categories",
+    "title": "Ordinal Regression",
+    "section": "The data: ordered categories",
+    "text": "The data: ordered categories\nAn ordinal response is one whose categories have a natural order, but no claim to equal spacing. Survey items on a Likert scale (strongly disagree … strongly agree), pain recorded as none / mild / moderate / severe, satisfaction as low / medium / high — all ordered, none safely treated as numbers.\nWe’ll use MASS::housing, the canonical ordinal dataset: a frequency table of householders’ satisfaction with their housing, cross-classified by the type of housing, their sense of influence over management, and their degree of contact with other residents.\n\n\nCode\nlibrary(MASS)\ndata(housing)\nhead(housing)\n\n\n     Sat   Infl  Type Cont Freq\n1    Low    Low Tower  Low   21\n2 Medium    Low Tower  Low   21\n3   High    Low Tower  Low   28\n4    Low Medium Tower  Low   34\n5 Medium Medium Tower  Low   22\n6   High Medium Tower  Low   36\n\n\nThe response Sat is an ordered factor with three levels, Low &lt; Medium &lt; High.\nTwo tempting shortcuts are both wrong, and wrong in instructive ways:\n\nTreat the categories as numbers (Low = 1, Medium = 2, High = 3) and run a linear regression. This smuggles in an assumption nobody actually believes: that the gap from low to medium equals the gap from medium to high. It will also happily predict a satisfaction of 2.7, which means nothing.\nTreat the categories as unordered and run a multinomial model. This is safe but wasteful: it throws away the ordering, estimating a separate set of coefficients for every category and so spending far more parameters than the problem needs.\n\nOrdinal regression threads between the two: it respects the ordering without pretending the gaps are equal.",
+    "crumbs": [
+      "Ordinal Regression"
+    ]
+  },
+  {
+    "objectID": "pages/main-course/ordinal-regression/index.html#a-latent-variable-cut-into-categories",
+    "href": "pages/main-course/ordinal-regression/index.html#a-latent-variable-cut-into-categories",
+    "title": "Ordinal Regression",
+    "section": "A latent variable, cut into categories",
+    "text": "A latent variable, cut into categories\nThe standard way to make sense of “ordered but not equally spaced” is to imagine a continuous latent variable sitting behind the observed category — a quantity of “satisfaction” that really is continuous, which we only ever see coarsened into low, medium or high by where it falls relative to a set of thresholds (or cut-points).\nConcretely, write the latent quantity for individual i as a linear predictor plus noise, \\eta_i = X_i\\beta, and place J-1 thresholds \\alpha_1 &lt; \\alpha_2 &lt; \\dots &lt;\n\\alpha_{J-1} along its scale. We observe category j when the latent value lands between \\alpha_{j-1} and \\alpha_j. With a logistic noise term this gives the cumulative logit (or proportional odds) model:\n\nP(Y_i \\le j) = \\operatorname{logit}^{-1}(\\alpha_j - X_i\\beta), \\qquad j = 1, \\dots, J-1,\n\nwith the conventions P(Y_i \\le 0) = 0 and P(Y_i \\le J) = 1. The probability of an individual category is then the difference of two neighbouring cumulative curves, P(Y_i = j) = P(Y_i \\le j) - P(Y_i \\le j-1).\nThe crucial structural fact — the thing that makes ordinal regression ordinal — is that there are J-1 thresholds for J categories, and the same slope vector \\beta acts at every threshold. The predictors move the whole latent distribution left or right; the thresholds stay put and decide how that movement gets carved into categories.\n\n\n\n\n\n\nTipThe picture, hand-drawn\n\n\n\nI’ve drawn this latent-variable-with-thresholds construction out by hand before, in a slightly different setting: Factor analysis with ordinal variables, in the hand-drawn statistics series on the blog. The diagram on page four of that post — a continuous scale chopped into ordinal levels by a row of thresholds, with the rule “if there are T levels there are T-1 thresholds” — is exactly the construction above.\nOne honest caveat, because the two settings are not the same model. That post is about measurement: recovering a latent factor from a battery of ordinal indicators (the thresholds there are estimated per item, and there are no predictors). This page is about regression: a single ordinal outcome whose latent scale is driven by predictors X\\beta, with one shared set of thresholds. Same atom — which slice of an unequally-spaced latent continuum do you fall into? — put to two different uses. If you want the static, measurement-flavoured intuition, read the drawing; if you want the moving, predictor-driven version, read on (or open the interactive demo).",
+    "crumbs": [
+      "Ordinal Regression"
+    ]
+  },
+  {
+    "objectID": "pages/main-course/ordinal-regression/index.html#fitting-it-in-r",
+    "href": "pages/main-course/ordinal-regression/index.html#fitting-it-in-r",
+    "title": "Ordinal Regression",
+    "section": "Fitting it in R",
+    "text": "Fitting it in R\nMASS::polr (“proportional odds logistic regression”) fits the cumulative logit model. The housing data come pre-tabulated, so we pass the cell counts as weights.\n\n\nCode\nm &lt;- polr(Sat ~ Infl + Type + Cont, weights = Freq, data = housing, Hess = TRUE)\nsummary(m)\n\n\nCall:\npolr(formula = Sat ~ Infl + Type + Cont, data = housing, weights = Freq, \n    Hess = TRUE)\n\nCoefficients:\n                Value Std. Error t value\nInflMedium     0.5664    0.10465   5.412\nInflHigh       1.2888    0.12716  10.136\nTypeApartment -0.5724    0.11924  -4.800\nTypeAtrium    -0.3662    0.15517  -2.360\nTypeTerrace   -1.0910    0.15149  -7.202\nContHigh       0.3603    0.09554   3.771\n\nIntercepts:\n            Value   Std. Error t value\nLow|Medium  -0.4961  0.1248    -3.9739\nMedium|High  0.6907  0.1255     5.5049\n\nResidual Deviance: 3479.149 \nAIC: 3495.149 \n\n\nThe output has two blocks, and the split matters. The Coefficients are the slopes \\beta — one per predictor, not one per threshold. The Intercepts are the thresholds \\alpha_1, \\alpha_2 — here labelled Low|Medium and Medium|High, the two cut-points between three categories. There is no single “intercept”: its job has been taken over by the J-1 thresholds.\nWe can show the fitted thresholds on the latent scale, which is the rendered, real-data version of the hand-drawn picture above:\n\n\nCode\nlibrary(ggplot2)\n\nthr &lt;- as.numeric(m$zeta)                      # fitted thresholds (cut-points)\nd &lt;- data.frame(x = seq(-4, 4, length.out = 400))\nd$density &lt;- dlogis(d$x)\n\nggplot(d, aes(x, density)) +\n  geom_area(fill = \"grey85\") +\n  geom_vline(xintercept = thr, linetype = \"dashed\") +\n  annotate(\"text\", x = c(-1.5, 0.1, 1.9), y = 0.265,\n           label = c(\"Low\", \"Medium\", \"High\")) +\n  labs(\n    x = \"latent satisfaction scale\",\n    y = \"density\",\n    title = \"J = 3 categories, J - 1 = 2 thresholds\"\n  ) +\n  theme_minimal()\n\n\n\n\n\nThe two fitted thresholds cut the latent (logistic) satisfaction scale into Low, Medium and High. The curve is the latent noise distribution for a household at the baseline of every predictor.\n\n\n\n\nMove a household toward higher influence or away from terraced housing and you slide the whole curve rightward under those fixed dashed lines, shifting probability mass from Low toward High.",
+    "crumbs": [
+      "Ordinal Regression"
+    ]
+  },
+  {
+    "objectID": "pages/main-course/ordinal-regression/index.html#why-only-betas-look-at-betas-again",
+    "href": "pages/main-course/ordinal-regression/index.html#why-only-betas-look-at-betas-again",
+    "title": "Ordinal Regression",
+    "section": "Why only betas look at betas (again)",
+    "text": "Why only betas look at betas (again)\nA recurring theme of these notes is that the raw \\beta coefficients are usually not the quantity you want to read off and interpret directly. Ordinal regression is a clean case in point: a coefficient here is neither a change in the response (the response is a category, not a number) nor a probability. On the logit scale it is a log odds ratio, so the interpretable quantity is its exponential:\n\n\nCode\nround(exp(coef(m)), 3)\n\n\n   InflMedium      InflHigh TypeApartment    TypeAtrium   TypeTerrace \n        1.762         3.628         0.564         0.693         0.336 \n     ContHigh \n        1.434 \n\n\nBecause the model is proportional odds, each of these has a single, threshold-independent reading: \\exp(\\beta_k) is the multiplicative effect on the odds of being in a higher category rather than a lower one, for a one-unit change in x_k — and that same factor applies at every cut-point. So high influence over management multiplies the odds of greater satisfaction by about 3.6, while living in a terrace (versus a tower block) multiplies them by about 0.34.\nThat “one push across all thresholds” is precisely the assumption that lets ordinal regression be so economical — and the thing you should be suspicious of (see below).\nIf you want something genuinely interpretable on the scale people care about, predict probabilities for a concrete profile rather than staring at coefficients:\n\n\nCode\nnewd &lt;- data.frame(Infl = \"Medium\", Type = \"Tower\", Cont = \"High\")\nround(predict(m, newd, type = \"probs\"), 3)\n\n\n   Low Medium   High \n 0.194  0.247  0.559 \n\n\nA medium-influence tower-block household with high resident contact is predicted most likely to report high satisfaction — but with real probability mass in all three categories, which is exactly the kind of honest, hedged statement a categorical outcome deserves.",
+    "crumbs": [
+      "Ordinal Regression"
+    ]
+  },
+  {
+    "objectID": "pages/main-course/ordinal-regression/index.html#the-proportional-odds-assumption",
+    "href": "pages/main-course/ordinal-regression/index.html#the-proportional-odds-assumption",
+    "title": "Ordinal Regression",
+    "section": "The proportional-odds assumption",
+    "text": "The proportional-odds assumption\nThe economy of the model — one slope vector instead of one per threshold — rests entirely on the proportional-odds assumption: that a predictor’s effect is the same at every cut-point. That is a real, testable restriction, and it is not always met.\nA few practical notes:\n\nIt can be checked formally (for example a Brant test, or by comparing against a model that lets the slopes vary across thresholds).\nThe ordinal package’s clm() is a more flexible modern alternative to polr, and supports partial proportional odds, where you relax the assumption for just the predictors that need it.\nA latent variable made of normal rather than logistic noise gives the ordered probit model — the same threshold construction, a different cumulative curve, and usually near-identical conclusions. This is the same logit-versus-probit choice that appears for binary outcomes in Intro to GLMs.",
+    "crumbs": [
+      "Ordinal Regression"
+    ]
+  },
+  {
+    "objectID": "pages/main-course/ordinal-regression/index.html#try-it-interactively",
+    "href": "pages/main-course/ordinal-regression/index.html#try-it-interactively",
+    "title": "Ordinal Regression",
+    "section": "Try it interactively",
+    "text": "Try it interactively\n\n\n\n\n\n\nTipTry it interactively\n\n\n\nThe companion GLM Dashboard Explainer has a full ordinal-regression walkthrough — choosing the response and predictors, picking the cumulative-logit link, and an interactive version of the threshold picture above where you can drag the latent distribution under the cut-points and watch the category probabilities change: Tutorial 7: Ordered Categories.",
+    "crumbs": [
+      "Ordinal Regression"
+    ]
+  },
+  {
+    "objectID": "pages/main-course/ordinal-regression/index.html#further-reading-and-connections",
+    "href": "pages/main-course/ordinal-regression/index.html#further-reading-and-connections",
+    "title": "Ordinal Regression",
+    "section": "Further reading and connections",
+    "text": "Further reading and connections\n\nThe hand-drawn origin. Factor analysis with ordinal variables gives the latent-variable-and-thresholds intuition in pen and paper, and its sequel How factor analysis is used in testing carries the same idea into how standardised aptitude and knowledge tests are built — the bridge from ordinal models toward item-response theory.\nThe framework. Intro to GLMs sets up the stochastic/systematic split that this page extends, and the why-only-betas argument that the odds-ratio interpretation above is an instance of.\nThe interactive companion. Tutorials for the other model families — Poisson, negative binomial, gamma, beta and zero-inflated counts — live on the GLM Dashboard Explainer, several of which are not yet written up here.",
+    "crumbs": [
+      "Ordinal Regression"
+    ]
+  },
+  {
+    "objectID": "pages/main-course/negative-binomial-regression/index.html",
+    "href": "pages/main-course/negative-binomial-regression/index.html",
+    "title": "Negative Binomial Regression",
+    "section": "",
+    "text": "NoteAbout this page: an AI-first draft\n\n\n\nLike the Ordinal Regression page, this was drafted first by an AI assistant (Claude Fable) and is offered as a starting point for me to revise. It is part of closing a gap that opened when the GLM Dashboard Explainer ran ahead of these notes: the dashboard has a full negative-binomial tutorial, while JonStats had nothing on overdispersion at all. The R code is real and runnable; the prose deserves a careful read.",
+    "crumbs": [
+      "Negative Binomial Regression"
+    ]
+  },
+  {
+    "objectID": "pages/main-course/negative-binomial-regression/index.html#where-this-fits",
+    "href": "pages/main-course/negative-binomial-regression/index.html#where-this-fits",
+    "title": "Negative Binomial Regression",
+    "section": "Where this fits",
+    "text": "Where this fits\nThe organising idea of these notes is the two-part model (after King, Tomz & Wittenberg, 2000): a stochastic component for what kind of random thing the response is, and a systematic component for how the predictors move it.\n\nY_i \\sim f(\\theta_i, \\alpha) \\qquad\\qquad \\theta_i = g(X_i, \\beta)\n\nPoisson regression is the standard first model for counts: f is the Poisson distribution and g is the log link. But Poisson comes with a hidden promise that real count data routinely breaks. Negative binomial regression keeps the same systematic side and the same log link — it only changes f, and in doing so it puts the usually-ignored parameter \\alpha to work.\n\n\n\n\n\nflowchart LR\n  X\n  beta\n  eta\n  f\n  alpha\n  Y\n  X --&gt; eta\n  beta --&gt; eta\n  eta --&gt; f\n  alpha --&gt; f\n  f --&gt; Y\n\n\n\n\n\n\nEverything on this page is about that \\alpha — the dispersion — flowing into f.",
+    "crumbs": [
+      "Negative Binomial Regression"
+    ]
+  },
+  {
+    "objectID": "pages/main-course/negative-binomial-regression/index.html#the-data-counts-that-wont-sit-still",
+    "href": "pages/main-course/negative-binomial-regression/index.html#the-data-counts-that-wont-sit-still",
+    "title": "Negative Binomial Regression",
+    "section": "The data: counts that won’t sit still",
+    "text": "The data: counts that won’t sit still\nWe’ll use MASS::quine: the number of days each of 146 Australian schoolchildren was absent in a year, with predictors for ethnicity, sex, age group and learning ability.\n\n\nCode\nlibrary(MASS)\ndata(quine)\nc(mean = mean(quine$Days), variance = var(quine$Days))\n\n\n    mean variance \n 16.4589 264.1673 \n\n\nThe variance is roughly sixteen times the mean. That single fact is the whole problem, because of a peculiarity of the Poisson distribution.",
+    "crumbs": [
+      "Negative Binomial Regression"
+    ]
+  },
+  {
+    "objectID": "pages/main-course/negative-binomial-regression/index.html#why-poisson-isnt-enough",
+    "href": "pages/main-course/negative-binomial-regression/index.html#why-poisson-isnt-enough",
+    "title": "Negative Binomial Regression",
+    "section": "Why Poisson isn’t enough",
+    "text": "Why Poisson isn’t enough\nThe Poisson distribution has exactly one parameter, and it does double duty: the mean and the variance are the same number,\n\n\\operatorname{Var}(Y) = \\operatorname{E}(Y) = \\mu.\n\nThat is a strong, testable claim — and counts in the wild rarely honour it. Real count data are usually overdispersed: more variable than their mean, because of unmeasured heterogeneity (some children are simply more absence-prone than their predictors reveal).\nWe can see the strain directly. If the Poisson model were adequate, its residual deviance should be roughly equal to its residual degrees of freedom:\n\n\nCode\nm_pois &lt;- glm(Days ~ Eth + Sex + Age + Lrn, family = poisson, data = quine)\nc(resid_deviance = deviance(m_pois),\n  df             = df.residual(m_pois),\n  ratio          = deviance(m_pois) / df.residual(m_pois))\n\n\nresid_deviance             df          ratio \n    1696.70655      139.00000       12.20652 \n\n\nA ratio near twelve, where we wanted one, is the model telling us it cannot account for how spread out the data are. The coefficients may not be badly wrong, but the uncertainty the model reports will be — far too small, as we’ll see.",
+    "crumbs": [
+      "Negative Binomial Regression"
+    ]
+  },
+  {
+    "objectID": "pages/main-course/negative-binomial-regression/index.html#the-negative-binomial-fix",
+    "href": "pages/main-course/negative-binomial-regression/index.html#the-negative-binomial-fix",
+    "title": "Negative Binomial Regression",
+    "section": "The negative binomial fix",
+    "text": "The negative binomial fix\nThe negative binomial keeps the mean model \\mu_i = \\exp(X_i\\beta) untouched and adds a single dispersion parameter \\theta that lets the variance grow faster than the mean:\n\n\\operatorname{Var}(Y) = \\mu + \\frac{\\mu^2}{\\theta}.\n\nThis is a variance function — a statement about how spread depends on level — and it is the first time in this course that the “uninteresting” stochastic parameter \\alpha has become the point of the exercise. As \\theta \\to \\infty the extra term vanishes and the negative binomial collapses back to the Poisson; small \\theta means heavy overdispersion. Picturing the two variance functions side by side makes the difference concrete:\n\n\nCode\nlibrary(ggplot2)\nm_nb  &lt;- glm.nb(Days ~ Eth + Sex + Age + Lrn, data = quine)\ntheta &lt;- m_nb$theta\nmu    &lt;- seq(0, 60, length.out = 200)\n\nvf &lt;- rbind(\n  data.frame(mu = mu, variance = mu,                  model = \"Poisson:  Var = mu\"),\n  data.frame(mu = mu, variance = mu + mu^2 / theta,   model = \"Negative binomial:  Var = mu + mu^2 / theta\")\n)\n\nggplot(vf, aes(mu, variance, colour = model)) +\n  geom_line(linewidth = 1) +\n  labs(x = \"mean count (mu)\", y = \"variance\", colour = NULL,\n       title = \"Two variance functions\") +\n  theme_minimal() +\n  theme(legend.position = \"top\")\n\n\n\n\n\nPoisson forces the variance to equal the mean (the straight line). The negative binomial lets it curve upward, with the fitted dispersion theta controlling how sharply.",
+    "crumbs": [
+      "Negative Binomial Regression"
+    ]
+  },
+  {
+    "objectID": "pages/main-course/negative-binomial-regression/index.html#fitting-it-in-r",
+    "href": "pages/main-course/negative-binomial-regression/index.html#fitting-it-in-r",
+    "title": "Negative Binomial Regression",
+    "section": "Fitting it in R",
+    "text": "Fitting it in R\nMASS::glm.nb fits the negative binomial, estimating \\theta alongside the coefficients:\n\n\nCode\nsummary(m_nb)\n\n\n\nCall:\nglm.nb(formula = Days ~ Eth + Sex + Age + Lrn, data = quine, \n    init.theta = 1.274892646, link = log)\n\nCoefficients:\n            Estimate Std. Error z value Pr(&gt;|z|)    \n(Intercept)  2.89458    0.22842  12.672  &lt; 2e-16 ***\nEthN        -0.56937    0.15333  -3.713 0.000205 ***\nSexM         0.08232    0.15992   0.515 0.606710    \nAgeF1       -0.44843    0.23975  -1.870 0.061425 .  \nAgeF2        0.08808    0.23619   0.373 0.709211    \nAgeF3        0.35690    0.24832   1.437 0.150651    \nLrnSL        0.29211    0.18647   1.566 0.117236    \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n(Dispersion parameter for Negative Binomial(1.2749) family taken to be 1)\n\n    Null deviance: 195.29  on 145  degrees of freedom\nResidual deviance: 167.95  on 139  degrees of freedom\nAIC: 1109.2\n\nNumber of Fisher Scoring iterations: 1\n\n              Theta:  1.275 \n          Std. Err.:  0.161 \n\n 2 x log-likelihood:  -1093.151 \n\n\nThe coefficient block reads exactly like a Poisson fit — same log link, same kind of log-rate coefficients. What is new is the line beneath it reporting the estimated dispersion:\n\n\nCode\nm_nb$theta\n\n\n[1] 1.274893\n\n\nA small \\theta like this confirms heavy overdispersion. And the model comparison is decisive — the negative binomial is an enormously better fit for the same predictors:\n\n\nCode\nAIC(m_pois, m_nb)\n\n\n       df      AIC\nm_pois  7 2299.184\nm_nb    8 1109.151",
+    "crumbs": [
+      "Negative Binomial Regression"
+    ]
+  },
+  {
+    "objectID": "pages/main-course/negative-binomial-regression/index.html#why-only-betas-look-at-betas-again",
+    "href": "pages/main-course/negative-binomial-regression/index.html#why-only-betas-look-at-betas-again",
+    "title": "Negative Binomial Regression",
+    "section": "Why only betas look at betas (again)",
+    "text": "Why only betas look at betas (again)\nA recurring lesson in these notes is that the raw coefficients are seldom the thing to read off directly. With a log link they are log rate ratios, so the interpretable quantity is their exponential:\n\n\nCode\nround(exp(coef(m_nb)), 3)\n\n\n(Intercept)        EthN        SexM       AgeF1       AgeF2       AgeF3 \n     18.076       0.566       1.086       0.639       1.092       1.429 \n      LrnSL \n      1.339 \n\n\nEach value multiplies the expected count. So switching the Eth indicator multiplies the expected number of absences by about 0.57 (roughly a 43% reduction), holding the other predictors fixed.\nBut the deeper lesson here is about the numbers you didn’t ask to see — the standard errors. The Poisson and negative binomial models give nearly the same point estimates, yet very different standard errors, because the Poisson model wrongly believes the data are far tidier than they are. Fitting Poisson to overdispersed counts produces standard errors that are too small, t-statistics that are too large, and a procession of significance stars that should not be there. This is the count-data face of the warning in the P-Values and Statistical Significance notes: a model that misstates the variance will misstate your confidence, and overdispersion is one of the commonest ways for that to happen quietly.",
+    "crumbs": [
+      "Negative Binomial Regression"
+    ]
+  },
+  {
+    "objectID": "pages/main-course/negative-binomial-regression/index.html#quasi-poisson-and-other-routes",
+    "href": "pages/main-course/negative-binomial-regression/index.html#quasi-poisson-and-other-routes",
+    "title": "Negative Binomial Regression",
+    "section": "Quasi-Poisson and other routes",
+    "text": "Quasi-Poisson and other routes\nThe negative binomial is not the only response to overdispersion.\n\nQuasi-Poisson (family = quasipoisson) takes a blunter approach: it keeps the Poisson mean model but multiplies all the standard errors by an estimated dispersion factor. It fixes the inference without committing to a full distribution for the counts — useful, but it cannot be compared by AIC because it has no likelihood.\nZero-inflation is a different problem again — an excess of zeros over what any single count distribution predicts, handled by a two-part mixture. The dashboard covers it as a separate tutorial; it stretches the framework further than this page does.",
+    "crumbs": [
+      "Negative Binomial Regression"
+    ]
+  },
+  {
+    "objectID": "pages/main-course/negative-binomial-regression/index.html#try-it-interactively",
+    "href": "pages/main-course/negative-binomial-regression/index.html#try-it-interactively",
+    "title": "Negative Binomial Regression",
+    "section": "Try it interactively",
+    "text": "Try it interactively\n\n\n\n\n\n\nTipTry it interactively\n\n\n\nThe companion GLM Dashboard Explainer has an interactive negative-binomial walkthrough that lets you watch overdispersion break a Poisson fit and then be absorbed by the dispersion parameter: Tutorial 4: Overdispersed Counts.",
+    "crumbs": [
+      "Negative Binomial Regression"
+    ]
+  },
+  {
+    "objectID": "pages/main-course/negative-binomial-regression/index.html#further-reading-and-connections",
+    "href": "pages/main-course/negative-binomial-regression/index.html#further-reading-and-connections",
+    "title": "Negative Binomial Regression",
+    "section": "Further reading and connections",
+    "text": "Further reading and connections\n\nThe framework. Intro to GLMs introduces the Poisson model and the log link that this page reuses unchanged.\nThe inference angle. P-Values and Statistical Significance is the natural companion: overdispersion is a concrete reason a model’s reported certainty can be untrustworthy.\nThe interactive companion. The other extended families — gamma, beta, ordinal and zero-inflated counts — have tutorials on the GLM Dashboard Explainer, some not yet written up here.",
+    "crumbs": [
+      "Negative Binomial Regression"
+    ]
+  },
+  {
+    "objectID": "pages/main-course/beta-regression/index.html",
+    "href": "pages/main-course/beta-regression/index.html",
+    "title": "Beta Regression",
+    "section": "",
+    "text": "NoteAbout this page: an AI-first draft\n\n\n\nAs with the Ordinal and Negative Binomial pages, this was drafted first by an AI assistant (Claude Fable), to close a gap the GLM Dashboard Explainer had opened by running ahead of these notes. The R here is deliberately built from base R — we simulate data and fit it by hand — both so the page renders without extra packages and because that approach suits the likelihood-and-simulation spirit of this course. Read the prose critically before relying on it.",
+    "crumbs": [
+      "Beta Regression"
+    ]
+  },
+  {
+    "objectID": "pages/main-course/beta-regression/index.html#where-this-fits",
+    "href": "pages/main-course/beta-regression/index.html#where-this-fits",
+    "title": "Beta Regression",
+    "section": "Where this fits",
+    "text": "Where this fits\nThese notes keep returning to the two-part model (after King, Tomz & Wittenberg, 2000):\n\nY_i \\sim f(\\theta_i, \\alpha) \\qquad\\qquad \\theta_i = g(X_i, \\beta)\n\nEach model so far has been a particular choice of family f and link g. Beta regression is the choice for a response that is a continuous proportion — a number strictly between 0 and 1 — and it makes a point worth pausing on: it reuses the exact same logit link as logistic regression, but pairs it with a different distribution. Link and family are separate choices, and this is the cleanest demonstration of that in the whole course.",
+    "crumbs": [
+      "Beta Regression"
+    ]
+  },
+  {
+    "objectID": "pages/main-course/beta-regression/index.html#the-data-proportions-rates-and-shares",
+    "href": "pages/main-course/beta-regression/index.html#the-data-proportions-rates-and-shares",
+    "title": "Beta Regression",
+    "section": "The data: proportions, rates and shares",
+    "text": "The data: proportions, rates and shares\nPlenty of responses live on the open interval (0, 1) without being yes/no outcomes: the proportion of exam questions a student gets right, a candidate’s share of the vote in a constituency, the fraction of an insurer’s premiums paid out in claims, the proportion of a budget spent. These are continuous, but bounded.\nTwo familiar models both misfit them:\n\nOrdinary linear regression treats the response as unbounded, so it will cheerfully predict a proportion of 1.3 or -0.2, and it assumes a constant variance that a bounded quantity cannot have (a proportion near 0 or 1 simply has less room to vary).\nLogistic regression is for binary outcomes — counts of successes out of trials — not a continuous proportion that was never a count in the first place. Forcing a 0.73 to be “0.73 of a success” throws away the fact that it is a genuine measured fraction.\n\nBeta regression keeps the response on (0,1) and lets its variance shrink toward the boundaries, where bounded data really do vary less.",
+    "crumbs": [
+      "Beta Regression"
+    ]
+  },
+  {
+    "objectID": "pages/main-course/beta-regression/index.html#the-beta-distribution",
+    "href": "pages/main-course/beta-regression/index.html#the-beta-distribution",
+    "title": "Beta Regression",
+    "section": "The beta distribution",
+    "text": "The beta distribution\nThe beta distribution lives on (0, 1) and is usually written with two shape parameters, but for regression it is far more natural to reparameterise it in terms of a mean \\mu and a precision \\phi:\n\n\\operatorname{E}(Y) = \\mu, \\qquad \\operatorname{Var}(Y) = \\frac{\\mu(1-\\mu)}{1 + \\phi}.\n\nThe mean \\mu is what the predictors will steer; \\phi plays the role that \\sigma^2 does for the Gaussian or \\theta does for the negative binomial — a dispersion-style parameter that the data also have to estimate. Larger \\phi means more precise, i.e. less variance around the mean. The distribution’s great virtue is flexibility of shape while staying inside the boundaries:\n\n\nCode\nlibrary(ggplot2)\n\nshapes &lt;- list(\"mu = 0.3, phi = 15\" = c(0.3, 15),\n               \"mu = 0.5, phi = 8\"  = c(0.5, 8),\n               \"mu = 0.7, phi = 25\" = c(0.7, 25))\ngrid &lt;- do.call(rbind, lapply(names(shapes), function(nm) {\n  p &lt;- shapes[[nm]]\n  x &lt;- seq(0.001, 0.999, length.out = 300)\n  data.frame(x = x, density = dbeta(x, p[1] * p[2], (1 - p[1]) * p[2]), shape = nm)\n}))\n\nggplot(grid, aes(x, density, colour = shape)) +\n  geom_line(linewidth = 1) +\n  labs(x = \"y (a proportion)\", y = \"density\", colour = NULL,\n       title = \"Beta densities on (0, 1)\") +\n  theme_minimal() +\n  theme(legend.position = \"top\")\n\n\n\n\n\nThe beta distribution takes many shapes on (0,1) — here for three (mean, precision) pairs — but never strays outside the boundaries, unlike a Gaussian.",
+    "crumbs": [
+      "Beta Regression"
+    ]
+  },
+  {
+    "objectID": "pages/main-course/beta-regression/index.html#the-same-logit-link-a-different-distribution",
+    "href": "pages/main-course/beta-regression/index.html#the-same-logit-link-a-different-distribution",
+    "title": "Beta Regression",
+    "section": "The same logit link, a different distribution",
+    "text": "The same logit link, a different distribution\nTo connect the mean to predictors we need a link that keeps \\mu inside (0,1). That is exactly the job the logit did for logistic regression, and we use it again unchanged:\n\n\\mu_i = \\operatorname{logit}^{-1}(X_i\\beta) = \\frac{1}{1 + e^{-X_i\\beta}}.\n\nSo the logit keeps reappearing across this course, each time bolted onto a different family: binomial for binary outcomes (logistic regression, in Intro to GLMs); the cumulative form for ordered categories (Ordinal Regression); and now beta for continuous proportions. The link handles the constraint; the family handles the shape of the randomness. They are genuinely independent dials.",
+    "crumbs": [
+      "Beta Regression"
+    ]
+  },
+  {
+    "objectID": "pages/main-course/beta-regression/index.html#fitting-it-simulate-then-recover",
+    "href": "pages/main-course/beta-regression/index.html#fitting-it-simulate-then-recover",
+    "title": "Beta Regression",
+    "section": "Fitting it: simulate, then recover",
+    "text": "Fitting it: simulate, then recover\nBeta regression in R is usually done with the betareg package, which is not part of base R. Rather than depend on it, we can lean on the likelihood and simulation theory developed earlier and do the whole thing from scratch: invent data with a known answer, then let an optimiser climb the log-likelihood back to it. If the machinery is sound, the estimates should land on the truth.\nFirst, simulate proportions from a beta model with coefficients we choose:\n\n\nCode\nset.seed(2024)\nn  &lt;- 300\nx1 &lt;- runif(n, -2, 2)\nx2 &lt;- rbinom(n, 1, 0.5)\nX  &lt;- cbind(1, x1, x2)\n\nbeta_true &lt;- c(0.4, 0.8, -0.5)                 # intercept, x1, x2\nphi_true  &lt;- 15                                # precision\nmu &lt;- plogis(X %*% beta_true)                  # the logit link\ny  &lt;- rbeta(n, mu * phi_true, (1 - mu) * phi_true)\n\n\nThe beta log-likelihood for one observation, in the mean–precision parameterisation, is\n\n\\ell_i = \\ln\\Gamma(\\phi) - \\ln\\Gamma(\\mu_i\\phi) - \\ln\\Gamma\\!\\big((1-\\mu_i)\\phi\\big)\n       + (\\mu_i\\phi - 1)\\ln y_i + \\big((1-\\mu_i)\\phi - 1\\big)\\ln(1-y_i),\n\nwhich dbeta(..., log = TRUE) computes for us. We hand the negative of its sum to optim — the “Robo-Chauffeur” of the likelihood page — optimising \\log\\phi so the precision stays positive:\n\n\nCode\nneg_loglik &lt;- function(par) {\n  beta &lt;- par[1:3]\n  phi  &lt;- exp(par[4])                          # keep precision positive\n  mu   &lt;- plogis(X %*% beta)\n  -sum(dbeta(y, mu * phi, (1 - mu) * phi, log = TRUE))\n}\n\nfit &lt;- optim(c(0, 0, 0, 0), neg_loglik, method = \"BFGS\", hessian = TRUE)\nse  &lt;- sqrt(diag(solve(fit$hessian)))          # SEs from the Hessian, as on the likelihood page\n\ndata.frame(\n  parameter = c(\"(Intercept)\", \"x1\", \"x2\"),\n  true      = beta_true,\n  estimate  = round(fit$par[1:3], 3),\n  std_error = round(se[1:3], 3)\n)\n\n\n    parameter true estimate std_error\n1 (Intercept)  0.4    0.421     0.051\n2          x1  0.8    0.807     0.030\n3          x2 -0.5   -0.509     0.067\n\n\nThe estimates sit right on top of the true values, and the precision is recovered too:\n\n\nCode\nc(true = phi_true, estimate = round(exp(fit$par[4]), 2))\n\n\n    true estimate \n   15.00    13.72 \n\n\nNote the standard errors came straight from the curvature of the log-likelihood at its peak — the inverse Hessian — exactly the connection between curvature and uncertainty made in the likelihood and simulation theory notes. The same Hessian an optimiser uses to find the peak efficiently is the one that tells you how sure to be once you are there.",
+    "crumbs": [
+      "Beta Regression"
+    ]
+  },
+  {
+    "objectID": "pages/main-course/beta-regression/index.html#the-one-liner-in-practice",
+    "href": "pages/main-course/beta-regression/index.html#the-one-liner-in-practice",
+    "title": "Beta Regression",
+    "section": "The one-liner in practice",
+    "text": "The one-liner in practice\nIn day-to-day work nobody hand-rolls the likelihood; the betareg package wraps all of the above — and adds proper inference, a model for the precision, diagnostics and predictions — into a single call that mirrors glm:\n\n\nCode\nlibrary(betareg)\nm &lt;- betareg(y ~ x1 + x2)        # same estimates as above, plus full inference\nsummary(m)\n\n\nThat betareg is a separate package, rather than another family inside base R’s glm(), is itself instructive: the GLM framework reaches comfortably past the handful of families R ships with.",
+    "crumbs": [
+      "Beta Regression"
+    ]
+  },
+  {
+    "objectID": "pages/main-course/beta-regression/index.html#why-only-betas-look-at-betas-again",
+    "href": "pages/main-course/beta-regression/index.html#why-only-betas-look-at-betas-again",
+    "title": "Beta Regression",
+    "section": "Why only betas look at betas (again)",
+    "text": "Why only betas look at betas (again)\nBecause the link is the logit, the coefficients are once more on the log-odds scale, not the proportion scale — so, as with logistic and ordinal regression, you cannot read a \\beta off and call it an effect on the proportion. Map it through the inverse logit for a concrete profile, or read \\exp(\\beta) as an odds ratio, but do not stare at the raw number.\nAnd the precision parameter \\phi is worth a glance of its own. It is the beta family’s version of the negative binomial’s \\theta and the Gaussian’s \\sigma^2: a second, stochastic-side parameter that the data must estimate and that governs how tightly the responses cluster around the fitted mean. Across these extended families, the same lesson keeps surfacing — the \\alpha in f(\\theta, \\alpha) is not always a nuisance to be ignored.",
+    "crumbs": [
+      "Beta Regression"
+    ]
+  },
+  {
+    "objectID": "pages/main-course/beta-regression/index.html#try-it-interactively",
+    "href": "pages/main-course/beta-regression/index.html#try-it-interactively",
+    "title": "Beta Regression",
+    "section": "Try it interactively",
+    "text": "Try it interactively\n\n\n\n\n\n\nTipTry it interactively\n\n\n\nThe companion GLM Dashboard Explainer has an interactive beta walkthrough — choosing a bounded-proportion response, seeing the logit link reused, and watching the beta distribution’s shape flex inside (0,1): Tutorial 6: Bounded Proportions.",
+    "crumbs": [
+      "Beta Regression"
+    ]
+  },
+  {
+    "objectID": "pages/main-course/beta-regression/index.html#further-reading-and-connections",
+    "href": "pages/main-course/beta-regression/index.html#further-reading-and-connections",
+    "title": "Beta Regression",
+    "section": "Further reading and connections",
+    "text": "Further reading and connections\n\nThe link, reused. Intro to GLMs introduces the logit for logistic regression, and Ordinal Regression reuses it in cumulative form — beta regression is the third appearance of the same link.\nThe machinery. Likelihood and Simulation Theory is where optim, the log-likelihood and the Hessian-as-uncertainty come from, and the Complete Simulation Example is the simulate-then-recover loop used above, in full.\nThe interactive companion. The other extended families have tutorials on the GLM Dashboard Explainer.",
+    "crumbs": [
+      "Beta Regression"
+    ]
   }
 ]
