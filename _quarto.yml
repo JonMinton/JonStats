@@ -1,8 +1,14 @@
 project:
   type: website
+  resources:
+    # CNAME binds the stats.jonminton.net custom domain on GitHub Pages.
+    # It must ship with every publish: `quarto publish gh-pages` rewrites
+    # the whole branch, and losing this file silently unbinds the domain.
+    - CNAME
 
 website:
   title: "JonStats"
+  site-url: https://stats.jonminton.net/
   navbar:
     left:
       - href: index.qmd

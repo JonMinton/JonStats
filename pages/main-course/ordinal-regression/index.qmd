@@ -129,7 +129,7 @@ thresholds stay put and decide how that movement gets carved into categories.
 
 I've drawn this latent-variable-with-thresholds construction out by hand before, in a
 slightly different setting: [Factor analysis with ordinal
-variables](https://jonminton.github.io/jon-blog/posts/handdrawn-stats/factor-analysis-ordinal-variables-analogue/),
+variables](https://blog.jonminton.net/posts/handdrawn-stats/factor-analysis-ordinal-variables-analogue/),
 in the hand-drawn statistics series on the blog. The diagram on page four of that post —
 a continuous scale chopped into ordinal levels by a row of thresholds, with the rule "if
 there are $T$ levels there are $T-1$ thresholds" — is *exactly* the construction above.
@@ -260,10 +260,10 @@ Categories](https://jonminton.github.io/glm-dashboard-explainer/tutorials/07-ord
 ## Further reading and connections
 
 - **The hand-drawn origin.** [Factor analysis with ordinal
-  variables](https://jonminton.github.io/jon-blog/posts/handdrawn-stats/factor-analysis-ordinal-variables-analogue/)
+  variables](https://blog.jonminton.net/posts/handdrawn-stats/factor-analysis-ordinal-variables-analogue/)
   gives the latent-variable-and-thresholds intuition in pen and paper, and its sequel
   [How factor analysis is used in
-  testing](https://jonminton.github.io/jon-blog/posts/handdrawn-stats/how-factor-analysis-is-used-in-testing/)
+  testing](https://blog.jonminton.net/posts/handdrawn-stats/how-factor-analysis-is-used-in-testing/)
   carries the same idea into how standardised aptitude and knowledge tests are built —
   the bridge from ordinal models toward item-response theory.
 - **The framework.** [Intro to GLMs](../intro-to-glms/index.qmd) sets up the
