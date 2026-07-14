@@ -604,7 +604,7 @@ P(Y_i \le j) = \operatorname{logit}^{-1}(\alpha_j - X_i\beta), \qquad j = 1, \do
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>I’ve drawn this latent-variable-with-thresholds construction out by hand before, in a slightly different setting: <a href="https://jonminton.github.io/jon-blog/posts/handdrawn-stats/factor-analysis-ordinal-variables-analogue/">Factor analysis with ordinal variables</a>, in the hand-drawn statistics series on the blog. The diagram on page four of that post — a continuous scale chopped into ordinal levels by a row of thresholds, with the rule “if there are <span class="math inline">T</span> levels there are <span class="math inline">T-1</span> thresholds” — is <em>exactly</em> the construction above.</p>
+<p>I’ve drawn this latent-variable-with-thresholds construction out by hand before, in a slightly different setting: <a href="https://blog.jonminton.net/posts/handdrawn-stats/factor-analysis-ordinal-variables-analogue/">Factor analysis with ordinal variables</a>, in the hand-drawn statistics series on the blog. The diagram on page four of that post — a continuous scale chopped into ordinal levels by a row of thresholds, with the rule “if there are <span class="math inline">T</span> levels there are <span class="math inline">T-1</span> thresholds” — is <em>exactly</em> the construction above.</p>
 <p>One honest caveat, because the two settings are not the same model. That post is about <strong>measurement</strong>: recovering a latent <em>factor</em> from a battery of ordinal indicators (the thresholds there are estimated per item, and there are no predictors). This page is about <strong>regression</strong>: a single ordinal <em>outcome</em> whose latent scale is driven by predictors <span class="math inline">X\beta</span>, with one shared set of thresholds. Same atom — <em>which slice of an unequally-spaced latent continuum do you fall into?</em> — put to two different uses. If you want the static, measurement-flavoured intuition, read the drawing; if you want the moving, predictor-driven version, read on (or open the <a href="#try-it-interactively">interactive demo</a>).</p>
 </div>
 </div>
@@ -735,7 +735,7 @@ AIC: 3495.149 </code></pre>
 <section id="further-reading-and-connections" class="level2">
 <h2 class="anchored" data-anchor-id="further-reading-and-connections">Further reading and connections</h2>
 <ul>
-<li><strong>The hand-drawn origin.</strong> <a href="https://jonminton.github.io/jon-blog/posts/handdrawn-stats/factor-analysis-ordinal-variables-analogue/">Factor analysis with ordinal variables</a> gives the latent-variable-and-thresholds intuition in pen and paper, and its sequel <a href="https://jonminton.github.io/jon-blog/posts/handdrawn-stats/how-factor-analysis-is-used-in-testing/">How factor analysis is used in testing</a> carries the same idea into how standardised aptitude and knowledge tests are built — the bridge from ordinal models toward item-response theory.</li>
+<li><strong>The hand-drawn origin.</strong> <a href="https://blog.jonminton.net/posts/handdrawn-stats/factor-analysis-ordinal-variables-analogue/">Factor analysis with ordinal variables</a> gives the latent-variable-and-thresholds intuition in pen and paper, and its sequel <a href="https://blog.jonminton.net/posts/handdrawn-stats/how-factor-analysis-is-used-in-testing/">How factor analysis is used in testing</a> carries the same idea into how standardised aptitude and knowledge tests are built — the bridge from ordinal models toward item-response theory.</li>
 <li><strong>The framework.</strong> <a href="../../../pages/main-course/intro-to-glms/index.html">Intro to GLMs</a> sets up the stochastic/systematic split that this page extends, and the <a href="../../../pages/main-course/intro-to-glms/index.html#why-only-betas-look-at-betas">why-only-betas argument</a> that the odds-ratio interpretation above is an instance of.</li>
 <li><strong>The interactive companion.</strong> Tutorials for the other model families — Poisson, negative binomial, gamma, beta and zero-inflated counts — live on the <a href="https://jonminton.github.io/glm-dashboard-explainer/">GLM Dashboard Explainer</a>, several of which are not yet written up here.</li>
 </ul>
@@ -830,7 +830,7 @@ AIC: 3495.149 </code></pre>
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp('/' + window.location.host + '/');
+        var filterRegex = new RegExp("https:\/\/stats\.jonminton\.net\/");
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
