@@ -3,6 +3,8 @@
 **Source:** Adapted from jon-blog repo's Claude documentation
 **Date:** 2025-12-06
 
+> **NOTE (2026-07):** The `experimental/claude` staging branch has been retired — all work now happens directly on `main` (see CLAUDE.md § Branch Workflow). References to `experimental/claude` below are historical; the branch-sync and branch-merge instructions no longer apply. The footnote, rendering, and conflict-resolution techniques remain valid.
+
 ## Key Learnings from jon-blog
 
 ### 1. Footnote Rendering Issues
