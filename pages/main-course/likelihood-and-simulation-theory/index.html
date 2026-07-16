@@ -431,7 +431,7 @@ window.Quarto = {
 </ul>
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link" href="https://jonminton.github.io/glm-dashboard-explainer/" target="_blank"> 
+    <a class="nav-link" href="https://stats-board.jonminton.net/" target="_blank"> 
 <span class="menu-text">Interactive Dashboard</span></a>
   </li>  
 </ul>
@@ -598,7 +598,7 @@ L(\beta, \sigma^2 | y) = \prod{L(y_i | \mu_i, \sigma^2)}
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Watch gradient ascent and Newton-Raphson algorithms navigate a likelihood surface in the <a href="https://jonminton.github.io/glm-dashboard-explainer/optimization/">GLM Dashboard optimisation visualisations</a>.</p>
+<p>Watch gradient ascent and Newton-Raphson algorithms navigate a likelihood surface in the <a href="https://stats-board.jonminton.net/optimization/">GLM Dashboard optimisation visualisations</a>.</p>
 </div>
 </div>
 <p>To continue the example from the slides, we can write out a function for calculating the log likelihood of standard linear regression as follows:</p>
@@ -717,7 +717,7 @@ L(\beta, \sigma^2 | y) = \prod{L(y_i | \mu_i, \sigma^2)}
 <section id="optim-for-parameter-point-estimation-our-robo-chauffeur" class="level2">
 <h2 class="anchored" data-anchor-id="optim-for-parameter-point-estimation-our-robo-chauffeur"><code>optim</code> for parameter point estimation: our Robo-Chauffeur</h2>
 <p>Note how the <code>llNormal</code> function takes a single argument, <code>pars</code>, which packages up all the specific candidate parameter values we want to try out. In our previous post, we also had a ‘feeder function’, <code>feed_to_ll</code>, which takes the various <span class="math inline">\beta</span> candidate values from the grid and packages them into <code>pars</code>. In our previous post, we had to specify the candidate values to try to feed to <code>llNormal</code> packages inside <code>pars</code>.</p>
-<p>But we don’t have to do this. We can instead use an algorithm to take candidate parameters, try them out, then make new candidate parameters and try them out, for us. Much as a taxi driver needs to know where to meet a passenger, but doesn’t want the passenger to tell them exactly which route to take, we just need to specify a starting set of values for the parameters to optimise. The <a href="https://jonminton.github.io/glm-dashboard-explainer/optimization/">GLM Dashboard optimisation visualisations</a> show this process animated on a real terrain — you can watch algorithms climb from starting points to peaks, seeing exactly how different optimisation strategies navigate the surface. R’s standard way of doing this is with the <code>optim</code> function. Here’s it in action:</p>
+<p>But we don’t have to do this. We can instead use an algorithm to take candidate parameters, try them out, then make new candidate parameters and try them out, for us. Much as a taxi driver needs to know where to meet a passenger, but doesn’t want the passenger to tell them exactly which route to take, we just need to specify a starting set of values for the parameters to optimise. The <a href="https://stats-board.jonminton.net/optimization/">GLM Dashboard optimisation visualisations</a> show this process animated on a real terrain — you can watch algorithms climb from starting points to peaks, seeing exactly how different optimisation strategies navigate the surface. R’s standard way of doing this is with the <code>optim</code> function. Here’s it in action:</p>
 <div class="cell">
 <details open="" class="code-fold">
 <summary>Code</summary>
