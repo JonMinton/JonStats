@@ -12,7 +12,7 @@ message: false
 Like the [Ordinal Regression](../ordinal-regression/index.qmd) page, this was drafted
 *first* by an AI assistant (Claude Fable) and is offered as a starting point for me to
 revise. It is part of closing a gap that opened when the [GLM Dashboard
-Explainer](https://jonminton.github.io/glm-dashboard-explainer/) ran ahead of these notes:
+Explainer](https://stats-board.jonminton.net/) ran ahead of these notes:
 the dashboard has a full negative-binomial tutorial, while JonStats had nothing on
 overdispersion at all. The R code is real and runnable; the prose deserves a careful read.
 :::
@@ -192,10 +192,10 @@ The negative binomial is not the only response to overdispersion.
 ::: {.callout-tip}
 ## Try it interactively
 The companion [GLM Dashboard
-Explainer](https://jonminton.github.io/glm-dashboard-explainer/) has an interactive
+Explainer](https://stats-board.jonminton.net/) has an interactive
 negative-binomial walkthrough that lets you watch overdispersion break a Poisson fit and
 then be absorbed by the dispersion parameter: [Tutorial 4: Overdispersed
-Counts](https://jonminton.github.io/glm-dashboard-explainer/tutorials/04-negbin/systematic.html).
+Counts](https://stats-board.jonminton.net/tutorials/04-negbin/systematic.html).
 :::
 
 ## Further reading and connections
@@ -207,5 +207,5 @@ Counts](https://jonminton.github.io/glm-dashboard-explainer/tutorials/04-negbin/
   overdispersion is a concrete reason a model's reported certainty can be untrustworthy.
 - **The interactive companion.** The other extended families — gamma, beta, ordinal and
   zero-inflated counts — have tutorials on the [GLM Dashboard
-  Explainer](https://jonminton.github.io/glm-dashboard-explainer/), some not yet written up
+  Explainer](https://stats-board.jonminton.net/), some not yet written up
   here.

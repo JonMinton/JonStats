@@ -84,7 +84,7 @@ To reiterate, we can't change the data, but we can keep changing the candidate p
 
 ::: {.callout-tip}
 ## See it in action
-Watch gradient ascent and Newton-Raphson algorithms navigate a likelihood surface in the [GLM Dashboard optimisation visualisations](https://jonminton.github.io/glm-dashboard-explainer/optimization/).
+Watch gradient ascent and Newton-Raphson algorithms navigate a likelihood surface in the [GLM Dashboard optimisation visualisations](https://stats-board.jonminton.net/optimization/).
 :::
 
 To continue the example from the slides, we can write out a function for calculating the log likelihood of standard linear regression as follows:
@@ -196,7 +196,7 @@ One feature we noticed with the likelihood surface over $\beta_0$ and $\beta_1$ 
 
 Note how the `llNormal` function takes a single argument, `pars`, which packages up all the specific candidate parameter values we want to try out. In our previous post, we also had a 'feeder function', `feed_to_ll`, which takes the various $\beta$ candidate values from the grid and packages them into `pars`. In our previous post, we had to specify the candidate values to try to feed to `llNormal` packages inside `pars`. 
 
-But we don't have to do this. We can instead use an algorithm to take candidate parameters, try them out, then make new candidate parameters and try them out, for us. Much as a taxi driver needs to know where to meet a passenger, but doesn't want the passenger to tell them exactly which route to take, we just need to specify a starting set of values for the parameters to optimise. The [GLM Dashboard optimisation visualisations](https://jonminton.github.io/glm-dashboard-explainer/optimization/) show this process animated on a real terrain — you can watch algorithms climb from starting points to peaks, seeing exactly how different optimisation strategies navigate the surface. R's standard way of doing this is with the `optim` function. Here's it in action:
+But we don't have to do this. We can instead use an algorithm to take candidate parameters, try them out, then make new candidate parameters and try them out, for us. Much as a taxi driver needs to know where to meet a passenger, but doesn't want the passenger to tell them exactly which route to take, we just need to specify a starting set of values for the parameters to optimise. The [GLM Dashboard optimisation visualisations](https://stats-board.jonminton.net/optimization/) show this process animated on a real terrain — you can watch algorithms climb from starting points to peaks, seeing exactly how different optimisation strategies navigate the surface. R's standard way of doing this is with the `optim` function. Here's it in action:
 
 ```{r}
 

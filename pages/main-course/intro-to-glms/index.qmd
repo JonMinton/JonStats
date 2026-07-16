@@ -106,7 +106,7 @@ Pretty much all statistical model fitting involves iterating along this $g \to \
 
 ::: {.callout-tip}
 ## Try it interactively
-Practice choosing the right distribution and link function for different data types with the [GLM Dashboard interactive tutorials](https://jonminton.github.io/glm-dashboard-explainer/).
+Practice choosing the right distribution and link function for different data types with the [GLM Dashboard interactive tutorials](https://stats-board.jonminton.net/).
 :::
 
 ## Systematic components and link functions
@@ -269,7 +269,7 @@ quasibinomial(link = "logit")
 quasipoisson(link = "log")
 ```
 
-Each family has a default `link` argument, and for this `gaussian` family, this link is the identity function. To see how each of these families works in practice — choosing predictors, link functions, and distributions step-by-step — try the corresponding [GLM Dashboard](https://jonminton.github.io/glm-dashboard-explainer/) tutorials: [Gaussian](https://jonminton.github.io/glm-dashboard-explainer/tutorials/01-gaussian/systematic.html), [Binomial/Logistic](https://jonminton.github.io/glm-dashboard-explainer/tutorials/02-logistic/systematic.html), and [Poisson](https://jonminton.github.io/glm-dashboard-explainer/tutorials/03-poisson/systematic.html).
+Each family has a default `link` argument, and for this `gaussian` family, this link is the identity function. To see how each of these families works in practice — choosing predictors, link functions, and distributions step-by-step — try the corresponding [GLM Dashboard](https://stats-board.jonminton.net/) tutorials: [Gaussian](https://stats-board.jonminton.net/tutorials/01-gaussian/systematic.html), [Binomial/Logistic](https://stats-board.jonminton.net/tutorials/02-logistic/systematic.html), and [Poisson](https://stats-board.jonminton.net/tutorials/03-poisson/systematic.html).
 
 We can also see that, for both the `binomial` and `quasibinomial` family, the default link is `logit`, which transforms all predictors onto a 0-1 scale, as shown in the last post.
 
@@ -657,7 +657,7 @@ This section of the course has aimed to reintroduce statistics from the perspect
 - That all regression models can be thought of as just 'types' of GLM, with more in common than divides them
 - That we can and should aim for *substantive significance* when using the outputs of GLMs, i.e. use them for prediction and simulation rather than focus on whether individual coefficients are 'statistically significant' or not.
 
-For an interactive companion to this material, the [GLM Dashboard](https://jonminton.github.io/glm-dashboard-explainer/) lets you work through the same framework hands-on — choosing distributions, link functions, and fitting models for different data types.
+For an interactive companion to this material, the [GLM Dashboard](https://stats-board.jonminton.net/) lets you work through the same framework hands-on — choosing distributions, link functions, and fitting models for different data types.
 
 The [next section](../likelihood-and-simulation-theory/index.qmd) of the course delves further into the fundamentals of model fitting and statistical inference, including likelihood theory.
 

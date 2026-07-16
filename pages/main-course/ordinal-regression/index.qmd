@@ -14,7 +14,7 @@ starting point for me to revise rather than as a finished, hand-checked piece.
 
 It exists because of a small role-reversal. The written notes here are meant to be the
 canonical home for the theory, with the [GLM Dashboard
-Explainer](https://jonminton.github.io/glm-dashboard-explainer/) acting as the interactive
+Explainer](https://stats-board.jonminton.net/) acting as the interactive
 companion. But while building out the dashboard, the companion ran *ahead* of the course:
 the dashboard gained a complete ordinal-regression tutorial (and a few other model
 families) while JonStats had no ordinal material at all. Rather than leave that gap, the
@@ -249,12 +249,12 @@ A few practical notes:
 ::: {.callout-tip}
 ## Try it interactively
 The companion [GLM Dashboard
-Explainer](https://jonminton.github.io/glm-dashboard-explainer/) has a full ordinal-regression
+Explainer](https://stats-board.jonminton.net/) has a full ordinal-regression
 walkthrough — choosing the response and predictors, picking the cumulative-logit link,
 and an interactive version of the threshold picture above where you can drag the
 latent distribution under the cut-points and watch the category probabilities change:
 [Tutorial 7: Ordered
-Categories](https://jonminton.github.io/glm-dashboard-explainer/tutorials/07-ordinal/systematic.html).
+Categories](https://stats-board.jonminton.net/tutorials/07-ordinal/systematic.html).
 :::
 
 ## Further reading and connections
@@ -272,5 +272,5 @@ Categories](https://jonminton.github.io/glm-dashboard-explainer/tutorials/07-ord
   interpretation above is an instance of.
 - **The interactive companion.** Tutorials for the other model families — Poisson,
   negative binomial, gamma, beta and zero-inflated counts — live on the [GLM Dashboard
-  Explainer](https://jonminton.github.io/glm-dashboard-explainer/), several of which are
+  Explainer](https://stats-board.jonminton.net/), several of which are
   not yet written up here.

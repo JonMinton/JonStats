@@ -12,7 +12,7 @@ message: false
 As with the [Ordinal](../ordinal-regression/index.qmd) and [Negative
 Binomial](../negative-binomial-regression/index.qmd) pages, this was drafted *first* by an
 AI assistant (Claude Fable), to close a gap the [GLM Dashboard
-Explainer](https://jonminton.github.io/glm-dashboard-explainer/) had opened by running ahead
+Explainer](https://stats-board.jonminton.net/) had opened by running ahead
 of these notes. The R here is deliberately built from base R — we *simulate* data and fit it
 by hand — both so the page renders without extra packages and because that approach suits
 the likelihood-and-simulation spirit of this course. Read the prose critically before
@@ -208,10 +208,10 @@ keeps surfacing — the $\alpha$ in $f(\theta, \alpha)$ is not always a nuisance
 ::: {.callout-tip}
 ## Try it interactively
 The companion [GLM Dashboard
-Explainer](https://jonminton.github.io/glm-dashboard-explainer/) has an interactive beta
+Explainer](https://stats-board.jonminton.net/) has an interactive beta
 walkthrough — choosing a bounded-proportion response, seeing the logit link reused, and
 watching the beta distribution's shape flex inside $(0,1)$: [Tutorial 6: Bounded
-Proportions](https://jonminton.github.io/glm-dashboard-explainer/tutorials/06-beta/systematic.html).
+Proportions](https://stats-board.jonminton.net/tutorials/06-beta/systematic.html).
 :::
 
 ## Further reading and connections
@@ -225,4 +225,4 @@ Proportions](https://jonminton.github.io/glm-dashboard-explainer/tutorials/06-be
   Example](../complete-simulation-example/index.qmd) is the simulate-then-recover loop used
   above, in full.
 - **The interactive companion.** The other extended families have tutorials on the [GLM
-  Dashboard Explainer](https://jonminton.github.io/glm-dashboard-explainer/).
+  Dashboard Explainer](https://stats-board.jonminton.net/).

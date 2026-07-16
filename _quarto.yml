@@ -19,7 +19,7 @@ website:
       - sidebar:extra-courses
     right:
       - text: "Interactive Dashboard"
-        href: https://jonminton.github.io/glm-dashboard-explainer/
+        href: https://stats-board.jonminton.net/
         target: _blank
 
   sidebar:
