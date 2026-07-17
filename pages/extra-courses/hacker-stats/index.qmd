@@ -10,7 +10,9 @@ bibliography: references.bib
 
 ### Introduction
 
-This page discusses resampling approaches to statistical inference. Resampling approaches are a powerful and highly adaptable set of approaches for trying to get 'good enough' estimates of how statistically significant some observed value or summary of observed values is likely to be, or equivalently how likely what one's observed is to have been observed by chance. They can also be extended and applied to performing post-stratification, which allows samples of the population with known biases to be adjusted in ways that aim to mitigate such biases, and so produce summary estimates more representative of the population of interest. 
+This page discusses resampling approaches to statistical inference. Resampling approaches are a powerful and highly adaptable set of approaches for trying to get 'good enough' estimates of how statistically significant some observed value or summary of observed values is likely to be, or equivalently how likely what one's observed is to have been observed by chance. They can also be extended and applied to performing post-stratification, which allows samples of the population with known biases to be adjusted in ways that aim to mitigate such biases, and so produce summary estimates more representative of the population of interest.
+
+The GLM Dashboard now has an interactive companion to this whole course — bootstrap the median (a statistic with no analytic standard error), shuffle the two-coins example from this page yourself, line resampling up against Wald and Bayesian intervals, and repair a gamer-skewed sample by post-stratification: [Hacker Stats on the GLM Dashboard](https://stats-board.jonminton.net/hacker-stats/).
 
 ### Resampling as Hacker Stats
 

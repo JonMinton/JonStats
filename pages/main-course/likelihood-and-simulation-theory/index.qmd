@@ -328,7 +328,9 @@ Amongst the various bells, whistles and decals in the previous formula is the su
 
 And what's being *inverted* in the last formula? A horrible-looking expression, $[\frac{\delta^2lnL(\tilde{\theta}|y)}{\delta \tilde{\theta} \delta \tilde{\theta}^{'}}]_{\tilde{\theta} = \hat{\theta}}$, that's basically an answer to the question of *how curvy is the log likelihood surface at its peak position?* 
 
-Within @King98 (p.89, eq. 4.18), this expression (or rather the negative of the term) is defined as $I(\hat{\theta} | y)$, where $I(.)$ stands for **information**. 
+Within @King98 (p.89, eq. 4.18), this expression (or rather the negative of the term) is defined as $I(\hat{\theta} | y)$, where $I(.)$ stands for **information**.
+
+Probe the curvature of a likelihood surface yourself, and watch the Hessian become standard errors and a confidence ellipse, in the GLM Dashboard's interactive companion to this section: [Standard Errors from Curvature](https://stats-board.jonminton.net/inference/curvature.html).
 
 So, the algebra are saying
 
@@ -344,7 +346,9 @@ Of course this makes sense. If you ask someone "How long will this task take?", 
 - **Sharp gradients** mean **narrow uncertaintly intervals** mean **high information**
 
 
-This is, fundamentally, what the blind and barefoot person in the previous analogy is trying to achieve: by feeling out the local curvature around the highest point, they are trying to work out how much information they have about different pieces of the model. The curvature along any one dimension of the surface (equivalent to the 0 and 90 degree explorations) indicates how much information there is about any single coefficient, and the curvature along the equivalent of a 45 degree plane gives a measure of how associated any two coefficients tend to be. 
+This is, fundamentally, what the blind and barefoot person in the previous analogy is trying to achieve: by feeling out the local curvature around the highest point, they are trying to work out how much information they have about different pieces of the model. The curvature along any one dimension of the surface (equivalent to the 0 and 90 degree explorations) indicates how much information there is about any single coefficient, and the curvature along the equivalent of a 45 degree plane gives a measure of how associated any two coefficients tend to be.
+
+An interactive version of this exact exercise — three probes from the summit, filling in the Hessian matrix cell by cell, with the 45 degree probe revealing the covariance term — is on the [GLM Dashboard](https://stats-board.jonminton.net/inference/curvature.html).
 
 
 With these many analogies and equations spinning in our heads, let's now see how these concepts can be applied in practice.
