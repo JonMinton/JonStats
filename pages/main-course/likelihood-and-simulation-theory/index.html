@@ -873,6 +873,7 @@ Number of Fisher Scoring iterations: 2</code></pre>
 <p>Amongst the various bells, whistles and decals in the previous formula is the superscript <span class="math inline">(.)^{-1}</span>. This means <em>invert</em>, which for a single value means <span class="math inline">\frac{1}{.}</span> but for a matrix means something conceptually the same but technically not.</p>
 <p>And what’s being <em>inverted</em> in the last formula? A horrible-looking expression, <span class="math inline">[\frac{\delta^2lnL(\tilde{\theta}|y)}{\delta \tilde{\theta} \delta \tilde{\theta}^{'}}]_{\tilde{\theta} = \hat{\theta}}</span>, that’s basically an answer to the question of <em>how curvy is the log likelihood surface at its peak position?</em></p>
 <p>Within <span class="citation" data-cites="King98">King (<a href="#ref-King98" role="doc-biblioref">1998</a>)</span> (p.89, eq. 4.18), this expression (or rather the negative of the term) is defined as <span class="math inline">I(\hat{\theta} | y)</span>, where <span class="math inline">I(.)</span> stands for <strong>information</strong>.</p>
+<p>Probe the curvature of a likelihood surface yourself, and watch the Hessian become standard errors and a confidence ellipse, in the GLM Dashboard’s interactive companion to this section: <a href="https://stats-board.jonminton.net/inference/curvature.html">Standard Errors from Curvature</a>.</p>
 <p>So, the algebra are saying</p>
 <blockquote class="blockquote">
 <p>Uncertainty is inversely related to information</p>
@@ -887,6 +888,7 @@ Number of Fisher Scoring iterations: 2</code></pre>
 <li><strong>Sharp gradients</strong> mean <strong>narrow uncertaintly intervals</strong> mean <strong>high information</strong></li>
 </ul>
 <p>This is, fundamentally, what the blind and barefoot person in the previous analogy is trying to achieve: by feeling out the local curvature around the highest point, they are trying to work out how much information they have about different pieces of the model. The curvature along any one dimension of the surface (equivalent to the 0 and 90 degree explorations) indicates how much information there is about any single coefficient, and the curvature along the equivalent of a 45 degree plane gives a measure of how associated any two coefficients tend to be.</p>
+<p>An interactive version of this exact exercise — three probes from the summit, filling in the Hessian matrix cell by cell, with the 45 degree probe revealing the covariance term — is on the <a href="https://stats-board.jonminton.net/inference/curvature.html">GLM Dashboard</a>.</p>
 <p>With these many analogies and equations spinning in our heads, let’s now see how these concepts can be applied in practice.</p>
 </section>
 <section id="how-to-get-optim-to-return-this-information" class="level3">
