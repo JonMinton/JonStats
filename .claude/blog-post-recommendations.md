@@ -26,11 +26,13 @@ This document tracks potential blog posts from [Jon's Blog](https://jonminton.gi
 - **Rationale**: Natural extension of GLM main course
 - **Integration Point**: New section in main course or supplementary course
 - **Gap Filled**: Important statistical topic not yet covered
+- **Status**: Staged assets (raw blog copy with untranscribed handwritten scan) removed from `pages/extra-courses/repeated-measures/` on 2026-07-31. Blog post remains the source; a proper page needs the handwriting transcribed first
 
-### 4. Time and (state) change (survival modelling, Markov models)
+### 4. Time and (state) change (survival modelling, Markov models) ✅ DONE
 - **Rationale**: Related to but distinct from existing time series content
 - **Integration Point**: New supplementary course or addition to time series
 - **Scope**: Survival analysis, state transition models
+- **Status**: Migrated 2026-07-31 as `pages/extra-courses/survival-analysis/index.qmd`, listed in Supplementary Courses sidebar after Time Series
 
 ### 5. Factor Analysis Posts
 - "Factor analysis with ordinal variables"

@@ -73,6 +73,14 @@ Track which blog posts map to which stats site pages to facilitate propagating t
 - **Blog URLs**: https://jonminton.github.io/jon-blog/posts/glms/time-series/lms-are-glms-part-[19-25]/
 - **Typo Status**: Zero errors found in time series posts (cleanest content!)
 
+#### [pages/extra-courses/survival-analysis/index.qmd](pages/extra-courses/survival-analysis/index.qmd)
+**Blog Sources (1 post):**
+- "Time and (state) change: Some thoughts on Survival Modelling and Friends" (2025-03-30)
+- **Blog URL**: https://jonminton.github.io/jon-blog/posts/glms/one-off/time-and-change/
+- **Migrated**: 2026-07-31. Assets copied: `nltuk198020203.xlsx` (ONS lifetable), `competing-schedules.jpeg`
+- **Site adaptations**: frontmatter aligned to site conventions; "previous posts" reference now links to the time series course; Bayesian/MCMC aside now links to complete-simulation-example
+- **Key Content**: contingency tables → Markov models → absorbing states → survival → hazards/Weibull → lifetables → censoring → competing risks → discrete event simulation. Cox PH and Kaplan-Meier deliberately not covered
+
 #### [pages/extra-courses/hacker-stats/index.qmd](pages/extra-courses/hacker-stats/index.qmd)
 **Blog Sources (5 posts - main page consolidates all):**
 - "Hacker Stats: Intro and overview"

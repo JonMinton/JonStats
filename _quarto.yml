@@ -52,6 +52,8 @@ website:
           text: "Causal Inference"
         - href: pages/extra-courses/time-series/index.qmd
           text: "Time Series"
+        - href: pages/extra-courses/survival-analysis/index.qmd
+          text: "Survival Analysis"
         - href: pages/extra-courses/hacker-stats/index.qmd
           text: "Hacker Stats"
         - href: pages/extra-courses/p-values-stat-sig/index.qmd
