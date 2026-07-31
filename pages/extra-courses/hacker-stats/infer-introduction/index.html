@@ -402,6 +402,10 @@ window.Quarto = {
  <span class="dropdown-text">Time Series</span></a>
   </li>  
         <li>
+    <a class="dropdown-item" href="../../../../pages/extra-courses/survival-analysis/index.html">
+ <span class="dropdown-text">Survival Analysis</span></a>
+  </li>  
+        <li>
     <a class="dropdown-item" href="../../../../pages/extra-courses/hacker-stats/index.html">
  <span class="dropdown-text">Hacker Stats</span></a>
   </li>  
@@ -613,16 +617,16 @@ Null Hypothesis: independence
 # Groups:   replicate [10,000]
      age sex    replicate
    &lt;dbl&gt; &lt;fct&gt;      &lt;int&gt;
- 1    26 male           1
- 2    31 female         1
- 3    33 male           1
- 4    30 male           1
- 5    34 male           1
- 6    51 female         1
- 7    47 female         1
- 8    49 female         1
- 9    28 female         1
-10    49 female         1
+ 1    38 male           1
+ 2    39 female         1
+ 3    36 male           1
+ 4    23 male           1
+ 5    22 male           1
+ 6    45 female         1
+ 7    61 female         1
+ 8    35 female         1
+ 9    23 female         1
+10    29 female         1
 # ℹ 4,999,990 more rows</code></pre>
 </div>
 </div>
@@ -739,16 +743,16 @@ Null Hypothesis: ind...
 # Groups:   replicate [10,000]
    partyid college   replicate
    &lt;fct&gt;   &lt;fct&gt;         &lt;int&gt;
- 1 dem     degree            1
+ 1 rep     degree            1
  2 ind     no degree         1
  3 rep     degree            1
- 4 dem     no degree         1
- 5 rep     degree            1
- 6 rep     no degree         1
+ 4 rep     no degree         1
+ 5 ind     degree            1
+ 6 dem     no degree         1
  7 ind     no degree         1
- 8 ind     degree            1
- 9 dem     degree            1
-10 dem     no degree         1
+ 8 rep     degree            1
+ 9 ind     degree            1
+10 ind     no degree         1
 # ℹ 4,999,990 more rows</code></pre>
 </div>
 </div>
@@ -817,16 +821,16 @@ Null Hypothesis: ind...
 # A tibble: 10,000 × 2
    replicate  stat
        &lt;int&gt; &lt;dbl&gt;
- 1         1 0.891
- 2         2 3.12 
- 3         3 3.31 
- 4         4 3.58 
- 5         5 2.71 
- 6         6 4.94 
- 7         7 1.60 
- 8         8 1.80 
- 9         9 1.57 
-10        10 3.04 
+ 1         1 3.38 
+ 2         2 3.04 
+ 3         3 3.98 
+ 4         4 3.96 
+ 5         5 2.35 
+ 6         6 2.29 
+ 7         7 2.79 
+ 8         8 0.531
+ 9         9 5.17 
+10        10 0.404
 # ℹ 9,990 more rows</code></pre>
 </div>
 </div>
@@ -850,7 +854,7 @@ Null Hypothesis: ind...
 <pre><code># A tibble: 1 × 1
   p_value
     &lt;dbl&gt;
-1   0.243</code></pre>
+1   0.256</code></pre>
 </div>
 </div>
 <p>Around a quarter of Chi-squared values under the Null are as greater or greater than that observed in the real dataset. So there’s not great evidence of there being a relationship between having a degree and distribution of party affiliations.</p>
