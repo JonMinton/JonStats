@@ -14,24 +14,13 @@ Two practices worth keeping from the old workflow:
 
 This is Jon Minton's statistics course website - a static site built with Quarto that consolidates material from his blog into structured course pages. The site covers:
 - **Main Course**: GLM theory, likelihood, simulation, and "statistics as circuits"
-- **Supplementary Courses**: Causal inference, time series, hacker stats, p-values
-- **Extra Content**: Repeated measures (in development)
+- **Supplementary Courses**: Causal inference, time series, survival analysis, hacker stats, p-values
+
+(A repeated-measures page was formerly staged in `pages/extra-courses/repeated-measures/` as raw blog material — an untranscribed handwritten scan. Those assets were removed in July 2026; the blog post remains the source if that page is ever developed properly.)
 
 **Key Difference from jon-blog:** This site consolidates multiple blog posts into single comprehensive pages, making internal linking and content organization different from the blog.
 
 ## Building and Rendering
-
-**Preview the site locally:**
-```bash
-quarto preview
-```
-
-**Render the full site:**
-```bash
-quarto render
-```
-
-The rendered site outputs to the `_site/` directory (configured in `_quarto.yml`).
 
 **Monitoring long-running renders:**
 When `quarto render` is run in the background, use these **safe** methods to check progress without interrupting the process:
@@ -46,37 +35,6 @@ When `quarto render` is run in the background, use these **safe** methods to che
    Use the `BashOutput` tool with the background task ID. This reads buffered output without sending signals to the process.
 
 **AVOID:** Calling the `BashOutput` tool excessively or asking about progress too frequently, as this can sometimes interrupt the render process. Check progress sparingly (e.g., every few minutes for long renders).
-
-## Project Structure
-
-```
-.
-├── _quarto.yml              # Main Quarto configuration
-├── pages/                   # All course pages
-│   ├── main-course/        # Core GLM course content
-│   │   ├── intro-to-glms/
-│   │   ├── likelihood-and-simulation-theory/
-│   │   ├── complete-simulation-example/
-│   │   └── statistics-as-circuits/
-│   ├── extra-courses/      # Supplementary courses
-│   │   ├── causal-inference/
-│   │   ├── time-series/
-│   │   ├── hacker-stats/
-│   │   ├── p-values-stat-sig/
-│   │   └── repeated-measures/
-│   └── [course]/index.qmd  # Each course is a single comprehensive page
-├── _site/                   # Rendered output
-├── .claude/                 # Claude documentation and trackers
-├── scripts/                 # R dependency checker and render wrapper
-├── index.qmd               # Homepage
-└── about.qmd               # About page
-```
-
-**Page organization:**
-- Each course lives in `pages/[category]/[course-name]/index.qmd`
-- Multiple blog posts consolidated into single comprehensive pages
-- Each page may have a `references.bib` file for citations
-- YAML frontmatter required: title, code-fold, warning, message, bibliography (if needed)
 
 ## Content Source and Relationship to jon-blog
 
@@ -135,134 +93,23 @@ Here is some text before the list.
 Here is text after the list.
 ```
 
-Other formatting rules:
-- Paragraph breaks require blank lines between paragraphs (markdown standard)
-- Use `**bold**` for emphasis in bullet points when needed
-- Links: `[Link text](url)` for external, `[Link text](../path/index.qmd)` for internal
-
 **Images and media:**
 - Store in the same directory as the page's `index.qmd`
 - Reference with relative paths: `![Alt text](filename.png)`
 
 **Footnotes:**
 
-Quarto supports standard Markdown footnote syntax with two-part format:
-- Reference in text: `Some text here[^id]`
-- Definition elsewhere: `[^id]: Footnote content here`
-
-**CRITICAL - Footnote ID Convention:**
-- **ALWAYS use descriptive IDs** for Claude-generated footnotes
-- Format: `[^claude-shorttopic]` (e.g., `[^claude-ml]`, `[^claude-pvalues]`)
-- **NEVER use sequential numbers** ([^1], [^2]) for Claude footnotes - this creates collision risk with existing footnotes
-- User's original footnotes may use numbers - descriptive IDs prevent conflicts
-
-Example correct usage:
-```markdown
-The GLM framework applies to many models.[^claude-ml]
-
-[^claude-ml]: **Note from Claude:** This concept is taught in Andrew Ng's ML course...
-```
-
-**Claude Footnote Convention:**
-All Claude-generated footnotes should:
-- Use descriptive IDs: `[^claude-topic]`
-- Start with: `**Note from Claude:**`
-- Connect traditional statistics to ML/AI applications and Python implementations
-- Reference online courses, Python libraries, and modern ML practices
-
-**Example Claude footnotes used in this site:**
-- `[^claude-ml]` - ML frameworks and Python libraries
-- `[^claude-activations]` - Link functions vs activation functions
-- `[^claude-python]` - Python implementations (statsmodels, scikit-learn)
-- `[^claude-interpretability]` - SHAP values and ML interpretability
-- `[^claude-mle]` - MLE and loss functions
-- `[^claude-optimizers]` - Optimization algorithms
-- `[^claude-optimization]` - Marble/jumping bean → ML optimization
-- `[^claude-causal]` - Causal inference libraries (DoWhy, CausalML)
-- `[^claude-resampling]` - Bootstrapping and cross-validation
-- `[^claude-pvalues]` - P-values vs cross-validation
-
-**Bibliography citations:**
-Footnotes can include bibliography citations using `@citationkey` format if the page has a `bibliography: references.bib` entry in the YAML frontmatter.
-
-Example:
-```markdown
-[^claude-interpretability]: **Note from Claude:** The marginal effects approach connects
-to @molnar2022interpretable which covers ML interpretability methods.
-```
-
-See `.claude/quarto-rendering-best-practices.md` for full details on footnote rendering and troubleshooting.
-
-## Themes and Styling
-
-The site uses dual themes configured in `_quarto.yml`:
-- Light: cosmo
-- Dark: slate
-- Custom CSS: `styles.css`
-
-## R Integration
-
-This is primarily an R-based course site with Quarto. Pages contain R code chunks with statistical analyses, visualizations, and simulations demonstrating GLM concepts.
-
-**R package dependencies:**
-- The `scripts/` directory contains helper scripts:
-  - `check-r-packages.R` - Checks if required R packages are installed
-  - `render-with-checks.R` - Wrapper that checks dependencies before rendering
+Claude footnotes use descriptive IDs (`[^claude-topic]`), **never** sequential numbers — load the `claude-footnotes` skill (`.claude/skills/claude-footnotes/SKILL.md`) before adding or editing any footnotes or bibliography entries.
 
 ## Common Workflow Patterns
 
-**Editing existing pages:**
-- Pages are in `pages/**/**/index.qmd`
-- After editing, render to see changes: `quarto preview` or `quarto render`
-- Check for rendering warnings
-
-**Adding Claude footnotes to pages:**
-1. Identify the appropriate location in the text
-2. Add footnote reference with descriptive ID: `text[^claude-topic]`
-3. Add footnote definition: `[^claude-topic]: **Note from Claude:** content...`
-4. If using bibliography citations, ensure `bibliography: references.bib` in YAML
-5. Add citation entries to `references.bib` if needed
-6. Verify rendering: `quarto render pages/path/to/page/index.qmd`
-
-**Working with bibliography files:**
-- Each page directory can have its own `references.bib`
-- Use BibTeX format for all citations
-- Claude footnotes added the following new citations:
-  - `@molnar2022interpretable` - ML interpretability
-  - `@murphy2022probabilistic` - Probabilistic ML
-  - `@cunningham2021causal` - Causal Inference: The Mixtape
-  - `@facure2022causal` - Causal Inference for The Brave and True
-  - `@downey2014think` - Think Stats (computational statistics)
-  - `@mcelreath2020statistical` - Statistical Rethinking
-  - `@efron2016computer` - Computer Age Statistical Inference
+Footnote-adding and bibliography workflows live in the `claude-footnotes` skill.
 
 ## Troubleshooting Common Issues
 
 ### Duplicate or Missing Footnotes in Rendered Output
 
-**Symptom:** Footnotes appear duplicated, missing, or incorrect in the rendered HTML even though the source `.qmd` file is correct.
-
-**Cause:** Stale Quarto cache in `.quarto/` directory. When footnote IDs are changed (e.g., from `[^1]` to `[^claude-ml]`), the cached render state can conflict with the new source.
-
-**Solution:**
-```bash
-# Clear cache for specific page
-rm -rf .quarto/xref/[page-hash]
-
-# Or clear all cache
-rm -rf .quarto/*
-
-# Re-render the page
-quarto render pages/[path-to-page]/index.qmd
-```
-
-**When to use this fix:**
-- After changing footnote IDs (numbered → descriptive)
-- When footnotes appear duplicated in rendered output
-- When user's footnotes are missing but Claude footnotes appear multiple times
-- After resolving merge conflicts in pages with footnotes
-
-**Prevention:** Starting each session current with origin/main (`git pull --ff-only`) reduces the need for retroactive footnote ID changes.
+Stale Quarto cache in `.quarto/` — see the `claude-footnotes` skill for symptoms, the cache-clearing fix, and prevention.
 
 ### Render Warnings
 
