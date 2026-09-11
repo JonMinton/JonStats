@@ -596,7 +596,8 @@ Perhaps a better option, then, would be to calculate an average marginal effect 
 
 ```{r}
 predictions_predictors_observed_straight <- mtcars |> 
-  select(hp, wt) |> 
+  tibble::rownames_to_column("car") |> 
+  select(car, hp, wt) |> 
   mutate(vs = 1)
 
 predictions_predictors_observed_straight <- predictions_predictors_observed_straight |> 
@@ -605,7 +606,8 @@ predictions_predictors_observed_straight <- predictions_predictors_observed_stra
   )
 
 predictions_predictors_observed_vshaped <- mtcars |> 
-  select(hp, wt) |> 
+  tibble::rownames_to_column("car") |> 
+  select(car, hp, wt) |> 
   mutate(vs = 0) 
 
 predictions_predictors_observed_vshaped <- predictions_predictors_observed_vshaped |> 
@@ -622,7 +624,7 @@ predictions_predictors_observed <-
 
 predictions_marginal <- 
   predictions_predictors_observed |> 
-    group_by(hp, wt) |> 
+    group_by(car) |> 
     summarise(
       diff_p_manual = p_manual[vs==1] - p_manual[vs==0]
     )
